@@ -106,16 +106,16 @@
             android:layout_marginTop="35dp"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/i8_accountLogin_toLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:background="@drawable/i8_login_btn_bg"
+                android:background="@color/white"
                 android:text="登录"
                 android:textColor="#99d0f3"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
         </LinearLayout>
 
 
