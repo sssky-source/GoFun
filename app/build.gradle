@@ -37,4 +37,6 @@ dependencies {
 
     //baseQuickAdapter
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+    //material design
+    implementation 'com.google.android.material:material:1.4.0'
 }

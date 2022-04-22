@@ -12,7 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.coolweather.gofun.R;
+/**
 
+* @Author : W4ited
+
+* @Time : On 2022/4/22 15:52
+
+* @Github : https://github.com/W4ited
+*/
 public class Recommandfragment extends Fragment {
 
     private RecyclerView recyclerView;
