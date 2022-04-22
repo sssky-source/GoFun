@@ -8,7 +8,8 @@
         android:id="@+id/ll_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:orientation="vertical"
         android:paddingLeft="12dp"
         android:paddingRight="12dp">
@@ -24,8 +25,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/icon_username" />
 
 
@@ -53,7 +54,7 @@
                 android:layout_height="45dp"
                 android:layout_gravity="center_vertical"
                 android:scaleType="center"
-                android:src="@drawable/i8_login_selectaccount" />
+                android:src="@drawable/icon_login_selectaccount" />
         </LinearLayout>
 
         <LinearLayout
@@ -69,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/i8_login_password" />
+                android:src="@drawable/icon_password" />
 
             <EditText
                 android:id="@+id/i8_accountLogin_password"
@@ -95,7 +96,7 @@
                 android:layout_marginRight="12dp"
                 android:background="@drawable/bukejian"
                 android:button="@null"
-                android:checked="false"/>
+                android:checked="false" />
 
         </LinearLayout>
 
@@ -115,7 +116,7 @@
                 android:background="@color/white"
                 android:text="登录"
                 android:textColor="#99d0f3"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
         </LinearLayout>
 
 
