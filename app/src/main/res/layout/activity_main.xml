@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clipChildren="false">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#33666666" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|center"
+        android:background="#eee"
+        android:clipChildren="false"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            style="@style/Custom.TabRadioButton"
+            android:id="@+id/rb_location"
+            android:drawableTop="@drawable/nav_map_selector"
+            android:text="@string/nav_location"
+            android:checked="true" />
+
+        <RadioButton
+            style="@style/Custom.TabRadioButton"
+            android:id="@+id/rb_recommand"
+            android:drawableTop="@drawable/nav_recommand_selector"
+            android:text="@string/nav_recommand" />
+
+        <!-- 这里直接给其设置高度 让其超过父亲布局的56dp-->
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+
+            android:layout_height="110dp">
+            <ImageView
+                android:id="@+id/rbAdd"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:src="@drawable/comui_tab_post" />
+            <TextView
+                android:textColor="@color/black"
+                android:text="发布"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <RadioButton
+            style="@style/Custom.TabRadioButton"
+            android:id="@+id/rb_message"
+            android:drawableTop="@drawable/nav_message_selector"
+            android:text="@string/nav_message"/>
+
+        <RadioButton
+            style="@style/Custom.TabRadioButton"
+            android:id="@+id/rb_mine"
+            android:drawableTop="@drawable/nav_mine_selector"
+            android:text="@string/nav_mine"/>
+    </RadioGroup>
+
+
+
+</LinearLayout>
