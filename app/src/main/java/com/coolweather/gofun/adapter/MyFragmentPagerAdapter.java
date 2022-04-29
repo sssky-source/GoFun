@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.coolweather.gofun.MainActivity;
+import com.coolweather.gofun.activity.MainActivity;
 import com.coolweather.gofun.fragment.Mapfragment;
 import com.coolweather.gofun.fragment.Messagefragment;
 import com.coolweather.gofun.fragment.Minefragment;

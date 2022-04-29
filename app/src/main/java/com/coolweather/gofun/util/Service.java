@@ -1,9 +1,17 @@
 package com.coolweather.gofun.util;
 
-import java.util.List;
+import com.coolweather.gofun.bean.User;
 
+import java.util.List;
+import java.util.Map;
+
+import okhttp3.FormBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
 
@@ -20,5 +28,7 @@ public interface Service {
     * @GET("Good/getGoodsByType?page=1&size=6&type=1")
     * Call<List<Good>> getGoodData();
     * */
+    @GET("/TheActivity/login1")
+    Call<ResponseBody> createData(@Query("username") String username ,@Query("password") String password);
 
 }

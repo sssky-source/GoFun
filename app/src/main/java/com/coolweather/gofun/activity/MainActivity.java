@@ -1,4 +1,4 @@
-package com.coolweather.gofun;
+package com.coolweather.gofun.activity;
 
 import androidx.viewpager.widget.ViewPager;
 
@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.coolweather.gofun.BaseActivity;
+import com.coolweather.gofun.R;
 import com.coolweather.gofun.adapter.MyFragmentPagerAdapter;
 
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, ViewPager.OnPageChangeListener{

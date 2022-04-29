@@ -21,7 +21,7 @@ GoFun源码
 **MainActivity**
 
 ```java
-        Service service = HttpRequest.create(GoodService.class);
+        Service service = HttpRequest.create(Service.class);
 		UserSign userSign =new UserSign();
         userSign.setEmail("510992113@qq.com");
         userSign.setPassword("510992113");

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d5d5d5">
 
     <LinearLayout
-        android:id="@+id/ll_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
         android:orientation="vertical"
         android:paddingLeft="12dp"
         android:paddingRight="12dp">
@@ -30,29 +28,20 @@
 
 
             <EditText
-                android:id="@+id/i8_accountLogin_name"
+                android:id="@+id/accountRegister_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@null"
                 android:ems="10"
-                android:hint="请输入帐号"
+                android:hint="请输入注册账号"
                 android:inputType="textPersonName"
                 android:maxLength="15"
                 android:singleLine="true"
-                android:text=""
                 android:textColor="#333333"
                 android:textColorHint="#ababab"
                 android:textSize="16sp" />
 
-
-            <ImageView
-                android:id="@+id/i8_accountLoginSelect"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_gravity="center_vertical"
-                android:scaleType="center"
-                android:src="@drawable/icon_login_selectaccount" />
         </LinearLayout>
 
         <LinearLayout
@@ -71,29 +60,64 @@
                 android:src="@drawable/icon_password" />
 
             <EditText
-                android:id="@+id/i8_accountLogin_password"
+                android:id="@+id/accountRegister_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@null"
                 android:ems="10"
-                android:hint="请输入密码"
+                android:hint="请输入注册密码"
                 android:maxLength="16"
                 android:singleLine="true"
-                android:text=""
                 android:textColor="#333333"
                 android:textColorHint="#ababab"
                 android:textSize="16sp" />
 
+
             <CheckBox
-                android:id="@+id/login_check"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="12dp"
+                android:id="@+id/register_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/icon_bukejian"
                 android:button="@null"
                 android:checked="false" />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/login_line_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_email" />
+
+            <EditText
+                android:id="@+id/accountRegister_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:ems="10"
+                android:hint="请输入邮箱账号"
+                android:maxLength="16"
+                android:singleLine="true"
+                android:textColor="#333333"
+                android:textColorHint="#ababab"
+                android:textSize="16sp" />
+
 
         </LinearLayout>
 
@@ -105,45 +129,16 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/i8_accountLogin_toLogin"
+                android:id="@+id/accountRegistern_toRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:background="@drawable/login_btn_bg"
-                android:text="登录"
+                android:text="注册"
                 android:textColor="#99d0f3"
                 android:textSize="16sp" />
         </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/viewpagerline"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/viewpager"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:background="@drawable/login_btn_bg"
-                android:text="转跳"
-                android:textColor="#99d0f3"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/register_account_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="14dp"
-            android:text="注册账号"
-            android:textColor="#808080" />
     </LinearLayout>
 
     <ProgressBar
@@ -154,4 +149,4 @@
         android:indeterminate="true"
         android:visibility="gone" />
 
-</RelativeLayout>
+</LinearLayout>
