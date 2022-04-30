@@ -6,26 +6,26 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.coolweather.gofun.activity.MainActivity;
-import com.coolweather.gofun.fragment.Mapfragment;
-import com.coolweather.gofun.fragment.Messagefragment;
-import com.coolweather.gofun.fragment.Minefragment;
-import com.coolweather.gofun.fragment.Recommandfragment;
+import com.coolweather.gofun.fragment.MapFragment;
+import com.coolweather.gofun.fragment.MessageFragment;
+import com.coolweather.gofun.fragment.MineFragment;
+import com.coolweather.gofun.fragment.RecommendFragment;
 
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private final int PAGER_COUNT = 4;
 
-    private Mapfragment mapfragment;
-    private Recommandfragment recommandfragment;
-    private Messagefragment messagefragment;
-    private Minefragment minefragment;
+    private MapFragment mapfragment;
+    private RecommendFragment recommendFragment;
+    private MessageFragment messagefragment;
+    private MineFragment minefragment;
 
     public MyFragmentPagerAdapter(@NonNull FragmentManager fm) {
         super(fm);
-        mapfragment = new Mapfragment();
-        recommandfragment = new Recommandfragment();
-        messagefragment = new Messagefragment();
-        minefragment = new Minefragment();
+        mapfragment = new MapFragment();
+        recommendFragment = new RecommendFragment();
+        messagefragment = new MessageFragment();
+        minefragment = new MineFragment();
     }
 
     @NonNull
@@ -37,7 +37,7 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
                 fragment = mapfragment;
                 break;
             case MainActivity.PAGE_TWO:
-                fragment = recommandfragment;
+                fragment = recommendFragment;
                 break;
             case MainActivity.PAGE_THREE:
                 fragment = messagefragment;

@@ -14,13 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.coolweather.gofun.R;
 /**
 
-* @Author : W4ited
+* @Author : LWD
 
 * @Time : On 2022/4/22 15:52
 
-* @Github : https://github.com/W4ited
 */
-public class Recommandfragment extends Fragment {
+public class RecommendFragment extends Fragment {
 
     private RecyclerView recyclerView;
 

@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -43,7 +42,7 @@ import static android.app.Activity.RESULT_OK;
  */
 
 
-public class Minefragment extends Fragment implements View.OnClickListener{
+public class MineFragment extends Fragment implements View.OnClickListener{
 
     public ImageView imageViewhead;
     public View view;
@@ -157,10 +156,10 @@ public class Minefragment extends Fragment implements View.OnClickListener{
                         public void accept(Boolean granted) throws Exception {
                             Log.d("Minefragment","333333333");
                             if (granted) {//申请成功
-                                ToastUtils.show(Minefragment.this.getContext(), "已经获得权限");
+                                ToastUtils.show(MineFragment.this.getContext(), "已经获得权限");
                                 hasPermissions = true;
                             } else {//申请失败
-                                ToastUtils.show(Minefragment.this.getContext(), "权限未开启");
+                                ToastUtils.show(MineFragment.this.getContext(), "权限未开启");
                                 hasPermissions = false;
                             }
                         }

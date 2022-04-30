@@ -9,4 +9,6 @@
     <color name="silver">#dddddd</color>
     <color name="pressed">#00C7B7</color>
     <color name="transparent">#00000000</color>
+    <color name="shrine_pink_100">#FEDBD0</color>
+    <color name="shrine_pink_900">#442B2D</color>
 </resources>

@@ -27,6 +27,9 @@ public interface Service {
     * 实例
     * @GET("Good/getGoodsByType?page=1&size=6&type=1")
     * Call<List<Good>> getGoodData();
+    *
+    * @POST("User/Login")
+    * Call<ResponseBody> createData(@Body UserSign userSign);
     * */
     @GET("/TheActivity/login1")
     Call<ResponseBody> createData(@Query("username") String username ,@Query("password") String password);
