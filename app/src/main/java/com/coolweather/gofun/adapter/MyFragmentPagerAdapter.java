@@ -6,10 +6,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.coolweather.gofun.activity.MainActivity;
-import com.coolweather.gofun.fragment.MapFragment;
-import com.coolweather.gofun.fragment.MessageFragment;
-import com.coolweather.gofun.fragment.MineFragment;
-import com.coolweather.gofun.fragment.RecommendFragment;
+import com.coolweather.gofun.fragment.Map.MapFragment;
+import com.coolweather.gofun.fragment.Message.MessageFragment;
+import com.coolweather.gofun.fragment.Mine.MineFragment;
+import com.coolweather.gofun.fragment.Recommend.RecommendFragment;
 
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 

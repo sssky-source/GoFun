@@ -1,4 +1,4 @@
-package com.coolweather.gofun.fragment;
+package com.coolweather.gofun.fragment.Mine;
 
 import android.Manifest;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.coolweather.gofun.fragment;
+package com.coolweather.gofun.fragment.Map;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
