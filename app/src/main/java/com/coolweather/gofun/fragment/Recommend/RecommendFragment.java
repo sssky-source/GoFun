@@ -8,10 +8,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.coolweather.gofun.R;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+
 /**
 
 * @Author : LWD
@@ -21,7 +25,12 @@ import com.coolweather.gofun.R;
 */
 public class RecommendFragment extends Fragment {
 
-    private RecyclerView recyclerView;
+    private MaterialToolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager2 viewPager2;
+
+    final ArrayList<String> tabName = new ArrayList<>();
+    final ArrayList<Fragment> fragmentList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -34,9 +43,10 @@ public class RecommendFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = view.findViewById(R.id.recommend_RecyclerView);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(linearLayoutManager);
+        toolbar = view.findViewById(R.id.recommend_Toolbar);
+        toolbar.setTitle("");
+        tabLayout = view.findViewById(R.id.recommend_TabLayout);
+        viewPager2 = view.findViewById(R.id.recommend_ViewPager2);
 
     }
 }

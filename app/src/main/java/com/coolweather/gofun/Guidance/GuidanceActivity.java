@@ -32,6 +32,7 @@ public class GuidanceActivity extends AppCompatActivity {
 
         fragmentList.add(new FragmentOne());
         fragmentList.add(new FragmentTwo());
+        fragmentList.add(new FragmentThree());
 
         viewPager2.setAdapter(new FragmentAdapter(getSupportFragmentManager(),getLifecycle(),fragmentList));
     }
