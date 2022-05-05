@@ -8,11 +8,15 @@
         android:id="@+id/ll_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="18dp"
+        android:layout_marginStart="30"
+        android:layout_marginTop="30"
+        android:layout_marginEnd="30"
+        android:layout_marginBottom="30"
         android:orientation="vertical"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp">
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,7 +31,6 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/icon_username" />
-
 
             <EditText
                 android:id="@+id/i8_accountLogin_name"
@@ -45,7 +48,6 @@
                 android:textColorHint="#ababab"
                 android:textSize="16sp" />
 
-
             <ImageView
                 android:id="@+id/i8_accountLoginSelect"
                 android:layout_width="45dp"
@@ -58,7 +60,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/login_line_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -97,44 +99,45 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/i8_accountLoginBtnLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/i8_accountLogin_toLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:background="@drawable/login_btn_bg"
-                android:text="登录"
-                android:textColor="#99d0f3"
-                android:textSize="16sp" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/i8_accountLogin_toLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/login_btn_bg"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="登录"
+            android:textColor="#99d0f3"
+            android:textSize="16sp" />
 
+        <Button
+            android:id="@+id/viewpager"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/login_btn_bg"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="转跳"
+            android:textColor="#99d0f3"
+            android:textSize="16sp" />
 
-        <LinearLayout
-            android:id="@+id/viewpagerline"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/viewpager"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:background="@drawable/login_btn_bg"
-                android:text="转跳"
-                android:textColor="#99d0f3"
-                android:textSize="16sp" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/guidance"
+            android:layout_width="130dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/login_btn_bg"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="引导页测试"
+            android:textColor="#99d0f3"
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/register_account_btn"

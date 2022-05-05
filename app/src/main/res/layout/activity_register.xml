@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d5d5d5">
@@ -7,14 +7,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_centerInParent="true"
+        android:layout_margin="18dp"
         android:orientation="vertical"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp">
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="44dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/login_line_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -47,7 +49,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/login_line_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -73,7 +76,6 @@
                 android:textColorHint="#ababab"
                 android:textSize="16sp" />
 
-
             <CheckBox
                 android:id="@+id/register_check"
                 android:layout_width="wrap_content"
@@ -85,14 +87,13 @@
                 android:button="@null"
                 android:checked="false" />
 
-
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/login_line_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -118,27 +119,20 @@
                 android:textColorHint="#ababab"
                 android:textSize="16sp" />
 
-
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/i8_accountLoginBtnLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/accountRegistern_toRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:background="@drawable/login_btn_bg"
-                android:text="注册"
-                android:textColor="#99d0f3"
-                android:textSize="16sp" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/accountRegistern_toRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/login_btn_bg"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="注册"
+            android:textColor="#99d0f3"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <ProgressBar
@@ -149,4 +143,4 @@
         android:indeterminate="true"
         android:visibility="gone" />
 
-</LinearLayout>
+</RelativeLayout>

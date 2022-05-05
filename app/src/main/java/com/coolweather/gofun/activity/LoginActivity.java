@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coolweather.gofun.BaseActivity;
+import com.coolweather.gofun.Guidance.GuidanceActivity;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.config.Config;
 import com.coolweather.gofun.util.ToastUtils;
@@ -26,17 +27,19 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Headers;
 import okhttp3.Response;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     private EditText accountLoginName;
     private EditText accountLoginPassword;
-    private Button loginBtn, viewpagerbutton;
+    private Button loginBtn, viewpagerbutton,guidance;
     private TextView registerAccountBtn;
     private ProgressBar progressBar;
     private LinearLayout llLogin;
@@ -57,6 +60,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         loginBtn = (Button) findViewById(R.id.i8_accountLogin_toLogin);
         viewpagerbutton = (Button) findViewById(R.id.viewpager);
         registerAccountBtn = (TextView) findViewById(R.id.register_account_btn);
+        guidance = findViewById(R.id.guidance);
         progressBar = (ProgressBar) findViewById(R.id.pb);
         llLogin = (LinearLayout) findViewById(R.id.ll_login);
         checkBox = (CheckBox) findViewById(R.id.login_check);
@@ -119,6 +123,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent1);
                 break;
+            case R.id.guidance:
+                Intent guidance = new Intent(LoginActivity.this, GuidanceActivity.class);
+                startActivity(guidance);
+                break;
             default:
                 break;
         }
@@ -143,9 +151,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         map.put("username",accountName);
         map.put("password",accountPassword);
         OkhttpUtil.requestpostone(url,map,new Callback(){
-
             @Override
-            public void onResponse(@NotNull okhttp3.Call call, @NotNull Response response) throws IOException {
+            public void onResponse(@NotNull okhttp3.Call call, @NotNull final Response response) throws IOException {
                 boolean flag = false;
                 Log.d("kwwl", "获取数据成功了");
                 Log.d("kwwl", "response.code()==" + response.code());
@@ -157,6 +164,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         @Override
                         public void run() {
                             Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                            Headers headers = response.headers();
+                            List<String> cookies = headers.values("Set-Cookie");
+
                         }
                     });
                 }else {

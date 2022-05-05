@@ -13,7 +13,7 @@
             android:id="@+id/recommend_Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
+            android:background="@color/shrine_pink_100"
             app:layout_scrollFlags="scroll|enterAlways|snap" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -27,6 +27,7 @@
             android:id="@+id/recommend_TabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/shrine_pink_100"
             app:tabContentStart="60dp"
             app:tabMode="scrollable" />
 
