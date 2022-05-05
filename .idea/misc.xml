@@ -11,6 +11,7 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_register.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/bottom_photo.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragment_blank.xml" value="0.109375" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragment_map.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragment_recommand.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragment_recommend_item.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragmentone.xml" value="0.24947916666666667" />
@@ -68,7 +69,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

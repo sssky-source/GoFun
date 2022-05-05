@@ -48,7 +48,7 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:ems="8"
-                    android:hint="输入城市名"
+                    android:hint="输入地点"
                     android:imeOptions="actionSearch"
                     android:padding="@dimen/dp_4"
                     android:singleLine="true"

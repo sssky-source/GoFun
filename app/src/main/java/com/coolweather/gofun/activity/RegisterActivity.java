@@ -122,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
-        final String url = Config.BASE_URL + "register1";
+        final String url = Config.BASE_URL + "/User/userSignUp";
         Map<String,String> map = new HashMap<>();
         map.put("username",username);
         map.put("password",password);

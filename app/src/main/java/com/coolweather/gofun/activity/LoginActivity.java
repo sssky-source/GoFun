@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.coolweather.gofun.BaseActivity;
 import com.coolweather.gofun.Guidance.GuidanceActivity;
 import com.coolweather.gofun.LocalDb.MyDatabaseHelper;
@@ -38,6 +39,8 @@ import java.util.Map;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Headers;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.internal.http2.Header;
 
@@ -45,7 +48,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private EditText accountLoginName;
     private EditText accountLoginPassword;
-    private Button loginBtn, viewpagerbutton,guidance;
+    private Button loginBtn, viewpagerbutton, guidance;
     private TextView registerAccountBtn;
     private ProgressBar progressBar;
     private LinearLayout llLogin;
@@ -76,10 +79,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         accountLoginPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         checkBox.setBackgroundResource(R.drawable.icon_bukejian);
         //通过构造函数将参数将数据库名指定为UserList.db，版本为1
-        dbhelper = new MyDatabaseHelper(this,"UserList.db",null,1);
+        dbhelper = new MyDatabaseHelper(this, "UserList.db", null, 1);
         //进入活动运行到这一步后检测到没有数据库就会创建
         db = dbhelper.getWritableDatabase();
-        if(searchUser()!=null){
+        if (searchUser() != null) {
             User user = searchUser();
             accountLoginName.setText(user.getUsername());
             accountLoginPassword.setText(user.getPassword());
@@ -131,7 +134,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.register_account_btn:
                 //跳转到注册界面
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivityForResult(intent,1);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.viewpager:
                 Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
@@ -160,55 +163,61 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             return;
         }
 
-        final String url = Config.BASE_URL + "login1";
-        Map<String,String> map = new HashMap<>();
-        map.put("username",accountName);
-        map.put("password",accountPassword);
-        rememberUser(accountName,accountPassword);
-//        OkhttpUtil.requestpostone(url,map,new Callback(){
-//
-//            @Override
-//            public void onResponse(@NotNull okhttp3.Call call, @NotNull Response response) throws IOException {
-//                boolean flag = false;
-//                Log.d("kwwl", "获取数据成功了");
-//                Log.d("kwwl", "response.code()==" + response.code());
-//                Log.d("kwwl", "response ==" + response);
-//                Log.d("kwwl", "response.url==" + response.request().url());
-//                Log.d("kwwl", "response.body().string()==" + response.body().string());
-//
-//                if(response.code() == 200){
+        final String url = Config.BASE_URL + "User/login";
+        MediaType mediaType = MediaType.parse("application/json;charset=utf-8"); //设置格式
+//        Map<String,String> map = new HashMap<>();
+//        map.put("username",accountName);
+//        map.put("password",accountPassword);
+        User user = new User();
+        user.setEmail(accountName);
+        user.setPassword(accountPassword);
+
+        String value = JSON.toJSONString(user);
+        RequestBody requestBody = RequestBody.create(mediaType, value);
+
+        OkhttpUtil.requestpostone(url, requestBody, new Callback() {
+
+            @Override
+            public void onResponse(@NotNull okhttp3.Call call, @NotNull Response response) throws IOException {
+                boolean flag = false;
+                Log.d("kwwl", "获取数据成功了");
+                Log.d("kwwl", "response.code()==" + response.code());
+                Log.d("kwwl", "response ==" + response);
+                Log.d("kwwl","token:" + response.body().string());
+
+                if (response.code() == 200) {
 //                    Headers headers = response.headers();
-//                    Log.d("kww1","headers" + headers);
+//                    Log.d("kww1", "headers" + headers);
 //                    List<String> cookies = headers.values("set-Cookies");
 //                    String session = cookies.get(0);
-//                    Log.d("kww1","onResponse-size" + cookies);
-//                    String s = session.substring(0,session.indexOf(";"));
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
-//                            rememberUser(accountName,accountPassword);
-//                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-//                            startActivity(intent);
-//                            finish();
-//                        }
-//
-//                    });
-//                }else {
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Toast.makeText(LoginActivity.this,"账号或密码错误",Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-//                Log.d("kwwl", "获取数据失败了");
-//            }
-//        });
+//                    Log.d("kww1", "onResponse-size" + cookies);
+//                    String s = session.substring(0, session.indexOf(";"));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                            rememberUser(accountName, accountPassword);
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+
+                    });
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Log.d("kwwl", "获取数据失败了");
+            }
+        });
     }
 
     @Override
@@ -217,7 +226,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
-                    User user = (User)data.getSerializableExtra("user");
+                    User user = (User) data.getSerializableExtra("user");
                     accountLoginName.setText(user.getUsername());
                     accountLoginPassword.setText(user.getPassword());
 //                    Log.d("LoginActivity", user.getEmail());
@@ -227,30 +236,30 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
-    private void rememberUser(String username,String password){
+    private void rememberUser(String username, String password) {
         db = dbhelper.getWritableDatabase();
         db.execSQL("delete from UserTable");
         ContentValues values = new ContentValues();
         //put(属性名，属性值) put("username","小明")；
-        values.put("username",username);
-        values.put("password",password);
-        db.insert("UserTable",null,values);  //将数据插入数据库
+        values.put("username", username);
+        values.put("password", password);
+        db.insert("UserTable", null, values);  //将数据插入数据库
         values.clear();
         db.close();
     }
 
-    private User searchUser(){
+    private User searchUser() {
       /*Cursor是相当于一个游标，便利表中没个条目，然后获取不同属性，找到与自己查找相符合
           的属性就将此条提取出来
       */
         User user = null;
-        Cursor cursor = db.query("UserTable",null,null,null,null,null,null);
-        if(cursor.moveToFirst()) {
+        Cursor cursor = db.query("UserTable", null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
             do {
                 Integer ID = Integer.valueOf(cursor.getString(cursor.getColumnIndex("id")));
                 String username = cursor.getString(cursor.getColumnIndex("username"));
                 String password = cursor.getString(cursor.getColumnIndex("password"));
-                user = new User(username,password);
+                user = new User(username, password);
 
             } while (cursor.moveToNext());
         }
