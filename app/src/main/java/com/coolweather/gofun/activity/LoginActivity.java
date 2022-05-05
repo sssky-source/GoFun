@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coolweather.gofun.BaseActivity;
+import com.coolweather.gofun.Guidance.GuidanceActivity;
 import com.coolweather.gofun.LocalDb.MyDatabaseHelper;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.bean.User;
@@ -44,7 +45,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private EditText accountLoginName;
     private EditText accountLoginPassword;
-    private Button loginBtn, viewpagerbutton;
+    private Button loginBtn, viewpagerbutton,guidance;
     private TextView registerAccountBtn;
     private ProgressBar progressBar;
     private LinearLayout llLogin;
@@ -65,6 +66,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         accountLoginPassword = (EditText) findViewById(R.id.i8_accountLogin_password);
         loginBtn = (Button) findViewById(R.id.i8_accountLogin_toLogin);
         viewpagerbutton = (Button) findViewById(R.id.viewpager);
+        guidance = findViewById(R.id.guidance);
         registerAccountBtn = (TextView) findViewById(R.id.register_account_btn);
         progressBar = (ProgressBar) findViewById(R.id.pb);
         llLogin = (LinearLayout) findViewById(R.id.ll_login);
@@ -101,6 +103,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         loginBtn.setOnClickListener(this);
         registerAccountBtn.setOnClickListener(this);
         viewpagerbutton.setOnClickListener(this);
+        guidance.setOnClickListener(this);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -133,6 +136,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.viewpager:
                 Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent1);
+                break;
+            case R.id.guidance:
+                Intent guidance = new Intent(LoginActivity.this, GuidanceActivity.class);
+                startActivity(guidance);
                 break;
             default:
                 break;
