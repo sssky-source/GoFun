@@ -12,6 +12,16 @@ import androidx.fragment.app.Fragment;
 import com.coolweather.gofun.R;
 
 public class RecommendItemFragment extends Fragment {
+
+    private int id;
+
+    public RecommendItemFragment(int id) {
+        this.id = id;
+    }
+
+    public RecommendItemFragment() {
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

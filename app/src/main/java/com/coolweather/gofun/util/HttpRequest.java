@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 //请求封装
 public class HttpRequest {
     //根地址
-    private static final String BASE_URI ="http://192.168.0.11:8000/api/";
+    private static final String BASE_URI ="http://139.224.221.148:666/api/";
     //http://192.168.0.11:8000/swagger/index.html
 
     private static final Retrofit retrofit = new Retrofit.Builder()
