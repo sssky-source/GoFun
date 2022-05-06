@@ -16,21 +16,22 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String CREATE_USER = "create table UserTable ("
             + "id integer primary key autoincrement, "
             + "username text, "
-            + "password text)";
+            + "password text, "
+            + "token text)";
     //token
-
 
 
     public MyDatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
-        mConText = context;    }
+        mConText = context;
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USER);
-        Log.d("Main","创建成功");
+        Log.d("Main", "创建成功");
 
-       // onCreate(db);
+        // onCreate(db);
     }
 
     @Override

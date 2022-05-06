@@ -20,8 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.coolweather.gofun.Animation.SgfSplash6Activity;
 import com.coolweather.gofun.BaseActivity;
-import com.coolweather.gofun.Guidance.GuidanceActivity;
 import com.coolweather.gofun.LocalDb.MyDatabaseHelper;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.bean.User;
@@ -32,17 +32,12 @@ import com.coolweather.gofun.util.OkhttpUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.internal.http2.Header;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
@@ -141,7 +136,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 startActivity(intent1);
                 break;
             case R.id.guidance:
-                Intent guidance = new Intent(LoginActivity.this, GuidanceActivity.class);
+                Intent guidance = new Intent(LoginActivity.this, SgfSplash6Activity.class);
                 startActivity(guidance);
                 break;
             default:
@@ -185,6 +180,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 Log.d("kwwl", "response ==" + response);
                 Log.d("kwwl","token:" + response.body().string());
 
+                String token = response.body().string();
                 if (response.code() == 200) {
 //                    Headers headers = response.headers();
 //                    Log.d("kww1", "headers" + headers);
@@ -196,7 +192,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         @Override
                         public void run() {
                             Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                            rememberUser(accountName, accountPassword);
+
+                            rememberUser(accountName,accountPassword,token);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -236,13 +233,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
-    private void rememberUser(String username, String password) {
+    private void rememberUser(String username, String password,String token) {
         db = dbhelper.getWritableDatabase();
         db.execSQL("delete from UserTable");
         ContentValues values = new ContentValues();
         //put(属性名，属性值) put("username","小明")；
         values.put("username", username);
         values.put("password", password);
+        values.put("token",token);
         db.insert("UserTable", null, values);  //将数据插入数据库
         values.clear();
         db.close();

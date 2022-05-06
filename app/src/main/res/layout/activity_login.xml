@@ -128,16 +128,16 @@
 
         <Button
             android:id="@+id/guidance"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:background="@drawable/login_btn_bg"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
-            android:text="引导页测试"
+            android:text="动画"
             android:textColor="#99d0f3"
-            android:textSize="10sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/register_account_btn"

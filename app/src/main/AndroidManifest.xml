@@ -40,6 +40,7 @@
             android:name=".Guidance.GuidanceActivity"
             android:exported="false" />
         <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".Animation.SgfSplash6Activity"/>
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
