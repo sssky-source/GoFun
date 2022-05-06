@@ -39,7 +39,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:ems="10"
-                android:hint="请输入帐号"
+                android:hint="请输入邮箱"
                 android:inputType="textPersonName"
                 android:maxLength="15"
                 android:singleLine="true"
