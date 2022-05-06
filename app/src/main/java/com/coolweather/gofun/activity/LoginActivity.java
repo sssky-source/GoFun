@@ -168,7 +168,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         user.setPassword(accountPassword);
 
         String value = JSON.toJSONString(user);
-        RequestBody requestBody = RequestBody.create(mediaType, value);
 
 
         OkhttpUtil.requestpostone(url, value, new Callback() {
