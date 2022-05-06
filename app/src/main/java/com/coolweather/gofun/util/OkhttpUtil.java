@@ -36,7 +36,6 @@ public class OkhttpUtil {
     public static void requestpostone(String url, String value, Callback callback){
         OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象。
         MediaType mediaType = MediaType.parse("application/json;charset=utf-8"); //设置格式
-        FormBody.Builder formatBody = new FormBody.Builder();
         RequestBody requestBody = RequestBody.create(mediaType, value);
         final Request request = new Request.Builder()//创建Request 对象。
                 .url(url)

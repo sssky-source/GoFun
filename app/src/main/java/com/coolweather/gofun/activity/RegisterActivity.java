@@ -16,6 +16,7 @@ import android.graphics.Paint;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.bean.User;
 import com.coolweather.gofun.config.Config;
@@ -123,51 +124,44 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
 
         final String url = Config.BASE_URL + "User/userSignUp";
-        Map<String,String> map = new HashMap<>();
-        map.put("username",username);
-        map.put("password",password);
-        map.put("email",email);
+
         User user = new User(username,password,email);
-        Intent intent = new Intent();
-        //      intent.putExtra("user","uuuser");
-        intent.putExtra("user",user);
-        setResult(RESULT_OK,intent);
-        finish();
-//        OkhttpUtil.requestpostone(url, map, new Callback() {
-//            @Override
-//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-//                Log.d("RegisterActiivty","获取数据失败");
-//            }
-//
-//            @Override
-//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-//                Log.d("kwwl", "获取数据成功了");
-//                Log.d("kwwl", "response.code()==" + response.code());
-//                Log.d("kwwl", "response ==" + response);
-//                Log.d("kwwl", "response.url==" + response.request().url());
-//                Log.d("kwwl", "response.body().string()==" + response.body().string());
-//                if(response.code() == 200){
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Toast.makeText(RegisterActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
-//                            User user = new User(username,password,email);
-//                            Intent intent = new Intent();
-//                            intent.putExtra("user",user);
-//                            setResult(RESULT_OK,intent);
-//                            finish();
-//                        }
-//                    });
-//                }else {
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Toast.makeText(RegisterActivity.this,"用户名已经存在",Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
-//            }
-//        });
+        String value = JSON.toJSONString(user);
+        OkhttpUtil.requestpostone(url, value, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Log.d("RegisterActiivty","获取数据失败");
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                Log.d("kwwl", "获取数据成功了");
+                Log.d("kwwl", "response.code()==" + response.code());
+                Log.d("kwwl", "response ==" + response);
+                Log.d("kwwl", "response.url==" + response.request().url());
+                Log.d("kwwl", "response.body().string()==" + response.body().string());
+                if(response.code() == 200){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(RegisterActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
+                            User user = new User(username,password,email);
+                            Intent intent = new Intent();
+                            intent.putExtra("user",user);
+                            setResult(RESULT_OK,intent);
+                            finish();
+                        }
+                    });
+                }else if(response.code() == 400){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(RegisterActivity.this,"用户名已经存在",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     /**

@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -693,12 +694,13 @@ public class MapFragment extends Fragment implements
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         dialogWindow.getDecorView().setPadding(40,0,40,0);
         dialogWindow.setAttributes(params);
-        dialog.setLisenter(new InfoCard.SureOnlickLisenter() {
-            @Override
-            public void sureOnlcik(float money) {
 
-            }
-        });
+//        params.setLisenter(new InfoCard.SureOnlickLisenter() {
+//            @Override
+//            public void sureOnlcik() {
+//
+//            }
+//        });
     }
 
 

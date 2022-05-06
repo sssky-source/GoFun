@@ -2,6 +2,7 @@ package com.coolweather.gofun.Animation;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
 
 import java.util.ArrayList;
@@ -46,6 +48,8 @@ public class SgfSplash6Activity extends AppCompatActivity {
         textViews.add(tv_course);
 //        showAnimation(textViews);
         showAnimation();
+        SqliteUtil sqliteUtil = new SqliteUtil(this);
+        Log.d("token","token = " + sqliteUtil.getToken());
     }
 
     private void showAnimation() {
@@ -53,8 +57,6 @@ public class SgfSplash6Activity extends AppCompatActivity {
         tv_search.setVisibility(View.INVISIBLE);
         tv_course.setVisibility(View.INVISIBLE);
         logo.setVisibility(View.INVISIBLE);
-
-
         Animation animation = AnimationUtils.loadAnimation(SgfSplash6Activity.this, R.anim.my_anim_scale2);
         logo.startAnimation(animation);
         logo.setVisibility(View.VISIBLE);

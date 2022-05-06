@@ -25,13 +25,13 @@ import retrofit2.http.Query;
 //定义相对路径和方法
 public interface RecommendService {
     /*
-    * 实例
-    * @GET("Good/getGoodsByType?page=1&size=6&type=1")
-    * Call<List<Good>> getGoodData();
-    *
-    * @POST("User/Login")
-    * Call<ResponseBody> createData(@Body UserSign userSign);
-    * */
+     * 实例
+     * @GET("Good/getGoodsByType?page=1&size=6&type=1")
+     * Call<List<Good>> getGoodData();
+     *
+     * @POST("User/Login")
+     * Call<ResponseBody> createData(@Body UserSign userSign);
+     * */
     @GET("/TheActivity/login1")
     Call<ResponseBody> createData(@Query("username") String username ,@Query("password") String password);
     @GET("")
