@@ -178,9 +178,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 Log.d("kwwl", "获取数据成功了");
                 Log.d("kwwl", "response.code()==" + response.code());
                 Log.d("kwwl", "response ==" + response);
-                Log.d("kwwl","token:" + response.body().string());
 
                 String token = response.body().string();
+                Log.d("kwwl","token :" + token);
                 if (response.code() == 200) {
 //                    Headers headers = response.headers();
 //                    Log.d("kww1", "headers" + headers);
