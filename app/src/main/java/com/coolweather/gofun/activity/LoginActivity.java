@@ -170,7 +170,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         String value = JSON.toJSONString(user);
         RequestBody requestBody = RequestBody.create(mediaType, value);
 
-        OkhttpUtil.requestpostone(url, requestBody, new Callback() {
+
+        OkhttpUtil.requestpostone(url, value, new Callback() {
 
             @Override
             public void onResponse(@NotNull okhttp3.Call call, @NotNull Response response) throws IOException {
