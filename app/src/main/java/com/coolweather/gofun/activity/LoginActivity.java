@@ -43,7 +43,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private EditText accountLoginName;
     private EditText accountLoginPassword;
-    private Button loginBtn, viewpagerbutton, guidance;
+    private Button loginBtn, viewpagerbutton,guidance;
     private TextView registerAccountBtn;
     private ProgressBar progressBar;
     private LinearLayout llLogin;
@@ -74,10 +74,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         accountLoginPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         checkBox.setBackgroundResource(R.drawable.icon_bukejian);
         //通过构造函数将参数将数据库名指定为UserList.db，版本为1
-        dbhelper = new MyDatabaseHelper(this, "UserList.db", null, 1);
+        dbhelper = new MyDatabaseHelper(this,"UserList.db",null,1);
         //进入活动运行到这一步后检测到没有数据库就会创建
         db = dbhelper.getWritableDatabase();
-        if (searchUser() != null) {
+        if(searchUser()!=null){
             User user = searchUser();
             accountLoginName.setText(user.getUsername());
             accountLoginPassword.setText(user.getPassword());
@@ -129,7 +129,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.register_account_btn:
                 //跳转到注册界面
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent,1);
                 break;
             case R.id.viewpager:
                 Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
@@ -223,7 +223,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
-                    User user = (User) data.getSerializableExtra("user");
+                    User user = (User)data.getSerializableExtra("user");
                     accountLoginName.setText(user.getUsername());
                     accountLoginPassword.setText(user.getPassword());
 //                    Log.d("LoginActivity", user.getEmail());
@@ -246,18 +246,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         db.close();
     }
 
-    private User searchUser() {
+    private User searchUser(){
       /*Cursor是相当于一个游标，便利表中没个条目，然后获取不同属性，找到与自己查找相符合
           的属性就将此条提取出来
       */
         User user = null;
-        Cursor cursor = db.query("UserTable", null, null, null, null, null, null);
-        if (cursor.moveToFirst()) {
+        Cursor cursor = db.query("UserTable",null,null,null,null,null,null);
+        if(cursor.moveToFirst()) {
             do {
                 Integer ID = Integer.valueOf(cursor.getString(cursor.getColumnIndex("id")));
                 String username = cursor.getString(cursor.getColumnIndex("username"));
                 String password = cursor.getString(cursor.getColumnIndex("password"));
-                user = new User(username, password);
+                user = new User(username,password);
 
             } while (cursor.moveToNext());
         }
