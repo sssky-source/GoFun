@@ -1,6 +1,9 @@
 package com.coolweather.gofun.fragment.Recommend.Adapter;
 
+import android.annotation.SuppressLint;
+import android.text.TextPaint;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,9 +23,12 @@ public class RecommendItemAdapter extends BaseQuickAdapter<ActivityItem, BaseVie
         //点击事件添加
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void convert(@NonNull BaseViewHolder baseViewHolder, ActivityItem activity) {
-        baseViewHolder.setText(R.id.activity_title, "[" + activity.getType() + "] " + activity.getTitle());
+        TextView textView = baseViewHolder.getView(R.id.activity_number);
+        baseViewHolder.setText(R.id.activity_type,"[" + activity.getType() + "] ");
+        baseViewHolder.setText(R.id.activity_title,activity.getTitle());
         baseViewHolder.setText(R.id.activity_introduction, activity.getIntroduction());
         baseViewHolder.setText(R.id.activity_startTime,activity.getStarttime().split("T")[0]
                         + " " + activity.getStarttime().split("T")[1]);
@@ -32,6 +38,9 @@ public class RecommendItemAdapter extends BaseQuickAdapter<ActivityItem, BaseVie
 
         baseViewHolder.setText(R.id.activity_username,activity.getUsername());
         baseViewHolder.setText(R.id.activity_number,activity.getCurnumber() + "/" + activity.getMaxnumber());
+        if (activity.getCurnumber().equals(activity.getMaxnumber())){
+            textView.setTextColor(R.color.red);
+        }
 
         ImageView userPic = baseViewHolder.getView(R.id.activity_userImage);
         Glide.with(getContext()).load(activity.getImage()).into(userPic);

@@ -9,6 +9,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:orientation="vertical"
+        android:background="#F1F2F3"
         android:layout_margin="2dp"
         android:id="@+id/recommend_RecyclerView"
         android:layout_width="match_parent"

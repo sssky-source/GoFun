@@ -19,23 +19,33 @@
             android:layout_height="55dp" />
 
         <TextView
+            android:id="@+id/activity_username"
             android:layout_width="55dp"
             android:layout_height="wrap_content"
-            android:id="@+id/activity_username"
             android:layout_below="@id/activity_userImage"
-            android:text="username"
-            android:gravity="center"
             android:layout_marginTop="5dp"
-            android:textColor="@color/shrine_pink_900"/>
+            android:gravity="center"
+            android:text="username"
+            android:textColor="#f25d8e" />
+
+        <TextView
+            android:id="@+id/activity_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@id/activity_userImage"
+            android:text="type"
+            android:textColor="#f25d8e"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/activity_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_toEndOf="@id/activity_userImage"
-            android:text="type + title"
-            android:textColor="@color/shrine_pink_900"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/activity_type"
+            android:text="title"
+            android:textColor="#000000"
             android:textSize="18sp" />
 
         <TextView
@@ -58,24 +68,25 @@
             android:layout_marginStart="15dp"
             android:layout_toEndOf="@id/activity_userImage"
             android:text="开始时间"
-            android:textColor="@color/shrine_pink_900" />
+            android:textColor="#99a2aa" />
 
         <TextView
             android:id="@+id/activity_endTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:textColor="@color/shrine_pink_900"
-            android:layout_toEndOf="@id/activity_userImage"
             android:layout_below="@id/activity_startTime"
-            android:text="截止时间"/>
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@id/activity_userImage"
+            android:text="截止时间"
+            android:textColor="#99a2aa" />
 
         <TextView
             android:id="@+id/activity_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="人数"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="30dp"/>
+            android:layout_marginRight="30dp"
+            android:textColor="#49cc90"
+            android:text="人数" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
