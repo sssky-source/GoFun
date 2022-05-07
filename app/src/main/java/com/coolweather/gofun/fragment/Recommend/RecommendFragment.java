@@ -68,7 +68,7 @@ public class RecommendFragment extends Fragment {
                 List<Activity> list = response.body();
                 for (Activity activity : list) {
                     tabName.add(activity.getType1());
-                    fragmentList.add(new RecommendItemFragment(activity.getId()));
+                    fragmentList.add(new RecommendItemFragment(token,activity.getId()));
                 }
 
                 viewPager2.setAdapter(new FragmentAdapter(getActivity().getSupportFragmentManager(), getLifecycle(), fragmentList));

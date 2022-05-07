@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/dp_330"
     android:layout_height="@dimen/dp_640"
     android:background="@drawable/bg_card"
@@ -88,7 +89,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="MissingClass">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image1"
