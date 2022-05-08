@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/recommend_color">
+    android:background="@drawable/recommend_color"
+    android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:orientation="vertical"
-        android:background="#F1F2F3"
-        android:layout_margin="2dp"
-        android:id="@+id/recommend_RecyclerView"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/recommend_SwipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recommend_RecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F1F2F3"
+            android:orientation="vertical" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

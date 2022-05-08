@@ -2,6 +2,9 @@ package com.coolweather.gofun.fragment.Recommend;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -10,18 +13,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.coolweather.gofun.activity.MainActivity;
 import com.coolweather.gofun.fragment.Recommend.Adapter.FragmentAdapter;
 import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.fragment.Recommend.bean.Activity;
 import com.coolweather.gofun.util.HttpRequest;
 import com.coolweather.gofun.util.RecommendService;
+import com.coolweather.gofun.util.ToastUtils;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,13 +57,15 @@ public class RecommendFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        //指出fragment愿意添加item到选项菜单
+        setHasOptionsMenu(true);
         //本地数据库查找token
         SqliteUtil sqliteUtil = new SqliteUtil(getActivity());
         token = sqliteUtil.getToken();
-
         toolbar = view.findViewById(R.id.recommend_Toolbar);
         toolbar.setTitle("");
+        //将Toolbar的实例传入
+        ((MainActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
         tabLayout = view.findViewById(R.id.recommend_TabLayout);
         viewPager2 = view.findViewById(R.id.recommend_ViewPager2);
 
@@ -86,5 +94,24 @@ public class RecommendFragment extends Fragment {
 
             }
         });
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.invite,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.QR_Code:
+                ToastUtils.show(getActivity(),"扫一扫");
+                break;
+            case R.id.invitation:
+                ToastUtils.show(getActivity(),"邀请码");
+                break;
+        }
+        return true;
     }
 }
