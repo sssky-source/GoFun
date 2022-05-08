@@ -9,5 +9,10 @@
     <string name="selectfromalbum">从相册中选择</string>
     <string name="cancel">取消</string>
     <string name="launch">发布</string>
+    <string name="type">类型：</string>
+    <string name="location">地点：</string>
+    <string name="creator">创建者：</string>
+    <string name="commit">评论</string>
+    <string name="detail">查看详情</string>
 
 </resources>

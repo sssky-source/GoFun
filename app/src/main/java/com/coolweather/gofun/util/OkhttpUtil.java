@@ -45,16 +45,6 @@ public class OkhttpUtil {
         client.newCall(request).enqueue(callback);
     }
 
-    public static void requestposttwo(String url, RequestBody requestBody, Callback callback){
-        OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象。
-
-        final Request request = new Request.Builder()//创建Request 对象。
-                .url(url)
-                .post(requestBody)//传递请求体
-                .build();
-        //回调接口，在网络请求时回调实现
-        client.newCall(request).enqueue(callback);
-    }
 
 
 

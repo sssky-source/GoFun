@@ -63,7 +63,9 @@ import com.amap.api.services.poisearch.PoiSearch;
 import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.util.ToastUtils;
+import com.coolweather.gofun.widget.BottomSelectDialog;
 import com.coolweather.gofun.widget.InfoCard;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -275,6 +277,13 @@ public class MapFragment extends Fragment implements
         addMarker(latLng);
         updateMapCenter(latLng);
 
+            BottomSelectDialog mBottomSheetDialog = new BottomSelectDialog(getContext());
+        //    mBottomSheetDialog.setContentView(view1);
+            mBottomSheetDialog.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
+            mBottomSheetDialog.show();
+
+
+       //   showMoneyDialog();
     }
 
     /**
@@ -508,12 +517,12 @@ public class MapFragment extends Fragment implements
         //显示InfoWindow
         if (!marker.isInfoWindowShown()) {
             //显示
-          //  marker.showInfoWindow();
-            showMoneyDialog();
+            marker.showInfoWindow();
+        //    showMoneyDialog();
             Log.d("MapView","1111111111");
         } else {
             //隐藏
-       //     marker.hideInfoWindow();
+          //  marker.hideInfoWindow();
         }
         return true;
     }
@@ -689,19 +698,16 @@ public class MapFragment extends Fragment implements
     private void showMoneyDialog(){
         InfoCard dialog = new InfoCard(getContext());
         dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setLayout(900,1200);
         Window dialogWindow = dialog.getWindow();
         WindowManager.LayoutParams params = dialogWindow.getAttributes();
-        params.width = WindowManager.LayoutParams.MATCH_PARENT;
-        dialogWindow.getDecorView().setPadding(40,0,40,0);
         dialogWindow.setAttributes(params);
+   //     View view = LayoutInflater.from(getContext()).inflate(R.layout.info_dialog, null, false);
 
-//        params.setLisenter(new InfoCard.SureOnlickLisenter() {
-//            @Override
-//            public void sureOnlcik() {
-//
-//            }
-//        });
     }
+
+
 
 
     @Override

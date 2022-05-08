@@ -23,11 +23,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     sourceSets {
-        main{
+        main {
             jniLibs.srcDirs = ['libs']
         }
     }
-
 
 
 }
@@ -54,8 +53,8 @@ dependencies {
     //material design
     implementation 'com.google.android.material:material:1.4.0'
     //retrofit
-    implementation'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     //okhttp
     implementation "com.squareup.okhttp3:okhttp:4.9.3"
     //Google推荐的EasyPermission库

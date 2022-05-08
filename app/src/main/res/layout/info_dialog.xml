@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/dp_330"
+    android:layout_width="@dimen/dp_350"
     android:layout_height="@dimen/dp_640"
     android:background="@drawable/bg_card"
     android:paddingLeft="@dimen/dp_10"
@@ -23,9 +23,10 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="类型：" />
+                android:text="@string/type" />
 
             <TextView
+                android:id="@+id/tv_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -42,14 +43,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="地点：" />
+                android:text="@string/location" />
 
             <TextView
+                android:id="@+id/tv_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:text="武汉市洪山区中南民族大学南区宿舍"/>
+                android:maxEms="10"
+                android:text="武汉市洪山区中南民族大学南区宿舍武汉市洪山区中南民族大学南区宿舍"/>
         </TableRow>
 
         <TableRow
@@ -60,9 +63,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="创建者：" />
+                android:text="@string/creator" />
 
             <TextView
+                android:id="@+id/tv_creator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -77,7 +81,7 @@
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_20"
         android:layout_marginBottom="@dimen/dp_10"
-        android:text="评论:"/>
+        android:text="@string/commit"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -91,7 +95,7 @@
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image1"
+                android:id="@+id/join_imageone"
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:src="@color/black" />
@@ -103,18 +107,23 @@
                 android:layout_marginLeft="@dimen/dp_20">
 
                 <TextView
+                    android:id="@+id/join_nameone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="陈元天" />
 
                 <TextView
+                    android:id="@+id/join_commitone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:text="很好玩会很好玩"/>
 
                 <TextView
+                    android:id="@+id/join_dateone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -133,7 +142,7 @@
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
+                android:id="@+id/join_imagetwo"
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:src="@color/black" />
@@ -145,18 +154,24 @@
                 android:layout_marginLeft="@dimen/dp_20">
 
                 <TextView
+                    android:id="@+id/join_nametwo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="陈元天" />
 
                 <TextView
+                    android:id="@+id/join_committwo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="很好玩会很好玩"/>
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:maxEms="10"
+                    android:text="都快来都快来都快来都快来都快来都快来"/>
 
                 <TextView
+                    android:id="@+id/join_datetwo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -173,7 +188,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp_40"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_20"
         android:layout_marginBottom="@dimen/dp_20"
         android:id="@+id/bt_detail"
         android:background="@drawable/detail_btn_bg"
@@ -184,7 +199,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:layout_marginLeft="@dimen/dp_10"
-            android:text="查看详情"/>
+            android:text="@string/detail"/>
 
         <ImageView
             android:layout_width="@dimen/sp_30"

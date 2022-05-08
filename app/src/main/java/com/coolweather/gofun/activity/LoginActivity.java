@@ -23,6 +23,7 @@ import com.alibaba.fastjson.JSON;
 import com.coolweather.gofun.Animation.SgfSplash6Activity;
 import com.coolweather.gofun.BaseActivity;
 import com.coolweather.gofun.LocalDb.MyDatabaseHelper;
+import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.bean.User;
 import com.coolweather.gofun.config.Config;
@@ -159,10 +160,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
 
         final String url = Config.BASE_URL + "User/login";
-        MediaType mediaType = MediaType.parse("application/json;charset=utf-8"); //设置格式
-//        Map<String,String> map = new HashMap<>();
-//        map.put("username",accountName);
-//        map.put("password",accountPassword);
+
         User user = new User();
         user.setEmail(accountName);
         user.setPassword(accountPassword);
@@ -182,17 +180,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 String token = response.body().string();
                 Log.d("kwwl","token :" + token);
                 if (response.code() == 200) {
-//                    Headers headers = response.headers();
-//                    Log.d("kww1", "headers" + headers);
-//                    List<String> cookies = headers.values("set-Cookies");
-//                    String session = cookies.get(0);
-//                    Log.d("kww1", "onResponse-size" + cookies);
-//                    String s = session.substring(0, session.indexOf(";"));
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-
                             rememberUser(accountName,accountPassword,token);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);

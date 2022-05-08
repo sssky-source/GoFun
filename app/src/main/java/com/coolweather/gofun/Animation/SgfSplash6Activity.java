@@ -48,6 +48,8 @@ public class SgfSplash6Activity extends AppCompatActivity {
         textViews.add(tv_course);
 //        showAnimation(textViews);
         showAnimation();
+        SqliteUtil sqliteUtil = new SqliteUtil(this);
+        Log.d("token","token = " + sqliteUtil.getToken());
     }
 
     private void showAnimation() {
