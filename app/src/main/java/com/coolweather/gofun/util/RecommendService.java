@@ -1,12 +1,14 @@
 package com.coolweather.gofun.util;
 
 import com.coolweather.gofun.fragment.Recommend.bean.Activity;
+import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Query;
 
 /**
 
@@ -28,6 +30,9 @@ public interface RecommendService {
     * */
     @GET("Activity/getActivityType")
     Call<List<Activity>> getActivityType(@Header("Authorization") String token);
+
+    @GET("Activity/getActivityByType")
+    Call<List<ActivityItem>> getActivityItem(@Header("Authorization") String token, @Query("typeId") int id);
 
 
 }

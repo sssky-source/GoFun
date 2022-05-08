@@ -69,5 +69,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     //圆形图片
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //SwipeRefreshLayout
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
 }

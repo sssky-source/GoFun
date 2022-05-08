@@ -11,4 +11,6 @@
     <color name="transparent">#00000000</color>
     <color name="shrine_pink_100">#FEDBD0</color>
     <color name="shrine_pink_900">#442B2D</color>
+    <color name="red">#FF0000</color>
+    <color name="pink">#f25d8e</color>
 </resources>

@@ -13,29 +13,29 @@
             android:id="@+id/recommend_Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/shrine_pink_100"
+            android:background="@color/white"
             app:layout_scrollFlags="scroll|enterAlways|snap" />
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/recommend_TabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/shrine_pink_100"
-            app:tabContentStart="60dp"
-            app:tabMode="scrollable" />
+            android:background="@color/white"
+            app:tabContentStart="10dp"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabIndicatorColor="#f25d8e"
+            app:tabIndicatorFullWidth="false"
+            app:tabMode="scrollable"
+            app:tabRippleColor="#CC929299"
+            app:tabSelectedTextColor="#f25d8e"
+            app:tabTextColor="#929299" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/recommend_ViewPager2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="1dp" />
-    </LinearLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/recommend_ViewPager2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="1dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
