@@ -3,12 +3,12 @@ package com.coolweather.gofun.fragment.Map;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +21,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
 
@@ -60,20 +61,29 @@ import com.amap.api.services.geocoder.RegeocodeQuery;
 import com.amap.api.services.geocoder.RegeocodeResult;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
-import com.coolweather.gofun.GoFunApplication;
+import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
+import com.coolweather.gofun.activity.MainActivity;
+import com.coolweather.gofun.fragment.Map.adapter.TypeAdapterone;
+import com.coolweather.gofun.fragment.Map.bean.TypeItem;
+import com.coolweather.gofun.fragment.Recommend.bean.Activity;
+import com.coolweather.gofun.net.HttpRequest;
+import com.coolweather.gofun.net.MapService;
 import com.coolweather.gofun.util.ToastUtils;
-import com.coolweather.gofun.widget.BottomSelectDialog;
-import com.coolweather.gofun.widget.InfoCard;
+import com.coolweather.gofun.fragment.Map.widget.BottomSelectDialog;
+import com.coolweather.gofun.fragment.Map.widget.InfoCard;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MapFragment extends Fragment implements
         AMapLocationListener, LocationSource,PoiSearch.OnPoiSearchListener,
@@ -130,7 +140,13 @@ public class MapFragment extends Fragment implements
     //标点列表
     private List<Marker> markerList = new ArrayList<>();
 
+    private RecyclerView recyclerView;
 
+    private List<TypeItem> typeItemList = new ArrayList<>();
+
+    private BottomSheetDialog bottomSheetDialog;
+    private BottomSheetBehavior mDialogBehavior;
+    private List<TypeItem> titleList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -152,6 +168,8 @@ public class MapFragment extends Fragment implements
         edSearch = getActivity().findViewById(R.id.ed_search);
         laySearch = getActivity().findViewById(R.id.lay_search);
         fabClearMarker = getActivity().findViewById(R.id.fab_clear_marker);
+        recyclerView = getActivity().findViewById(R.id.type_recyclerview);
+        initDatas();
         ivSearch.setOnClickListener(this::onClick);
         ivClose.setOnClickListener(this::onClick);
         edSearch.setOnKeyListener(this);
@@ -276,14 +294,16 @@ public class MapFragment extends Fragment implements
         //添加标点
         addMarker(latLng);
         updateMapCenter(latLng);
+        initData();
+        showSheetDialog();
+        bottomSheetDialog.show();
+//
+//            BottomSelectDialog mBottomSheetDialog = new BottomSelectDialog(getContext(),getActivity());
+//
+//            mBottomSheetDialog.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
+//
+//            mBottomSheetDialog.show();
 
-            BottomSelectDialog mBottomSheetDialog = new BottomSelectDialog(getContext());
-        //    mBottomSheetDialog.setContentView(view1);
-            mBottomSheetDialog.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
-            mBottomSheetDialog.show();
-
-
-       //   showMoneyDialog();
     }
 
     /**
@@ -695,20 +715,6 @@ public class MapFragment extends Fragment implements
 
     }
 
-    private void showMoneyDialog(){
-        InfoCard dialog = new InfoCard(getContext());
-        dialog.show();
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        dialog.getWindow().setLayout(900,1200);
-        Window dialogWindow = dialog.getWindow();
-        WindowManager.LayoutParams params = dialogWindow.getAttributes();
-        dialogWindow.setAttributes(params);
-   //     View view = LayoutInflater.from(getContext()).inflate(R.layout.info_dialog, null, false);
-
-    }
-
-
-
 
     @Override
     public void onResume() {
@@ -736,6 +742,87 @@ public class MapFragment extends Fragment implements
         //销毁定位客户端，同时销毁本地定位服务。
         mLocationClient.onDestroy();
         mapView.onDestroy();
+    }
+
+    private void initDatas() {
+        SqliteUtil sqliteUtil = new SqliteUtil(getContext());
+        String token = sqliteUtil.getToken();
+        MapService mapService = HttpRequest.create(MapService.class);
+        mapService.getActivityType("Bearer" + token).enqueue(new Callback<List<Activity>>() {
+            @Override
+            public void onResponse(Call<List<Activity>> call, Response<List<Activity>> response) {
+                List<Activity> list = response.body();
+                Log.d("Bottom1",response.body().toString());
+                Log.d("Botton4", String.valueOf(list.size()));
+                for(int i = 0; i < list.size(); i++){
+                    Log.d("Bottom2","111111111");
+                    TypeItem typeItem = new TypeItem();
+                    typeItem.setType(list.get(i).getType1());
+                    typeItem.setImage(R.drawable.head);
+                    Log.d("Bottom","type" + typeItem.getType());
+                    //   Log.d("Bottom2",list.get(i))
+                    //  typeItemList.get(i).setImage(R.drawable.head);
+                    typeItemList.add(typeItem);
+//                    activity.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//            //                ToastUtils.show(context,"1111111111111");
+//                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+//                            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//                            recyclerView.setLayoutManager(linearLayoutManager);
+//                            TypeAdapter typeAdapter = new TypeAdapter(R.id.img_type,typeItemList);
+//                            recyclerView.setAdapter(typeAdapter);
+//                        }
+//                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Activity>> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    private void initData() {
+        TypeItem typeItem = new TypeItem();
+        for (int i = 0; i < 110; i++) {
+            typeItem.setImage(R.drawable.head);
+            typeItem.setType("qqq");
+            titleList.add(typeItem);
+        }
+    }
+    private void showSheetDialog() {
+        //recyclerView = getActivity().findViewById(R.id.type_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        TypeAdapterone adapterone = new TypeAdapterone(typeItemList,getContext());
+        recyclerView.setAdapter(adapterone);
+
+        bottomSheetDialog = new BottomSheetDialog(getContext(), R.style.Theme_AppCompat_Light_Dialog);
+        View view = getLayoutInflater().inflate(R.layout.dialog_bottom_select, null);
+        bottomSheetDialog.setContentView(view);
+        mDialogBehavior = BottomSheetBehavior.from((View) view.getParent());
+        mDialogBehavior.setPeekHeight(getWindowHeight());//dialog的高度
+        mDialogBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View view, int i) {
+                if (i == BottomSheetBehavior.STATE_HIDDEN) {
+                    bottomSheetDialog.dismiss();
+                    mDialogBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
+            }
+            @Override
+            public void onSlide(@NonNull View view, float v) {
+
+            }
+        });
+    }
+
+    private int getWindowHeight() {
+        Resources res = getActivity().getResources();
+        DisplayMetrics displayMetrics = res.getDisplayMetrics();
+        return displayMetrics.heightPixels;
     }
 
 

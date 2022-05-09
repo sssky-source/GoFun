@@ -1,4 +1,4 @@
-package com.coolweather.gofun.util;
+package com.coolweather.gofun.net;
 
 import com.coolweather.gofun.fragment.Recommend.bean.Activity;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;

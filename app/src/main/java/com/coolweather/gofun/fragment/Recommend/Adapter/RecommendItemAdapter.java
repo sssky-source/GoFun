@@ -2,6 +2,7 @@ package com.coolweather.gofun.fragment.Recommend.Adapter;
 
 import android.annotation.SuppressLint;
 import android.text.TextPaint;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,5 +45,6 @@ public class RecommendItemAdapter extends BaseQuickAdapter<ActivityItem, BaseVie
 
         ImageView userPic = baseViewHolder.getView(R.id.activity_userImage);
         Glide.with(getContext()).load(activity.getImage()).into(userPic);
+        Log.d("Select","Recommand");
     }
 }

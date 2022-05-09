@@ -1,6 +1,7 @@
 package com.coolweather.gofun.fragment.Recommend;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,8 +19,8 @@ import com.coolweather.gofun.fragment.Recommend.Adapter.FragmentAdapter;
 import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.fragment.Recommend.bean.Activity;
-import com.coolweather.gofun.util.HttpRequest;
-import com.coolweather.gofun.util.RecommendService;
+import com.coolweather.gofun.net.HttpRequest;
+import com.coolweather.gofun.net.RecommendService;
 import com.coolweather.gofun.util.ToastUtils;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
@@ -74,9 +75,12 @@ public class RecommendFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Activity>> call, Response<List<Activity>> response) {
                 List<Activity> list = response.body();
+                //Log.d("Recommend11",list.toString());
+               // Log.d("Recommend",list.toString());
                 for (Activity activity : list) {
                     tabName.add(activity.getType1());
                     fragmentList.add(new RecommendItemFragment(token,activity.getId()));
+                    Log.d("Recommend","1111111111");
                 }
 
                 viewPager2.setAdapter(new FragmentAdapter(getActivity().getSupportFragmentManager(), getLifecycle(), fragmentList));

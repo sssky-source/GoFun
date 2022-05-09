@@ -2,11 +2,7 @@ package com.coolweather.gofun.fragment.Recommend;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -18,16 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.coolweather.gofun.R;
-import com.coolweather.gofun.activity.MainActivity;
 import com.coolweather.gofun.fragment.Recommend.Adapter.RecommendItemAdapter;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
-import com.coolweather.gofun.util.HttpRequest;
-import com.coolweather.gofun.util.RecommendService;
-import com.coolweather.gofun.util.ToastUtils;
-import com.google.android.material.appbar.MaterialToolbar;
+import com.coolweather.gofun.net.HttpRequest;
+import com.coolweather.gofun.net.RecommendService;
 
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
