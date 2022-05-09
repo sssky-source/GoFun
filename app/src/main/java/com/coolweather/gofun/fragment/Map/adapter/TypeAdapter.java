@@ -18,7 +18,8 @@ public class TypeAdapter extends BaseQuickAdapter<TypeItem, BaseViewHolder> {
 
     public TypeAdapter(int layoutResId, @Nullable List<TypeItem> data) {
         super(layoutResId, data);
-        Log.d("Select","55555555");
+        //添加子点击事件
+      //  addChildClickViewIds(R.id.tv_name, R.id.tv_delete);
     }
 
     @Override

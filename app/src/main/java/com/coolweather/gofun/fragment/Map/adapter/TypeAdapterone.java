@@ -38,7 +38,7 @@ public class TypeAdapterone extends RecyclerView.Adapter<TypeAdapterone.ViewHold
     @Override
     public void onBindViewHolder(@NonNull TypeAdapterone.ViewHolder holder, int position) {
         TypeItem typeItem = itemList.get(position);
-        holder.textView.setText(typeItem.getType());
+        holder.textView.setText("1111");
         holder.imageView.setImageResource(typeItem.getImage());
         Log.d("one","1111111111111");
     }

@@ -21,6 +21,7 @@ import com.coolweather.gofun.fragment.Recommend.bean.Activity;
 import com.coolweather.gofun.net.HttpRequest;
 import com.coolweather.gofun.net.MapService;
 import com.coolweather.gofun.util.ToastUtils;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -38,14 +39,20 @@ public class BottomSelectDialog extends BottomSheetDialog {
     private Context context;
     private android.app.Activity activity;
     private List<TypeItem> typeItemList = new ArrayList<>();
+    private BottomSheetDialog bottomSheetDialog;
+    private BottomSheetBehavior mDialogBehavior;
+    private TypeAdapterone mainAdapter;
+    private List<TypeItem> titleList = new ArrayList<>();
 
     private BottomSelectDialog mBottomSheetDialog;
     public BottomSelectDialog(@NonNull Context context, android.app.Activity activity) {
         super(context);
         this.context = context;
         this.activity = activity;
-       // initDatas();
         initViews();
+    //    initData();
+   //     showSheetDialog1();
+      //  bottomSheetDialog.show();
     }
 
     private void initDatas() {
@@ -90,14 +97,42 @@ public class BottomSelectDialog extends BottomSheetDialog {
 
     private void initViews() {
         View view = getLayoutInflater().inflate(R.layout.dialog_bottom_select, null);
-//        recyclerView = view.findViewById(R.id.type_recyclerview);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
-//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//        Log.d("Select","wwwwwwwww");
-//        TypeAdapterone typeAdapter = new TypeAdapterone(typeItemList,getContext());
-//      //  TypeAdapter typeAdapter = new TypeAdapter(R.id.img_type,typeItemList);
-//        recyclerView.setAdapter(typeAdapter);
         setContentView(view);
+    }
+
+    private void showSheetDialog1() {
+        View view = View.inflate(getContext(), R.layout.dialog_bottom_select, null);
+        recyclerView = view.findViewById(R.id.type_recyclerview);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(layoutManager);
+        mainAdapter = new TypeAdapterone(titleList,getContext());
+        recyclerView.setAdapter(mainAdapter);
+        bottomSheetDialog = new BottomSheetDialog(getContext());
+        bottomSheetDialog.setContentView(view);
+     //   mDialogBehavior = BottomSheetBehavior.from((View) view.getParent());
+      //  mDialogBehavior.setPeekHeight(getPeekHeight());
+    }
+
+
+    /**
+     * 弹窗高度，默认为屏幕高度的四分之三
+     * 子类可重写该方法返回peekHeight
+     *
+     * @return height
+     */
+    protected int getPeekHeight() {
+        int peekHeight = context.getResources().getDisplayMetrics().heightPixels;
+        //设置弹窗高度为屏幕高度的3/4
+        return peekHeight - peekHeight*7 / 10;
+    }
+
+    private void initData() {
+        TypeItem typeItem = new TypeItem();
+        for (int i = 0; i < 5; i++) {
+            typeItem.setImage(R.drawable.head);
+            typeItem.setType("1111");
+            titleList.add(typeItem);
+        }
     }
 }
