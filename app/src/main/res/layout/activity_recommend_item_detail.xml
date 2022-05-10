@@ -4,13 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:orientation="horizontal"
     app:cardCornerRadius="10dp"
     app:cardElevation="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -84,9 +83,20 @@
             android:id="@+id/activity_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="30dp"
             android:textColor="#49cc90"
             android:text="人数" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/activity_apply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/apply"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/activity_userImage"
+            android:textColor="#F9AA33"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -12,18 +12,18 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.coolweather.gofun.R;
-import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
+import com.coolweather.gofun.fragment.Mine.bean.PersonActivityItem;
 
 import java.util.List;
 
-public class StateItemAdapter extends BaseQuickAdapter<ActivityItem, BaseViewHolder> {
-    public StateItemAdapter(int layoutResId, @Nullable List<ActivityItem> data) {
+public class StateItemAdapter extends BaseQuickAdapter<PersonActivityItem, BaseViewHolder> {
+    public StateItemAdapter(int layoutResId, @Nullable List<PersonActivityItem> data) {
         super(layoutResId, data);
     }
 
     @SuppressLint("ResourceAsColor")
     @Override
-    protected void convert(@NonNull BaseViewHolder baseViewHolder, ActivityItem activityItem) {
+    protected void convert(@NonNull BaseViewHolder baseViewHolder, PersonActivityItem activityItem) {
         TextView textView = baseViewHolder.getView(R.id.state_number);
         baseViewHolder.setText(R.id.state_type,"[" + activityItem.getType() + "] ");
         baseViewHolder.setText(R.id.state_title,activityItem.getTitle());
@@ -41,6 +41,6 @@ public class StateItemAdapter extends BaseQuickAdapter<ActivityItem, BaseViewHol
         }
 
         ImageView userPic = baseViewHolder.getView(R.id.state_userImage);
-        Glide.with(getContext()).load(activityItem.getImage()).into(userPic);
+        Glide.with(getContext()).load(activityItem.getUserImage()).into(userPic);
     }
 }

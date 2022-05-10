@@ -15,6 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.fragment.Mine.Adapter.StateItemAdapter;
+import com.coolweather.gofun.fragment.Mine.bean.PersonActivityItem;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 import com.coolweather.gofun.net.PersonService;
 
@@ -65,17 +66,17 @@ public class StateFragment extends Fragment {
     }
 
     private void request() {
-        personService.getApplyStatusDetail("Bearer " + GoFunApplication.token,id).enqueue(new Callback<List<ActivityItem>>() {
+        personService.getApplyStatusDetail("Bearer " + GoFunApplication.token,id).enqueue(new Callback<List<PersonActivityItem>>() {
             @Override
-            public void onResponse(Call<List<ActivityItem>> call, Response<List<ActivityItem>> response) {
-                List<ActivityItem> list = response.body();
+            public void onResponse(Call<List<PersonActivityItem>> call, Response<List<PersonActivityItem>> response) {
+                List<PersonActivityItem> list = response.body();
                 stateItemAdapter = new StateItemAdapter(R.layout.activity_state_item,list);
                 recyclerView.setAdapter(stateItemAdapter);
                 swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
-            public void onFailure(Call<List<ActivityItem>> call, Throwable t) {
+            public void onFailure(Call<List<PersonActivityItem>> call, Throwable t) {
                 t.printStackTrace();
             }
         });

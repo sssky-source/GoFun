@@ -1,6 +1,7 @@
 package com.coolweather.gofun.net;
 
 import com.coolweather.gofun.fragment.Mine.bean.ActivityStatus;
+import com.coolweather.gofun.fragment.Mine.bean.PersonActivityItem;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 
 import java.util.List;
@@ -18,9 +19,9 @@ public interface PersonService {
 
     //我申请的活动详情
     @GET("Activity/getApplyActivityOfApplicant")
-    Call<List<ActivityItem>> getApplyStatusDetail(@Header("Authorization") String token, @Query("applyState") int id);
+    Call<List<PersonActivityItem>> getApplyStatusDetail(@Header("Authorization") String token, @Query("applyState") int id);
 
     //我加入的
     @GET("Activity/getApplyActivityOfApplicant?applyState=2")
-    Call<List<ActivityItem>> getJoinActivity(@Header("Authorization") String token);
+    Call<List<PersonActivityItem>> getJoinActivity(@Header("Authorization") String token);
 }

@@ -35,6 +35,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -51,6 +52,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private LinearLayout llLogin;
     private CheckBox checkBox;
     private MyDatabaseHelper dbhelper;
+    private CircleImageView QQ_Login,V_Login;
     SQLiteDatabase db;
 
     @Override
@@ -71,6 +73,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         progressBar = (ProgressBar) findViewById(R.id.pb);
         llLogin = (LinearLayout) findViewById(R.id.ll_login);
         checkBox = (CheckBox) findViewById(R.id.login_check);
+        QQ_Login = findViewById(R.id.QQ_Login);
+        V_Login = findViewById(R.id.V_Login);
         registerAccountBtn.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); //下划线
         registerAccountBtn.getPaint().setAntiAlias(true);//抗锯齿
         accountLoginPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -105,6 +109,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         registerAccountBtn.setOnClickListener(this);
         viewpagerbutton.setOnClickListener(this);
         guidance.setOnClickListener(this);
+        QQ_Login.setOnClickListener(this);
+        V_Login.setOnClickListener(this);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -141,6 +147,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.guidance:
                 Intent guidance = new Intent(LoginActivity.this, SgfSplash6Activity.class);
                 startActivity(guidance);
+                break;
+            case R.id.QQ_Login:
+            case R.id.V_Login:
+                ToastUtils.show(this,"敬请期待");
                 break;
             default:
                 break;

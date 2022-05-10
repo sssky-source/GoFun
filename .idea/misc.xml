@@ -6,6 +6,7 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/drawable/btn_border.xml" value="0.1715" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/drawable/login_btn_bg.xml" value="0.1875" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/drawable/login_btn_bg2.xml" value="0.1875" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/drawable/login_line_bg.xml" value="0.1905" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/drawable/nav_map_selector.xml" value="0.1685" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/drawable/nav_recommand_selector.xml" value="0.121" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/drawable/recommend_color.xml" value="0.1685" />
@@ -17,7 +18,7 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_person_activity.xml" value="0.24947916666666667" />
-        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_recommend_item_detail.xml" value="0.36147757255936674" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_recommend_item_detail.xml" value="0.264" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_register.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_sgf_splash6.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_state.xml" value="0.20668058455114824" />

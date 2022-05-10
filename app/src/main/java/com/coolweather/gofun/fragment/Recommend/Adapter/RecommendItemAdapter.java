@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.coolweather.gofun.R;
-import com.coolweather.gofun.fragment.Recommend.bean.Activity;
+
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 
 import java.util.List;
@@ -22,6 +22,7 @@ public class RecommendItemAdapter extends BaseQuickAdapter<ActivityItem, BaseVie
     public RecommendItemAdapter(int layoutResId, @Nullable List<ActivityItem> data) {
         super(layoutResId, data);
         //点击事件添加
+        addChildClickViewIds(R.id.activity_apply);
     }
 
     @SuppressLint("ResourceAsColor")
