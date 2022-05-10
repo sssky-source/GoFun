@@ -11,9 +11,8 @@ import android.util.Log;
 import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.fragment.Mine.bean.ActivityStatus;
-import com.coolweather.gofun.fragment.Recommend.Adapter.FragmentAdapter;
-import com.coolweather.gofun.util.HttpRequest;
-import com.coolweather.gofun.util.PersonService;
+import com.coolweather.gofun.net.HttpRequest;
+import com.coolweather.gofun.net.PersonService;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 

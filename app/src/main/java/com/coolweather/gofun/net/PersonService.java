@@ -1,4 +1,4 @@
-package com.coolweather.gofun.util;
+package com.coolweather.gofun.net;
 
 import com.coolweather.gofun.fragment.Mine.bean.ActivityStatus;
 
