@@ -24,7 +24,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/recommend_color"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/Join_SwipeRefreshLayout"
             android:layout_width="match_parent"
