@@ -1,4 +1,4 @@
-package com.coolweather.gofun.fragment.Mine;
+package com.coolweather.gofun.fragment.Mine.apply;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,10 +6,11 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
-import android.util.Log;
 
+import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
+import com.coolweather.gofun.fragment.Mine.Adapter.ActivityAdapter;
 import com.coolweather.gofun.fragment.Mine.bean.ActivityStatus;
 import com.coolweather.gofun.net.HttpRequest;
 import com.coolweather.gofun.net.PersonService;
@@ -25,7 +26,6 @@ import retrofit2.Response;
 
 public class PersonActivity extends AppCompatActivity {
 
-    private String token;
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     final ArrayList<String> tabName = new ArrayList<>();
@@ -36,8 +36,6 @@ public class PersonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_activity);
         PersonService personService = HttpRequest.create(PersonService.class);
-        SqliteUtil sqliteUtil = new SqliteUtil(PersonActivity.this);
-        token = sqliteUtil.getToken();
 
         tabLayout = (TabLayout) findViewById(R.id.PersonActivity_TabLayout);
         viewPager2 = findViewById(R.id.PersonActivity_ViewPager2);
@@ -46,26 +44,20 @@ public class PersonActivity extends AppCompatActivity {
     }
 
     private void request(PersonService personService) {
-        personService.getActivityStatus("Bearer " + token).enqueue(new Callback<List<ActivityStatus>>() {
+        personService.getApplyStatus("Bearer " + GoFunApplication.token).enqueue(new Callback<List<ActivityStatus>>() {
             @Override
             public void onResponse(Call<List<ActivityStatus>> call, Response<List<ActivityStatus>> response) {
                 List<ActivityStatus> list = response.body();
                 for (ActivityStatus activity : list) {
                     tabName.add(activity.getState());
-                    Log.d("111",activity.getState());
+                    fragmentList.add(new StateFragment(activity.getId(),personService));
+
                 }
-                Log.d("111", "size:" + tabName.size());
-                Log.d("111",tabName.get(0));
-                Log.d("111",tabName.get(1));
-                Log.d("111",tabName.get(2));
-                Log.d("111", "size11111:" + tabName.size());
-                Log.d("111", "size11111:" + fragmentList.size());
                 viewPager2.setAdapter(new ActivityAdapter(getSupportFragmentManager(),getLifecycle(),fragmentList));
                 new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
                     @Override
                     public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                        Log.d("111", "222222222:" + tabName.size());
-                        tab.setText(tabName.get(1));
+                        tab.setText(tabName.get(position));
                     }
                 }).attach();
             }

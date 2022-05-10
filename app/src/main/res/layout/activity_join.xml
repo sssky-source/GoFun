@@ -12,32 +12,32 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/PersonActivity_Toolbar"
+            android:id="@+id/Join_Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
             app:layout_scrollFlags="scroll|enterAlways|snap" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/PersonActivity_TabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:tabContentStart="10dp"
-            app:tabIndicatorAnimationMode="elastic"
-            app:tabIndicatorColor="#f25d8e"
-            app:tabIndicatorFullWidth="false"
-            app:tabMode="auto"
-            app:tabRippleColor="#CC929299"
-            app:tabSelectedTextColor="#f25d8e"
-            app:tabTextColor="#929299" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/PersonActivity_ViewPager2"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="1dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:background="@drawable/recommend_color"
+        android:orientation="vertical">
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/Join_SwipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Join_RecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F1F2F3"
+                android:orientation="vertical" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

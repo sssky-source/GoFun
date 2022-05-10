@@ -45,6 +45,5 @@ public class RecommendItemAdapter extends BaseQuickAdapter<ActivityItem, BaseVie
 
         ImageView userPic = baseViewHolder.getView(R.id.activity_userImage);
         Glide.with(getContext()).load(activity.getImage()).into(userPic);
-        Log.d("Select","Recommand");
     }
 }

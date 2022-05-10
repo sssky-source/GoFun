@@ -1,4 +1,4 @@
-package com.coolweather.gofun.fragment.Mine;
+package com.coolweather.gofun.fragment.Mine.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

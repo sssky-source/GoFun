@@ -1,7 +1,6 @@
 package com.coolweather.gofun.widget;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.coolweather.gofun.R;
-import com.coolweather.gofun.fragment.Mine.PersonActivity;
 
 public class SystemInformation extends LinearLayout {
 

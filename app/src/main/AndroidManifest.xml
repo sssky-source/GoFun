@@ -37,7 +37,9 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustPan">
         <activity
-            android:name=".fragment.Mine.PersonActivity"
+            android:name=".fragment.Mine.apply.PersonActivity"
+            android:exported="false" />
+        <activity android:name=".fragment.Mine.join.JoinActivity"
             android:exported="false" />
         <activity
             android:name=".Guidance.GuidanceActivity"

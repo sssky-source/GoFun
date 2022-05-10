@@ -26,6 +26,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -76,6 +77,7 @@ public class RecommendFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Activity>> call, Response<List<Activity>> response) {
                 List<Activity> list = response.body();
+                Collections.reverse(list);
                 for (Activity activity : list) {
                     tabName.add(activity.getType1());
                     fragmentList.add(new RecommendItemFragment(token,activity.getId()));
