@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.coolweather.gofun.Animation.SgfSplash6Activity;
 import com.coolweather.gofun.BaseActivity;
+import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.LocalDb.MyDatabaseHelper;
 import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
@@ -74,6 +75,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         registerAccountBtn.getPaint().setAntiAlias(true);//抗锯齿
         accountLoginPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         checkBox.setBackgroundResource(R.drawable.icon_bukejian);
+        Log.d("TOKEN", GoFunApplication.getToken());
         //通过构造函数将参数将数据库名指定为UserList.db，版本为1
         dbhelper = new MyDatabaseHelper(this,"UserList.db",null,1);
         //进入活动运行到这一步后检测到没有数据库就会创建

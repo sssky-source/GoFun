@@ -18,16 +18,14 @@ import com.coolweather.gofun.fragment.Recommend.Adapter.FragmentAdapter;
 import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.fragment.Recommend.bean.Activity;
-import com.coolweather.gofun.util.HttpRequest;
-import com.coolweather.gofun.util.RecommendService;
+import com.coolweather.gofun.net.HttpRequest;
+import com.coolweather.gofun.net.RecommendService;
 import com.coolweather.gofun.util.ToastUtils;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -78,7 +76,6 @@ public class RecommendFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Activity>> call, Response<List<Activity>> response) {
                 List<Activity> list = response.body();
-                Collections.reverse(list);  //倒置ArrayList
                 for (Activity activity : list) {
                     tabName.add(activity.getType1());
                     fragmentList.add(new RecommendItemFragment(token,activity.getId()));

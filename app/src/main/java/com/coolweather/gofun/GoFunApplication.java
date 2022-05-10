@@ -3,6 +3,9 @@ package com.coolweather.gofun;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
+
+import com.coolweather.gofun.LocalDb.SqliteUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,6 +18,7 @@ public class GoFunApplication  extends Application {
     private List<Activity> activityList = new LinkedList();//退出应用集合
     private List<Activity> temporaryActivityList = new LinkedList();//临时销毁Activity集合
     private static GoFunApplication instance;
+    public static String token = "0";
 
     @Override
     public void onCreate() {
@@ -22,7 +26,13 @@ public class GoFunApplication  extends Application {
         instance = this;
         //初始化全局上下文
         applicationContext=this;
+        SqliteUtil sqliteUtil = new SqliteUtil(getContext());
+        if(sqliteUtil.getToken()!=null){
+            token = sqliteUtil.getToken();
+            Log.d("TOKENq",token);
+        }else{
 
+        }
     }
 
     public  static Context getGlobalApplication() {
@@ -56,6 +66,10 @@ public class GoFunApplication  extends Application {
      */
     public static Context getContext() {
         return applicationContext;
+    }
+
+    public static String getToken(){
+        return token;
     }
 
     @Override

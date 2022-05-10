@@ -1,4 +1,4 @@
-package com.coolweather.gofun.widget;
+package com.coolweather.gofun.fragment.Map.widget;
 
 import android.app.Dialog;
 import android.content.Context;

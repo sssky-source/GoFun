@@ -6,14 +6,14 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.InputMethodManager;
@@ -21,11 +21,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
 
@@ -50,7 +51,6 @@ import com.amap.api.maps.model.animation.Animation;
 import com.amap.api.maps.model.animation.RotateAnimation;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
-import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.geocoder.GeocodeAddress;
 import com.amap.api.services.geocoder.GeocodeQuery;
 import com.amap.api.services.geocoder.GeocodeResult;
@@ -58,25 +58,34 @@ import com.amap.api.services.geocoder.GeocodeSearch;
 import com.amap.api.services.geocoder.RegeocodeAddress;
 import com.amap.api.services.geocoder.RegeocodeQuery;
 import com.amap.api.services.geocoder.RegeocodeResult;
-import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
-import com.coolweather.gofun.GoFunApplication;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
+import com.coolweather.gofun.fragment.Map.adapter.TypeAdapter;
+import com.coolweather.gofun.fragment.Map.bean.TypeItem;
+import com.coolweather.gofun.fragment.Map.widget.InfoCard;
+import com.coolweather.gofun.fragment.Recommend.bean.Activity;
+import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
+import com.coolweather.gofun.net.HttpRequest;
+import com.coolweather.gofun.net.MapService;
 import com.coolweather.gofun.util.ToastUtils;
-import com.coolweather.gofun.widget.BottomSelectDialog;
-import com.coolweather.gofun.widget.InfoCard;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.coolweather.gofun.fragment.Map.widget.BottomSelectDialog;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MapFragment extends Fragment implements
-        AMapLocationListener, LocationSource,PoiSearch.OnPoiSearchListener,
+        AMapLocationListener, LocationSource,
         AMap.OnMapClickListener,AMap.OnMapLongClickListener,
         GeocodeSearch.OnGeocodeSearchListener,View.OnClickListener,
         EditText.OnKeyListener,AMap.OnMarkerClickListener{
@@ -127,10 +136,22 @@ public class MapFragment extends Fragment implements
     //浮动按钮  清空地图标点
     private FloatingActionButton fabClearMarker;
 
+    //浮动按钮 筛选类型
+    private FloatingActionButton fabSelectType;
+
     //标点列表
     private List<Marker> markerList = new ArrayList<>();
 
+    private RecyclerView recyclerView;
 
+
+    private BottomSelectDialog bottomSheetDialog;
+
+    private TypeAdapter typeAdapter;
+    private List<TypeItem> titleList = new ArrayList<>();
+    private List<ActivityItem> activityItemList = new ArrayList<>();
+    private List<ActivityItem> allactivityItemList = new ArrayList<>();
+    private NetRequset netRequset = new NetRequset();
 
     @Nullable
     @Override
@@ -152,10 +173,14 @@ public class MapFragment extends Fragment implements
         edSearch = getActivity().findViewById(R.id.ed_search);
         laySearch = getActivity().findViewById(R.id.lay_search);
         fabClearMarker = getActivity().findViewById(R.id.fab_clear_marker);
+        fabSelectType = getActivity().findViewById(R.id.fab_select);
+        recyclerView = getActivity().findViewById(R.id.type_recyclerview);
+     //   initActivityType();
         ivSearch.setOnClickListener(this::onClick);
         ivClose.setOnClickListener(this::onClick);
         edSearch.setOnKeyListener(this);
         fabClearMarker.setOnClickListener(this::onClick);
+        fabSelectType.setOnClickListener(this::onClick);
         // toolbar = getActivity().findViewById(R.id.toolbar);
         // ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
     }
@@ -165,13 +190,6 @@ public class MapFragment extends Fragment implements
         super.onActivityCreated(savedInstanceState);
         MapsInitializer.updatePrivacyShow(getContext(),true,true);
         MapsInitializer.updatePrivacyAgree(getContext(),true);
-        fabPOI = getActivity().findViewById(R.id.fab_poi);
-        fabPOI.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                queryPOI();
-            }
-        });
         //初始化定位
         initLocation();
         //初始化地图
@@ -276,15 +294,11 @@ public class MapFragment extends Fragment implements
         //添加标点
         addMarker(latLng);
         updateMapCenter(latLng);
+        showInfoCard();
 
-            BottomSelectDialog mBottomSheetDialog = new BottomSelectDialog(getContext());
-        //    mBottomSheetDialog.setContentView(view1);
-            mBottomSheetDialog.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
-            mBottomSheetDialog.show();
-
-
-       //   showMoneyDialog();
     }
+
+
 
     /**
      * 地图长按事件
@@ -414,7 +428,6 @@ public class MapFragment extends Fragment implements
                 double longitude = aMapLocation.getLongitude();
                 //城市赋值
                 city = aMapLocation.getCity();
-
                 mLocationClient.stopLocation();
                 if(mListener!=null){
                     mListener.onLocationChanged(aMapLocation);
@@ -431,44 +444,6 @@ public class MapFragment extends Fragment implements
         }
     }
 
-    /**
-     * 浮动按钮点击查询附近POI
-     */
-    public void queryPOI() {
-        //构造query对象
-        query = new PoiSearch.Query("网吧", "", cityCode);
-        // 设置每页最多返回多少条poiitem
-        query.setPageSize(10);
-        //设置查询页码
-        query.setPageNum(1);
-        //构造 PoiSearch 对象
-        try {
-            poiSearch = new PoiSearch(getContext(), query);
-        } catch (AMapException e) {
-            e.printStackTrace();
-        }
-        //设置搜索回调监听
-        poiSearch.setOnPoiSearchListener(this);
-        //发起搜索附近POI异步请求
-        poiSearch.searchPOIAsyn();
-    }
-
-    /**
-     * POI搜索返回
-     *
-     * @param poiResult POI所有数据
-     * @param i
-     */
-    @Override
-    public void onPoiSearched(PoiResult poiResult, int i) {
-        //解析result获取POI信息
-
-        //获取POI组数列表
-        ArrayList<PoiItem> poiItems = poiResult.getPois();
-        for (PoiItem poiItem : poiItems) {
-            Log.d("MainActivity", " Title：" + poiItem.getTitle() + " Snippet：" + poiItem.getSnippet());
-        }
-    }
 
     /**
      * 添加地图标点
@@ -542,22 +517,6 @@ public class MapFragment extends Fragment implements
         //改变位置
         aMap.moveCamera(cameraUpdate);
     }
-
-
-
-
-
-    /**
-     * POI中的项目搜索返回
-     *
-     * @param poiItem 获取POI item
-     * @param i
-     */
-    @Override
-    public void onPoiItemSearched(PoiItem poiItem, int i) {
-
-    }
-
 
 
     /**
@@ -667,7 +626,6 @@ public class MapFragment extends Fragment implements
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 //隐藏软键盘
                 imm.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);
-
                 // name表示地址，第二个参数表示查询城市，中文或者中文全拼，citycode、adcode
                 GeocodeQuery query = new GeocodeQuery(address,city);
                 geocodeSearch.getFromLocationNameAsyn(query);
@@ -675,36 +633,6 @@ public class MapFragment extends Fragment implements
             return true;
         }
         return false;
-    }
-
-
-    @Override
-    public void onClick(View v) {
-
-        switch (v.getId()){
-            case R.id.iv_search:
-                initExpand();
-                break;
-            case R.id.iv_close:
-                initClose();
-            case R.id.fab_clear_marker:
-                clearAllMarker(v);
-                break;
-                default:
-        }
-
-    }
-
-    private void showMoneyDialog(){
-        InfoCard dialog = new InfoCard(getContext());
-        dialog.show();
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        dialog.getWindow().setLayout(900,1200);
-        Window dialogWindow = dialog.getWindow();
-        WindowManager.LayoutParams params = dialogWindow.getAttributes();
-        dialogWindow.setAttributes(params);
-   //     View view = LayoutInflater.from(getContext()).inflate(R.layout.info_dialog, null, false);
-
     }
 
 
@@ -736,6 +664,89 @@ public class MapFragment extends Fragment implements
         //销毁定位客户端，同时销毁本地定位服务。
         mLocationClient.onDestroy();
         mapView.onDestroy();
+    }
+
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+            case R.id.iv_search:
+                initExpand();
+                break;
+            case R.id.iv_close:
+                initClose();
+            case R.id.fab_clear_marker:
+                clearAllMarker(v);
+                break;
+            case R.id.fab_select:
+                titleList.clear();
+                netRequset.initActivityType(mHandler);
+                break;
+            default:
+        }
+
+    }
+
+
+
+    private void showSheetDialog1() {
+        View view = View.inflate(getContext(), R.layout.dialog_bottom_select, null);
+        recyclerView = view.findViewById(R.id.type_recyclerview);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(layoutManager);
+        typeAdapter = new TypeAdapter(R.layout.item_type,titleList);
+        recyclerView.setAdapter(typeAdapter);
+        bottomSheetDialog = new BottomSelectDialog(getContext(),getActivity());
+        bottomSheetDialog.setContentView(view);
+        typeAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+              //  ToastUtils.show(getContext(),titleList.get(position).getType());
+                Log.d("position", String.valueOf(position));
+                netRequset.initTypeActivity(mHandler,(position+1));
+
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+
+    }
+
+    final Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 1:
+                    titleList = (List<TypeItem>)msg.getData().getSerializable("typelist");
+                    showSheetDialog1();
+                    bottomSheetDialog.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
+                    bottomSheetDialog.show();
+                    Log.d("Hand", String.valueOf(titleList.size()));
+                    break;
+                case 2:
+                    activityItemList = (List<ActivityItem>)msg.getData().getSerializable("typeActivitylist");
+                    Log.d("Handd",String.valueOf(activityItemList.size()));
+                    break;
+                case 3:
+                    allactivityItemList = (List<ActivityItem>)msg.getData().getSerializable("allActivitylist");
+                    Log.d("Handdd",String.valueOf(allactivityItemList.size()));
+                    default:
+
+            }
+        }
+    };
+
+
+
+    private void showInfoCard() {
+        InfoCard infoCard = new InfoCard(getContext());
+        // infoCard.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
+        //此处设置位置窗体大小，
+        infoCard.getWindow().setLayout(800,1000);
+        infoCard.show();
     }
 
 
