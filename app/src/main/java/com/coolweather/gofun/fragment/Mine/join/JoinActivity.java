@@ -53,7 +53,7 @@ public class JoinActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<ActivityItem>> call, Response<List<ActivityItem>> response) {
                 List<ActivityItem> list = response.body();
-                joinItemAdapter = new JoinItemAdapter(R.layout.activity_join,list);
+                joinItemAdapter = new JoinItemAdapter(R.layout.activity_join_item,list);
                 recyclerView.setAdapter(joinItemAdapter);
                 swipeRefreshLayout.setRefreshing(false);
             }
