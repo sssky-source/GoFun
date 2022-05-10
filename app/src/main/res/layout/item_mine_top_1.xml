@@ -20,7 +20,6 @@
         android:paddingBottom="30dp">
 
 
-
         <RelativeLayout
             android:id="@+id/sel1"
             android:layout_width="0dp"
@@ -42,7 +41,7 @@
                 android:layout_below="@+id/image1"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="7dp"
-                android:text="我发布的"
+                android:text="我加入的"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -69,7 +68,7 @@
                 android:layout_below="@+id/image2"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="7dp"
-                android:text="我租借的"
+                android:text="我申请的"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -96,7 +95,7 @@
                 android:layout_below="@+id/image3"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="7dp"
-                android:text="已借出的"
+                android:text="我创建的"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 

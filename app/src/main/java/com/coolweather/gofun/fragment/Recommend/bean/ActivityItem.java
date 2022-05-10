@@ -4,8 +4,8 @@ public class ActivityItem {
     private Integer id;
     private Integer userid;
     private String title;
-    private Integer x;
-    private Integer y;
+    private Double x;
+    private Double y;
     private String image;
     private String location;
     private String introduction;
@@ -39,22 +39,6 @@ public class ActivityItem {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Integer getX() {
-        return x;
-    }
-
-    public void setX(Integer x) {
-        this.x = x;
-    }
-
-    public Integer getY() {
-        return y;
-    }
-
-    public void setY(Integer y) {
-        this.y = y;
     }
 
     public String getImage() {
@@ -135,5 +119,21 @@ public class ActivityItem {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Double getX() {
+        return x;
+    }
+
+    public void setX(Double x) {
+        this.x = x;
+    }
+
+    public Double getY() {
+        return y;
+    }
+
+    public void setY(Double y) {
+        this.y = y;
     }
 }

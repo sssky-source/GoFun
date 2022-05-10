@@ -37,14 +37,14 @@
         layout="@layout/item_mine_top_1"/>
  -->
 
-    <com.coolweather.gofun.widget.PersonImformationCard
+    <com.coolweather.gofun.widget.PersonInformationCard
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <com.coolweather.gofun.widget.SystemInformation
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"/>
+        android:layout_marginTop="350dp" />
 
 
 
