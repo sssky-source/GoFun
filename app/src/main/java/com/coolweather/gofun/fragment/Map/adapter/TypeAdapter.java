@@ -2,6 +2,7 @@ package com.coolweather.gofun.fragment.Map.adapter;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
+import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -19,7 +20,7 @@ public class TypeAdapter extends BaseQuickAdapter<TypeItem, BaseViewHolder> {
     public TypeAdapter(int layoutResId, @Nullable List<TypeItem> data) {
         super(layoutResId, data);
         //添加子点击事件
-      //  addChildClickViewIds(R.id.tv_name, R.id.tv_delete);
+        addChildClickViewIds(R.id.item_select);
     }
 
     @Override
@@ -28,5 +29,7 @@ public class TypeAdapter extends BaseQuickAdapter<TypeItem, BaseViewHolder> {
         baseViewHolder.setText(R.id.tv_type,typeItem.getType());
         Log.d("Select","11111111111111");
         Log.d("Select",typeItem.getType());
+
     }
+
 }

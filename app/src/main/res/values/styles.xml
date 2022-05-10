@@ -34,9 +34,10 @@
         <item name="android:windowNoTitle">true</item><!--没有标题-->
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:windowIsTranslucent">false</item>
-
         <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
 
 </resources>

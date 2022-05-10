@@ -51,6 +51,7 @@
         <activity
             android:name=".activity.MainActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+        <activity android:name=".activity.DetailInfoActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

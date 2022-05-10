@@ -6,6 +6,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -57,11 +59,15 @@ import com.amap.api.services.geocoder.RegeocodeAddress;
 import com.amap.api.services.geocoder.RegeocodeQuery;
 import com.amap.api.services.geocoder.RegeocodeResult;
 import com.amap.api.services.poisearch.PoiSearch;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.fragment.Map.adapter.TypeAdapter;
 import com.coolweather.gofun.fragment.Map.bean.TypeItem;
+import com.coolweather.gofun.fragment.Map.widget.InfoCard;
 import com.coolweather.gofun.fragment.Recommend.bean.Activity;
+import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 import com.coolweather.gofun.net.HttpRequest;
 import com.coolweather.gofun.net.MapService;
 import com.coolweather.gofun.util.ToastUtils;
@@ -138,12 +144,14 @@ public class MapFragment extends Fragment implements
 
     private RecyclerView recyclerView;
 
-    private List<TypeItem> typeItemList = new ArrayList<>();
 
     private BottomSelectDialog bottomSheetDialog;
-    private BottomSheetBehavior mDialogBehavior;
+
     private TypeAdapter typeAdapter;
     private List<TypeItem> titleList = new ArrayList<>();
+    private List<ActivityItem> activityItemList = new ArrayList<>();
+    private List<ActivityItem> allactivityItemList = new ArrayList<>();
+    private NetRequset netRequset = new NetRequset();
 
     @Nullable
     @Override
@@ -167,7 +175,7 @@ public class MapFragment extends Fragment implements
         fabClearMarker = getActivity().findViewById(R.id.fab_clear_marker);
         fabSelectType = getActivity().findViewById(R.id.fab_select);
         recyclerView = getActivity().findViewById(R.id.type_recyclerview);
-     //   initDatas();
+     //   initActivityType();
         ivSearch.setOnClickListener(this::onClick);
         ivClose.setOnClickListener(this::onClick);
         edSearch.setOnKeyListener(this);
@@ -286,9 +294,11 @@ public class MapFragment extends Fragment implements
         //添加标点
         addMarker(latLng);
         updateMapCenter(latLng);
-
+        showInfoCard();
 
     }
+
+
 
     /**
      * 地图长按事件
@@ -418,7 +428,6 @@ public class MapFragment extends Fragment implements
                 double longitude = aMapLocation.getLongitude();
                 //城市赋值
                 city = aMapLocation.getCity();
-
                 mLocationClient.stopLocation();
                 if(mListener!=null){
                     mListener.onLocationChanged(aMapLocation);
@@ -627,26 +636,6 @@ public class MapFragment extends Fragment implements
     }
 
 
-    @Override
-    public void onClick(View v) {
-
-        switch (v.getId()){
-            case R.id.iv_search:
-                initExpand();
-                break;
-            case R.id.iv_close:
-                initClose();
-            case R.id.fab_clear_marker:
-                clearAllMarker(v);
-                break;
-            case R.id.fab_select:
-                typeItemList.clear();
-                initDatas();
-                break;
-                default:
-        }
-
-    }
 
 
     @Override
@@ -678,6 +667,26 @@ public class MapFragment extends Fragment implements
     }
 
 
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+            case R.id.iv_search:
+                initExpand();
+                break;
+            case R.id.iv_close:
+                initClose();
+            case R.id.fab_clear_marker:
+                clearAllMarker(v);
+                break;
+            case R.id.fab_select:
+                titleList.clear();
+                netRequset.initActivityType(mHandler);
+                break;
+            default:
+        }
+
+    }
 
 
 
@@ -687,48 +696,57 @@ public class MapFragment extends Fragment implements
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
-        Log.d("Bott", String.valueOf(typeItemList.size()));
-        typeAdapter = new TypeAdapter(R.layout.item_type,typeItemList);
+        typeAdapter = new TypeAdapter(R.layout.item_type,titleList);
         recyclerView.setAdapter(typeAdapter);
         bottomSheetDialog = new BottomSelectDialog(getContext(),getActivity());
         bottomSheetDialog.setContentView(view);
+        typeAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+              //  ToastUtils.show(getContext(),titleList.get(position).getType());
+                Log.d("position", String.valueOf(position));
+                netRequset.initTypeActivity(mHandler,(position+1));
+
+                bottomSheetDialog.dismiss();
+            }
+        });
+
 
     }
 
-
-    private void initDatas() {
-        SqliteUtil sqliteUtil = new SqliteUtil(getContext());
-        String token = sqliteUtil.getToken();
-        MapService mapService = HttpRequest.create(MapService.class);
-        mapService.getActivityType("Bearer" + token).enqueue(new Callback<List<Activity>>() {
-            @Override
-            public void onResponse(Call<List<Activity>> call, Response<List<Activity>> response) {
-                List<Activity> list = response.body();
-                Log.d("Bottom1",response.body().toString());
-                Log.d("Botton4", String.valueOf(list.size()));
-                TypeItem typeItem = new TypeItem();
-                for(int i = 0; i < list.size(); i++){
-                    Log.d("Bottom2","111111111");
-                    typeItem.setType(list.get(i).getType1());
-                    typeItem.setImage(R.drawable.head);
-                    Log.d("Bottom","type" + typeItem.getType());
-                    typeItemList.add(typeItem);
-                }
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showSheetDialog1();
-                        bottomSheetDialog.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
-                        bottomSheetDialog.show();
-                    }
-                });
-            }
-
-            @Override
-            public void onFailure(Call<List<Activity>> call, Throwable t) {
+    final Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 1:
+                    titleList = (List<TypeItem>)msg.getData().getSerializable("typelist");
+                    showSheetDialog1();
+                    bottomSheetDialog.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
+                    bottomSheetDialog.show();
+                    Log.d("Hand", String.valueOf(titleList.size()));
+                    break;
+                case 2:
+                    activityItemList = (List<ActivityItem>)msg.getData().getSerializable("typeActivitylist");
+                    Log.d("Handd",String.valueOf(activityItemList.size()));
+                    break;
+                case 3:
+                    allactivityItemList = (List<ActivityItem>)msg.getData().getSerializable("allActivitylist");
+                    Log.d("Handdd",String.valueOf(allactivityItemList.size()));
+                    default:
 
             }
-        });
+        }
+    };
+
+
+
+    private void showInfoCard() {
+        InfoCard infoCard = new InfoCard(getContext());
+        // infoCard.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
+        //此处设置位置窗体大小，
+        infoCard.getWindow().setLayout(800,1000);
+        infoCard.show();
     }
 
 

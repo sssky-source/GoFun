@@ -24,4 +24,7 @@ public interface MapService {
 
     @GET("Activity/getActivityByType")
     Call<List<ActivityItem>> getActivityItem(@Header("Authorization") String token, @Query("typeId") int id);
+
+    @GET("Activity/getAllActivity")
+    Call<List<ActivityItem>> getAllActivity(@Header("Authorization") String token);
 }

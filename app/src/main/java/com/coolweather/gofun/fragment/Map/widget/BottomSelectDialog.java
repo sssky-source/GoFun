@@ -126,13 +126,4 @@ public class BottomSelectDialog extends BottomSheetDialog {
         //设置弹窗高度为屏幕高度的3/4
         return peekHeight - peekHeight*7 / 10;
     }
-
-    private void initData() {
-        TypeItem typeItem = new TypeItem();
-        for (int i = 0; i < 5; i++) {
-            typeItem.setImage(R.drawable.head);
-            typeItem.setType("1111");
-            titleList.add(typeItem);
-        }
-    }
 }

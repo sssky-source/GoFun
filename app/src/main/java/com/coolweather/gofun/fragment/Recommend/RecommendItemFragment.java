@@ -66,7 +66,6 @@ public class RecommendItemFragment extends Fragment {
                 recommendItemAdapter.notifyDataSetChanged();
             }
         });
-
         swipeRefreshLayout.setRefreshing(true);
         request(recommendService);
     }
