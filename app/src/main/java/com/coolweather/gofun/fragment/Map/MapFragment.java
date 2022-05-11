@@ -281,7 +281,7 @@ public class MapFragment extends Fragment implements
         mUiSettings.setScaleControlsEnabled(true);
 
         //设置最小缩放等级为16 ，缩放级别范围为[3, 20]
-        aMap.setMinZoomLevel(12);
+        aMap.setMinZoomLevel(5);
         // 自定义定位蓝点图标
         myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.drawable.gps_point));
         // 自定义精度范围的圆形边框颜色  都为0则透明
@@ -323,7 +323,7 @@ public class MapFragment extends Fragment implements
         //添加标点
      //   aMap.addMarker(new MarkerOptions().position(latLng).snippet("DefaultMarker"));
         //添加标点
-        addMarker(latLng,"http://139.224.221.148:1145/user/17/少女前线仲夏夜的精灵 大破.png");
+      //  addMarker(latLng,"http://139.224.221.148:1145/user/17/少女前线仲夏夜的精灵 大破.png");
         updateMapCenter(latLng);
      //   showInfoCard();
 
@@ -481,7 +481,7 @@ public class MapFragment extends Fragment implements
      *
      * @param latLng
      */
-    private void addMarker(LatLng latLng,String img) {
+    private void addMarker(LatLng latLng,String img,int indentify) {
         //显示浮动按钮
         fabClearMarker.show();
         //添加标点
@@ -499,11 +499,13 @@ public class MapFragment extends Fragment implements
         ImageView userPic = view.findViewById(R.id.iv_head);
         Glide.with(getContext()).load(img).into(userPic);
         MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.title(String.valueOf(indentify));
         markerOptions.position(latLng);
     //    markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapUtils.urlToBitmap(img)));
         markerOptions.icon(BitmapDescriptorFactory.fromView(view));
+        Marker marker = aMap.addMarker(markerOptions);
+        markerList.add(marker);
         Log.d("i","00000000000");
-        aMap.addMarker(markerOptions);
     }
 
 
@@ -512,12 +514,12 @@ public class MapFragment extends Fragment implements
      *
      */
     public void clearAllMarker() {
-//        if (markerOptionsList != null && markerOptionsList.size()>0){
-//            for (MarkerOptions markerItem : markerOptionsList) {
-//                markerItem.remove();
-//            }
-//        }
-        aMap.clear();
+        if (markerList != null && markerList.size()>0){
+            for (Marker markerItem : markerList) {
+                markerItem.remove();
+            }
+        }
+ //       aMap.clear();
         fabClearMarker.hide();
     }
 
@@ -532,11 +534,13 @@ public class MapFragment extends Fragment implements
         //showMsg("点击了标点");
         //显示InfoWindow
         if (!marker.isInfoWindowShown()) {
+
             //显示
        //     marker.showInfoWindow();
-            showInfoCard();
+            showInfoCard(marker.getTitle());
+       //     marker.remove();
         //    showMoneyDialog();
-            Log.d("MapView","1111111111");
+            Log.d("MapView",marker.getTitle());
         } else {
             //隐藏
           //  marker.hideInfoWindow();
@@ -760,8 +764,9 @@ public class MapFragment extends Fragment implements
 
 
 
-    private void showInfoCard() {
-        InfoCard infoCard = new InfoCard(getContext());
+    private void showInfoCard(String indntify) {
+        Log.d("list", String.valueOf(activityItemList.size()));
+        InfoCard infoCard = new InfoCard(getContext(),activityItemList.get(Integer.parseInt(indntify)));
         // infoCard.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
         //此处设置位置窗体大小，
         infoCard.getWindow().setLayout(800,1000);
@@ -776,7 +781,7 @@ public class MapFragment extends Fragment implements
             LatLng latLng = new LatLng(activityItem.getY(),activityItem.getX());
             String img = activityItem.getImage();
             Log.d("iii","纬度：" + latLng.latitude + "经度" + latLng.longitude);
-            addMarker(latLng,img);
+            addMarker(latLng,img,i);
         }
     }
 

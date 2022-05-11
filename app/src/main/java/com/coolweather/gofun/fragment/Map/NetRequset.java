@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
+import com.coolweather.gofun.bean.CommentItem;
 import com.coolweather.gofun.fragment.Map.bean.TypeItem;
 import com.coolweather.gofun.fragment.Map.widget.BottomSelectDialog;
 import com.coolweather.gofun.fragment.Recommend.Adapter.RecommendItemAdapter;
@@ -104,6 +105,28 @@ public class NetRequset {
 
             @Override
             public void onFailure(Call<List<ActivityItem>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void initActivityComment(final Handler mHandler,int id){
+        MapService mapService = HttpRequest.create(MapService.class);
+        mapService.getCommentItem("Bearer " + GoFunApplication.token,id).enqueue(new Callback<List<CommentItem>>() {
+            @Override
+            public void onResponse(Call<List<CommentItem>> call, Response<List<CommentItem>> response) {
+                List<CommentItem> list = response.body();
+                Log.d("com", String.valueOf(list.size()));
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("commentlist",(Serializable)list);
+                Message message = new Message();
+                message.what = 4;
+                message.setData(bundle);
+                mHandler.sendMessage(message);
+            }
+
+            @Override
+            public void onFailure(Call<List<CommentItem>> call, Throwable t) {
                 t.printStackTrace();
             }
         });

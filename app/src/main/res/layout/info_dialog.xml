@@ -75,115 +75,136 @@
         </TableRow>
     </TableLayout>
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_marginBottom="@dimen/dp_10"
         android:text="@string/commit"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/commit_none"
+            android:gravity="center"
+            android:text="暂无评论"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:orientation="horizontal">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/join_imageone"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:src="@color/black" />
+            android:id="@+id/line_commit"
+            android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/comment_one"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="@dimen/dp_20">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/join_nameone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="陈元天" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/join_imageone"
+                    android:layout_width="50sp"
+                    android:layout_height="50sp"
+                    android:src="@color/black" />
 
-                <TextView
-                    android:id="@+id/join_commitone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:singleLine="true"
-                    android:ellipsize="end"
-                    android:text="很好玩会很好玩"/>
-
-                <TextView
-                    android:id="@+id/join_dateone"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:layout_marginRight="@dimen/dp_20"
-                    android:text="2022.05.06"/>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/dp_20">
+
+                    <TextView
+                        android:id="@+id/join_nameone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="陈元天" />
+
+                    <TextView
+                        android:id="@+id/join_commitone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:text="很好玩会很好玩"/>
+
+                    <TextView
+                        android:id="@+id/join_dateone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:text="2022.05.06"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/comment_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/join_imagetwo"
+                    android:layout_width="50sp"
+                    android:layout_height="50sp"
+                    android:src="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/dp_20">
+
+                    <TextView
+                        android:id="@+id/join_nametwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="陈元天" />
+
+                    <TextView
+                        android:id="@+id/join_committwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:maxEms="10"
+                        android:text="都快来都快来都快来都快来都快来都快来"/>
+
+                    <TextView
+                        android:id="@+id/join_datetwo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:text="2022.05.06"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:orientation="horizontal">
+    </RelativeLayout>
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/join_imagetwo"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:src="@color/black" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="@dimen/dp_20">
-
-                <TextView
-                    android:id="@+id/join_nametwo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="陈元天" />
-
-                <TextView
-                    android:id="@+id/join_committwo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:singleLine="true"
-                    android:ellipsize="end"
-                    android:maxEms="10"
-                    android:text="都快来都快来都快来都快来都快来都快来"/>
-
-                <TextView
-                    android:id="@+id/join_datetwo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:layout_marginRight="@dimen/dp_20"
-                    android:text="2022.05.06"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"

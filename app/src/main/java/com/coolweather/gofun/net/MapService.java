@@ -1,5 +1,6 @@
 package com.coolweather.gofun.net;
 
+import com.coolweather.gofun.bean.CommentItem;
 import com.coolweather.gofun.fragment.Recommend.bean.Activity;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 
@@ -27,4 +28,7 @@ public interface MapService {
 
     @GET("Activity/getAllActivity")
     Call<List<ActivityItem>> getAllActivity(@Header("Authorization") String token);
+
+    @GET("Comment/showComment")
+    Call<List<CommentItem>> getCommentItem(@Header("Authorization") String token, @Query("activtiyId") int id);
 }
