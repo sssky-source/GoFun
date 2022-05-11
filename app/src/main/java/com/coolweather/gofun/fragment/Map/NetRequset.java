@@ -73,6 +73,7 @@ public class NetRequset {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("typeActivitylist",(Serializable)list);
                 Log.d("NetRe", String.valueOf(list.size()));
+                Log.d("ss","222222222");
                 Message message = new Message();
                 message.what = 2;
                 message.setData(bundle);

@@ -3,6 +3,7 @@ package com.coolweather.gofun.fragment.Map;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -59,30 +60,26 @@ import com.amap.api.services.geocoder.RegeocodeAddress;
 import com.amap.api.services.geocoder.RegeocodeQuery;
 import com.amap.api.services.geocoder.RegeocodeResult;
 import com.amap.api.services.poisearch.PoiSearch;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.fragment.Map.adapter.TypeAdapter;
 import com.coolweather.gofun.fragment.Map.bean.TypeItem;
 import com.coolweather.gofun.fragment.Map.widget.InfoCard;
-import com.coolweather.gofun.fragment.Recommend.bean.Activity;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
-import com.coolweather.gofun.net.HttpRequest;
-import com.coolweather.gofun.net.MapService;
+import com.coolweather.gofun.util.BitmapUtils;
 import com.coolweather.gofun.util.ToastUtils;
 import com.coolweather.gofun.fragment.Map.widget.BottomSelectDialog;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MapFragment extends Fragment implements
         AMapLocationListener, LocationSource,
@@ -141,7 +138,6 @@ public class MapFragment extends Fragment implements
 
     //标点列表
     private List<Marker> markerList = new ArrayList<>();
-
     private RecyclerView recyclerView;
 
 
@@ -152,6 +148,36 @@ public class MapFragment extends Fragment implements
     private List<ActivityItem> activityItemList = new ArrayList<>();
     private List<ActivityItem> allactivityItemList = new ArrayList<>();
     private NetRequset netRequset = new NetRequset();
+
+
+    final Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 1:
+                    titleList = (List<TypeItem>)msg.getData().getSerializable("typelist");
+                    titleList.add(0,new TypeItem(R.drawable.head,"全部"));
+                    showSheetDialog1();
+                    bottomSheetDialog.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
+                    bottomSheetDialog.show();
+                    Log.d("Hand", String.valueOf(titleList.size()));
+                    break;
+                case 2:
+                    activityItemList = (List<ActivityItem>)msg.getData().getSerializable("typeActivitylist");
+                    Log.d("Handd",String.valueOf(activityItemList.size()));
+                    initMark(activityItemList);
+                    break;
+                case 3:
+                    // activityItemList = (List<ActivityItem>)msg.getData().getSerializable("allActivitylist");
+                    //  initMark(activityItemList);
+                    //     Log.d("Handdd0",String.valueOf(allactivityItemList.size()));
+                default:
+
+            }
+        }
+    };
+
 
     @Nullable
     @Override
@@ -181,8 +207,10 @@ public class MapFragment extends Fragment implements
         edSearch.setOnKeyListener(this);
         fabClearMarker.setOnClickListener(this::onClick);
         fabSelectType.setOnClickListener(this::onClick);
+        Log.d("ss","11111111");
         // toolbar = getActivity().findViewById(R.id.toolbar);
         // ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
     }
 
     @Override
@@ -194,6 +222,9 @@ public class MapFragment extends Fragment implements
         initLocation();
         //初始化地图
         initMap(savedInstanceState);
+        Log.d("ss","3333333333");
+
+
         checkingAndroidVersion();
 
 
@@ -279,7 +310,7 @@ public class MapFragment extends Fragment implements
         }
         //设置监听
         geocodeSearch.setOnGeocodeSearchListener(this);
-
+        Log.d("ss","444444444");
     }
 
     /**
@@ -292,9 +323,9 @@ public class MapFragment extends Fragment implements
         //添加标点
      //   aMap.addMarker(new MarkerOptions().position(latLng).snippet("DefaultMarker"));
         //添加标点
-        addMarker(latLng);
+        addMarker(latLng,"http://139.224.221.148:1145/user/17/少女前线仲夏夜的精灵 大破.png");
         updateMapCenter(latLng);
-        showInfoCard();
+     //   showInfoCard();
 
     }
 
@@ -450,33 +481,43 @@ public class MapFragment extends Fragment implements
      *
      * @param latLng
      */
-    private void addMarker(LatLng latLng) {
+    private void addMarker(LatLng latLng,String img) {
         //显示浮动按钮
         fabClearMarker.show();
         //添加标点
-        Marker marker = aMap.addMarker(new MarkerOptions().position(latLng).title("标题").snippet("详细信息"));
-        marker.showInfoWindow();
-        //设置标点的绘制动画效果
-        Animation animation = new RotateAnimation(marker.getRotateAngle(),marker.getRotateAngle()+180,0,0,0);
-        long duration = 1000L;
-        animation.setDuration(duration);
-        animation.setInterpolator(new LinearInterpolator());
-        marker.setAnimation(animation);
-        marker.startAnimation();
-        markerList.add(marker);
+//        Marker marker = aMap.addMarker(new MarkerOptions().position(latLng).title("标题").snippet("详细信息"));
+//        marker.showInfoWindow();
+//        //设置标点的绘制动画效果
+//        Animation animation = new RotateAnimation(marker.getRotateAngle(),marker.getRotateAngle()+180,0,0,0);
+//        long duration = 1000L;
+//        animation.setDuration(duration);
+//        animation.setInterpolator(new LinearInterpolator());
+//        marker.setAnimation(animation);
+//        marker.startAnimation();
+//        markerList.add(marker);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.marker_layout,null);
+        ImageView userPic = view.findViewById(R.id.iv_head);
+        Glide.with(getContext()).load(img).into(userPic);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+    //    markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapUtils.urlToBitmap(img)));
+        markerOptions.icon(BitmapDescriptorFactory.fromView(view));
+        Log.d("i","00000000000");
+        aMap.addMarker(markerOptions);
     }
+
 
     /**
      * 清空地图Marker
      *
-     * @param view
      */
-    public void clearAllMarker(View view) {
-        if (markerList != null && markerList.size()>0){
-            for (Marker markerItem : markerList) {
-                markerItem.remove();
-            }
-        }
+    public void clearAllMarker() {
+//        if (markerOptionsList != null && markerOptionsList.size()>0){
+//            for (MarkerOptions markerItem : markerOptionsList) {
+//                markerItem.remove();
+//            }
+//        }
+        aMap.clear();
         fabClearMarker.hide();
     }
 
@@ -492,7 +533,8 @@ public class MapFragment extends Fragment implements
         //显示InfoWindow
         if (!marker.isInfoWindowShown()) {
             //显示
-            marker.showInfoWindow();
+       //     marker.showInfoWindow();
+            showInfoCard();
         //    showMoneyDialog();
             Log.d("MapView","1111111111");
         } else {
@@ -528,6 +570,7 @@ public class MapFragment extends Fragment implements
         if (mLocationClient == null) {
             mLocationClient.startLocation();//启动定位
         }
+        netRequset.initTypeActivity(mHandler,0);
     }
 
     /**
@@ -636,6 +679,10 @@ public class MapFragment extends Fragment implements
     }
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
 
     @Override
@@ -677,7 +724,7 @@ public class MapFragment extends Fragment implements
             case R.id.iv_close:
                 initClose();
             case R.id.fab_clear_marker:
-                clearAllMarker(v);
+                clearAllMarker();
                 break;
             case R.id.fab_select:
                 titleList.clear();
@@ -703,41 +750,13 @@ public class MapFragment extends Fragment implements
         typeAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-              //  ToastUtils.show(getContext(),titleList.get(position).getType());
                 Log.d("position", String.valueOf(position));
-                netRequset.initTypeActivity(mHandler,(position+1));
-
+                netRequset.initTypeActivity(mHandler,position);
                 bottomSheetDialog.dismiss();
             }
         });
-
-
     }
 
-    final Handler mHandler = new Handler(){
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case 1:
-                    titleList = (List<TypeItem>)msg.getData().getSerializable("typelist");
-                    showSheetDialog1();
-                    bottomSheetDialog.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
-                    bottomSheetDialog.show();
-                    Log.d("Hand", String.valueOf(titleList.size()));
-                    break;
-                case 2:
-                    activityItemList = (List<ActivityItem>)msg.getData().getSerializable("typeActivitylist");
-                    Log.d("Handd",String.valueOf(activityItemList.size()));
-                    break;
-                case 3:
-                    allactivityItemList = (List<ActivityItem>)msg.getData().getSerializable("allActivitylist");
-                    Log.d("Handdd",String.valueOf(allactivityItemList.size()));
-                    default:
-
-            }
-        }
-    };
 
 
 
@@ -747,6 +766,18 @@ public class MapFragment extends Fragment implements
         //此处设置位置窗体大小，
         infoCard.getWindow().setLayout(800,1000);
         infoCard.show();
+    }
+
+    private void initMark(List<ActivityItem> itemList){
+        clearAllMarker();
+        Log.d("ii","2222222222");
+        for(int i = 0; i < itemList.size(); i++){
+            ActivityItem activityItem = itemList.get(i);
+            LatLng latLng = new LatLng(activityItem.getY(),activityItem.getX());
+            String img = activityItem.getImage();
+            Log.d("iii","纬度：" + latLng.latitude + "经度" + latLng.longitude);
+            addMarker(latLng,img);
+        }
     }
 
 
