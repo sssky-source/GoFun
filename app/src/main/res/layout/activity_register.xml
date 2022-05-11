@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d5d5d5">
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -123,16 +123,18 @@
 
         <Button
             android:id="@+id/accountRegistern_toRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="30dp"
+            android:layout_marginRight="5dp"
             android:background="@drawable/login_btn_bg"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
             android:text="注册"
-            android:textColor="#99d0f3"
-            android:textSize="16sp" />
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <ProgressBar

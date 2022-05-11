@@ -21,6 +21,8 @@ import com.coolweather.gofun.fragment.Recommend.Adapter.RecommendItemAdapter;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 import com.coolweather.gofun.net.HttpRequest;
 import com.coolweather.gofun.net.RecommendService;
+import com.coolweather.gofun.util.DialogUtils;
+import com.coolweather.gofun.util.ToastUtils;
 
 import java.util.List;
 
@@ -87,8 +89,14 @@ public class RecommendItemFragment extends Fragment {
                 recommendItemAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
                     @Override
                     public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
-                        ActivityItem activityItem = list.get(position);
-                        applyRequest(recommendService,activityItem.getId());
+                        DialogUtils.getInstance().showDialog(getContext(), "确认加入活动？", new DialogUtils.DialogCallBack() {
+                            @Override
+                            public void OkEvent() {
+                                ActivityItem activityItem = list.get(position);
+                                applyRequest(recommendService,activityItem.getId());
+                                ToastUtils.show(getContext(),"已提交申请，等待加入活动");
+                            }
+                        });
                     }
                 });
             }

@@ -1,0 +1,124 @@
+Index: app/src/main/java/com/coolweather/gofun/util/RecommendService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.coolweather.gofun.util;\r\n\r\nimport com.coolweather.gofun.bean.User;\r\n\r\nimport java.util.List;\r\nimport java.util.Map;\r\n\r\nimport okhttp3.FormBody;\r\nimport okhttp3.ResponseBody;\r\nimport retrofit2.Call;\r\nimport retrofit2.http.Body;\r\nimport retrofit2.http.GET;\r\nimport retrofit2.http.Header;\r\nimport retrofit2.http.POST;\r\nimport retrofit2.http.Query;\r\n\r\n/**\r\n\r\n* @Author : LWD\r\n\r\n* @Time : On 2022/4/28 9:41\r\n\r\n*/\r\n\r\n//定义相对路径和方法\r\npublic interface RecommendService {\r\n    /*\r\n    * 实例\r\n    * @GET(\"Good/getGoodsByType?page=1&size=6&type=1\")\r\n    * Call<List<Good>> getGoodData();\r\n    *\r\n    * @POST(\"User/Login\")\r\n    * Call<ResponseBody> createData(@Body UserSign userSign);\r\n    * */\r\n    @GET(\"/TheActivity/login1\")\r\n    Call<ResponseBody> createData(@Query(\"username\") String username ,@Query(\"password\") String password);\r\n    @GET(\"\")\r\n    Call<Object> getType(@Header(\"Authorization\") String token);\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/coolweather/gofun/util/RecommendService.java b/app/src/main/java/com/coolweather/gofun/util/RecommendService.java
+--- a/app/src/main/java/com/coolweather/gofun/util/RecommendService.java	(revision 5a5fe8ff2e9605fadf0ac95f9422cdec7d2dc621)
++++ b/app/src/main/java/com/coolweather/gofun/util/RecommendService.java	(date 1651855967657)
+@@ -32,8 +32,6 @@
+     * @POST("User/Login")
+     * Call<ResponseBody> createData(@Body UserSign userSign);
+     * */
+-    @GET("/TheActivity/login1")
+-    Call<ResponseBody> createData(@Query("username") String username ,@Query("password") String password);
+     @GET("")
+     Call<Object> getType(@Header("Authorization") String token);
+ 
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2022_4_30_0_21_[Default_Changelist]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2022_4_30_0_21_[Default_Changelist]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_2022_4_30_0_21_[Default_Changelist]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2022_4_30_0_21_[Default_Changelist]/shelved.patch	(revision 5a5fe8ff2e9605fadf0ac95f9422cdec7d2dc621)
++++ /dev/null	(revision 5a5fe8ff2e9605fadf0ac95f9422cdec7d2dc621)
+@@ -1,86 +0,0 @@
+-Index: .idea/jarRepositories.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"RemoteRepositoriesConfiguration\">\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"central\" />\r\n      <option name=\"name\" value=\"Maven Central repository\" />\r\n      <option name=\"url\" value=\"https://repo1.maven.org/maven2\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"jboss.community\" />\r\n      <option name=\"name\" value=\"JBoss Community repository\" />\r\n      <option name=\"url\" value=\"https://repository.jboss.org/nexus/content/repositories/public/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"BintrayJCenter\" />\r\n      <option name=\"name\" value=\"BintrayJCenter\" />\r\n      <option name=\"url\" value=\"https://jcenter.bintray.com/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"Google\" />\r\n      <option name=\"name\" value=\"Google\" />\r\n      <option name=\"url\" value=\"https://dl.google.com/dl/android/maven2/\" />\r\n    </remote-repository>\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/jarRepositories.xml b/.idea/jarRepositories.xml
+---- a/.idea/jarRepositories.xml	(revision 04754b4f9b802b5f894ce4eb4e86743b0bdbbf92)
+-+++ b/.idea/jarRepositories.xml	(date 1650611614675)
+-@@ -21,5 +21,10 @@
+-       <option name="name" value="Google" />
+-       <option name="url" value="https://dl.google.com/dl/android/maven2/" />
+-     </remote-repository>
+-+    <remote-repository>
+-+      <option name="id" value="maven" />
+-+      <option name="name" value="maven" />
+-+      <option name="url" value="https://jitpack.io" />
+-+    </remote-repository>
+-   </component>
+- </project>
+-\ No newline at end of file
+-Index: app/src/main/java/com/coolweather/gofun/util/Service.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.coolweather.gofun.util;\r\n\r\nimport java.util.List;\r\n\r\nimport retrofit2.Call;\r\nimport retrofit2.http.GET;\r\n\r\n/**\r\n\r\n* @Author : LWD\r\n\r\n* @Time : On 2022/4/28 9:41\r\n\r\n*/\r\n\r\n//定义相对路径和方法\r\npublic interface Service {\r\n    /*\r\n    * 实例\r\n    * @GET(\"Good/getGoodsByType?page=1&size=6&type=1\")\r\n    * Call<List<Good>> getGoodData();\r\n    * */\r\n\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/com/coolweather/gofun/util/Service.java b/app/src/main/java/com/coolweather/gofun/util/Service.java
+---- a/app/src/main/java/com/coolweather/gofun/util/Service.java	(revision 04754b4f9b802b5f894ce4eb4e86743b0bdbbf92)
+-+++ b/app/src/main/java/com/coolweather/gofun/util/Service.java	(date 1651119680230)
+-@@ -19,6 +19,9 @@
+-     * 实例
+-     * @GET("Good/getGoodsByType?page=1&size=6&type=1")
+-     * Call<List<Good>> getGoodData();
+-+    *
+-+    * @POST("User/Login")
+-+    * Call<ResponseBody> createData(@Body UserSign userSign);
+-     * */
+- 
+- }
+-Index: .idea/misc.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DesignSurface\">\r\n    <option name=\"filePathToZoomLevelMap\">\r\n      <map>\r\n        <entry key=\"..\\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/drawable/btn_border.xml\" value=\"0.1715\" />\r\n        <entry key=\"..\\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_login.xml\" value=\"0.25364583333333335\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectInspectionProfilesVisibleTreeState\">\r\n    <entry key=\"Project Default\">\r\n      <profile-state>\r\n        <expanded-state>\r\n          <State />\r\n          <State>\r\n            <id>Class structureJava</id>\r\n          </State>\r\n          <State>\r\n            <id>Code maturityJava</id>\r\n          </State>\r\n          <State>\r\n            <id>JUnitJava</id>\r\n          </State>\r\n          <State>\r\n            <id>Java</id>\r\n          </State>\r\n          <State>\r\n            <id>Java 5Java language level migration aidsJava</id>\r\n          </State>\r\n          <State>\r\n            <id>Java 7Java language level migration aidsJava</id>\r\n          </State>\r\n          <State>\r\n            <id>Java 8Java language level migration aidsJava</id>\r\n          </State>\r\n          <State>\r\n            <id>Java language level migration aidsJava</id>\r\n          </State>\r\n          <State>\r\n            <id>JavadocJava</id>\r\n          </State>\r\n          <State>\r\n            <id>Numeric issuesJava</id>\r\n          </State>\r\n          <State>\r\n            <id>PerformanceJava</id>\r\n          </State>\r\n          <State>\r\n            <id>TestNGJava</id>\r\n          </State>\r\n          <State>\r\n            <id>Threading issuesJava</id>\r\n          </State>\r\n        </expanded-state>\r\n      </profile-state>\r\n    </entry>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/misc.xml b/.idea/misc.xml
+---- a/.idea/misc.xml	(revision 04754b4f9b802b5f894ce4eb4e86743b0bdbbf92)
+-+++ b/.idea/misc.xml	(date 1650640174584)
+-@@ -5,6 +5,10 @@
+-       <map>
+-         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/drawable/btn_border.xml" value="0.1715" />
+-         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_login.xml" value="0.25364583333333335" />
+-+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+-+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/bottom_photo.xml" value="0.25364583333333335" />
+-+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragment_recommand.xml" value="0.25364583333333335" />
+-+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/item_mine_top_2.xml" value="0.25364583333333335" />
+-       </map>
+-     </option>
+-   </component>
+-Index: app/src/main/java/com/coolweather/gofun/fragment/Recommandfragment.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.coolweather.gofun.fragment;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.coolweather.gofun.R;\r\n/**\r\n\r\n* @Author : W4ited\r\n\r\n* @Time : On 2022/4/22 15:52\r\n\r\n* @Github : https://github.com/W4ited\r\n*/\r\npublic class Recommandfragment extends Fragment {\r\n\r\n    private RecyclerView recyclerView;\r\n\r\n    @Nullable\r\n    @Override\r\n    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {\r\n        View view =  inflater.inflate(R.layout.fragment_recommand, container, false);\r\n        return view;\r\n    }\r\n\r\n    @Override\r\n    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {\r\n        super.onViewCreated(view, savedInstanceState);\r\n\r\n        recyclerView = view.findViewById(R.id.recommend_RecyclerView);\r\n        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());\r\n        recyclerView.setLayoutManager(linearLayoutManager);\r\n\r\n    }\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/com/coolweather/gofun/fragment/Recommandfragment.java b/app/src/main/java/com/coolweather/gofun/fragment/Recommandfragment.java
+---- a/app/src/main/java/com/coolweather/gofun/fragment/Recommandfragment.java	(revision 04754b4f9b802b5f894ce4eb4e86743b0bdbbf92)
+-+++ b/app/src/main/java/com/coolweather/gofun/fragment/Recommandfragment.java	(date 1651119604935)
+-@@ -14,11 +14,10 @@
+- import com.coolweather.gofun.R;
+- /**
+- 
+--* @Author : W4ited
+-+* @Author : LWD
+- 
+- * @Time : On 2022/4/22 15:52
+- 
+--* @Github : https://github.com/W4ited
+- */
+- public class Recommandfragment extends Fragment {
+- 
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2022_4_30_0_21__Default_Changelist_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2022_4_30_0_21__Default_Changelist_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_2022_4_30_0_21__Default_Changelist_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2022_4_30_0_21__Default_Changelist_.xml	(revision 5a5fe8ff2e9605fadf0ac95f9422cdec7d2dc621)
++++ /dev/null	(revision 5a5fe8ff2e9605fadf0ac95f9422cdec7d2dc621)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2022_4_30_0_21_[Default_Changelist]" date="1651249300532" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_4_30_0_21_[Default_Changelist]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2022/4/30 0:21 [Default Changelist]" />
+-</changelist>
+\ No newline at end of file

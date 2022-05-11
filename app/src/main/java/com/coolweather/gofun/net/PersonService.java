@@ -22,6 +22,6 @@ public interface PersonService {
     Call<List<PersonActivityItem>> getApplyStatusDetail(@Header("Authorization") String token, @Query("applyState") int id);
 
     //我加入的
-    @GET("Activity/getApplyActivityOfApplicant?applyState=2")
+    @GET("Activity/getGoingActivityOfApplicant")
     Call<List<PersonActivityItem>> getJoinActivity(@Header("Authorization") String token);
 }
