@@ -2,6 +2,7 @@ package com.coolweather.gofun.activity;
 
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -53,7 +54,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainActivity.this,LaunchActivity.class);
+                startActivity(intent);
             }
         });
     }

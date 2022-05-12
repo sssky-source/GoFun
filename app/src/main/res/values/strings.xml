@@ -15,4 +15,19 @@
     <string name="commit">评论</string>
     <string name="detail">查看详情</string>
     <string name="apply">申请活动</string>
+    <string name="title">请选择时间</string>
+    <string name="confirm">确定</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
+    <string name="select_date">选择日期</string>
+    <string name="current_date">当前日期</string>
+    <string name="select_time">选择时间</string>
+    <string name="start_time">开始时间</string>
+    <string name="end_time">截止时间</string>
+    <string name="theme">活动主题</string>
+    <string name="number">最多人数</string>
+    <string name="activity_type">活动类型</string>
 </resources>
