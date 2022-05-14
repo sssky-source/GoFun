@@ -1,5 +1,6 @@
 package com.coolweather.gofun.fragment.Map.widget;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -43,6 +44,7 @@ public class InfoCard extends Dialog implements View.OnClickListener {
     private TextView textView_commitnone;
     private List<CommentItem> commentItemList = new ArrayList<>();
     private String url = "http://139.224.221.148:1145/user/16/default.jpg";
+    private Activity activity;
 
     final Handler mHandler = new Handler(){
         @Override
@@ -75,7 +77,6 @@ public class InfoCard extends Dialog implements View.OnClickListener {
                         join_committwo.setText(commentItem2.getComment());
                         join_datetwo.setText(commentItem2.getCreatetime().split("T")[0]
                                 + " " + commentItem2.getCreatetime().split("T")[1]);
-
                     }
                     break;
                 case 2:
@@ -88,9 +89,10 @@ public class InfoCard extends Dialog implements View.OnClickListener {
         }
     };
 
-    public InfoCard(@NonNull Context context, ActivityItem activityItem) {
+    public InfoCard(@NonNull Context context,Activity activity, ActivityItem activityItem) {
         super(context, R.style.dialog);
         this.context = context;
+        this.activity = activity;
         this.activityItem = activityItem;
         initView();
         initDatas();
@@ -153,6 +155,7 @@ public class InfoCard extends Dialog implements View.OnClickListener {
     public void onClick(View view) {
         Intent intent = new Intent(context, DetailInfoActivity.class);
         context.startActivity(intent);
+        activity.finish();
     }
 
 }

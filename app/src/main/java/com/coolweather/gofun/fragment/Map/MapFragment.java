@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -459,6 +460,7 @@ public class MapFragment extends Fragment implements
                 double longitude = aMapLocation.getLongitude();
                 //城市赋值
                 city = aMapLocation.getCity();
+                Log.d("Map","地址是" + address);
                 mLocationClient.stopLocation();
                 if(mListener!=null){
                     mListener.onLocationChanged(aMapLocation);
@@ -766,7 +768,7 @@ public class MapFragment extends Fragment implements
 
     private void showInfoCard(String indntify) {
         Log.d("list", String.valueOf(activityItemList.size()));
-        InfoCard infoCard = new InfoCard(getContext(),activityItemList.get(Integer.parseInt(indntify)));
+        InfoCard infoCard = new InfoCard(getContext(),getActivity(),activityItemList.get(Integer.parseInt(indntify)));
         // infoCard.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
         //此处设置位置窗体大小，
         infoCard.getWindow().setLayout(800,1000);

@@ -150,7 +150,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.QQ_Login:
             case R.id.V_Login:
-                ToastUtils.show(this,"敬请期待");
+              //  ToastUtils.show(this,"敬请期待");
                 break;
             default:
                 break;
@@ -162,12 +162,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         final String accountPassword = accountLoginPassword.getText().toString().trim();//密码
 
         if (TextUtils.isEmpty(accountName)) {
-            ToastUtils.show(this, "用户名不能为空");
+          //  ToastUtils.show(this, "用户名不能为空");
             return;
         }
 
         if (TextUtils.isEmpty(accountPassword)) {
-            ToastUtils.show(this, "密码不能为空");
+           // ToastUtils.show(this, "密码不能为空");
             return;
         }
 
@@ -195,7 +195,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                         //   Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                             rememberUser(accountName,accountPassword,token);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
@@ -207,7 +207,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -229,7 +229,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     User user = (User)data.getSerializableExtra("user");
                     accountLoginName.setText(user.getUsername());
                     accountLoginPassword.setText(user.getPassword());
-//                    Log.d("LoginActivity", user.getEmail());
                 }
                 break;
             default:

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">You&amp;I</string>
+    <string name="app_name">You and I</string>
     <string name="nav_location">地图</string>
     <string name="nav_recommand">推荐</string>
     <string name="nav_message">消息</string>
@@ -30,4 +30,6 @@
     <string name="theme">活动主题</string>
     <string name="number">最多人数</string>
     <string name="activity_type">活动类型</string>
+    <string name="activity_introduce">活动简介</string>
+    <string name="activity_location">活动地点</string>
 </resources>

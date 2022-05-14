@@ -25,7 +25,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustPan">
-        <activity android:name=".activity.LaunchActivity"></activity>
+        <activity android:name=".activity.TestActivity">
+        </activity>
+        <activity android:name=".activity.LaunchActivity" android:theme="@style/AppThemeone">
+
+        </activity>
         <activity
             android:name=".fragment.Mine.apply.PersonActivity"
             android:exported="false" />
@@ -49,7 +53,7 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.DetailInfoActivity"
-            android:theme="@style/AppThemeone"/>
+            android:theme="@style/AppThemeone" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

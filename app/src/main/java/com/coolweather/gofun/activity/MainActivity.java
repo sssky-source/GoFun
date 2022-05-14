@@ -4,23 +4,26 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.coolweather.gofun.BaseActivity;
+import com.coolweather.gofun.CustomViewPager;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.adapter.MyFragmentPagerAdapter;
 
-public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, ViewPager.OnPageChangeListener{
+public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, CustomViewPager.OnPageChangeListener{
 
     private RadioGroup rg_all;
     private RadioButton rb_map;
     private RadioButton rb_recommand;
     private RadioButton rb_message;
     private RadioButton rb_mine;
-    private ViewPager vpager;
+    private CustomViewPager vpager;
     private ImageView imageView;
 
     private MyFragmentPagerAdapter myFragmentPagerAdapter;
@@ -80,6 +83,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         }
 
     }
+
+
+
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

@@ -228,12 +228,12 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     }
 
     private void initDateUnits(int endMonth, int endDay, int endHour, int endMinute) {
-        /*
-        for (int i = mBeginYear; i <= mEndYear; i++) {
+
+        for (int i = mEndYear; i <= mEndYear + 3; i++) {
             mYearUnits.add(String.valueOf(i));
         }
-         */
-        mYearUnits.add(String.valueOf(mEndYear));
+
+       // mYearUnits.add(String.valueOf(mEndYear));
         for (int i = mBeginMonth; i <= endMonth; i++) {
             mMonthUnits.add(mDecimalFormat.format(i));
         }
@@ -273,7 +273,7 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     }
 
     private void setCanScroll() {
-        mDpvYear.setCanScroll(mYearUnits.size() > 5);
+        mDpvYear.setCanScroll(mYearUnits.size() > 1);
         mDpvMonth.setCanScroll(mMonthUnits.size() > 1);
         mDpvDay.setCanScroll(mDayUnits.size() > 1);
         mDpvHour.setCanScroll(mHourUnits.size() > 1 && (mScrollUnits & SCROLL_UNIT_HOUR) == SCROLL_UNIT_HOUR);
@@ -302,7 +302,7 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
         */
         else if (selectedYear == mEndYear) {
             minMonth = mEndMonth;
-            maxMonth = mEndMonth;
+            maxMonth = MAX_MONTH_UNIT;
         } else {
             minMonth = 1;
             maxMonth = MAX_MONTH_UNIT;
@@ -356,7 +356,7 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
         */
         else if (selectedYear == mEndYear && selectedMonth == mEndMonth) {
             minDay = mEndDay;
-            maxDay = mEndDay + 3;
+            maxDay = mSelectedTime.getActualMaximum(Calendar.DAY_OF_MONTH);
         } else {
             minDay = 1;
             maxDay = mSelectedTime.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -602,7 +602,6 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
      */
     public void setScrollLoop(boolean canLoop) {
         if (!canShow()) return;
-
         mDpvYear.setCanScrollLoop(canLoop);
         mDpvMonth.setCanScrollLoop(canLoop);
         mDpvDay.setCanScrollLoop(canLoop);
