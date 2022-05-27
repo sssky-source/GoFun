@@ -23,6 +23,7 @@ public class RecommendItemAdapter extends BaseQuickAdapter<ActivityItem, BaseVie
         super(layoutResId, data);
         //点击事件添加
         addChildClickViewIds(R.id.activity_apply);
+        addChildClickViewIds(R.id.activity_detailCard);
     }
 
     @SuppressLint("ResourceAsColor")

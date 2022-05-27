@@ -1,7 +1,9 @@
 package com.coolweather.gofun.fragment.Recommend;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,7 @@ import com.coolweather.gofun.net.RecommendService;
 import com.coolweather.gofun.util.DialogUtils;
 import com.coolweather.gofun.util.ToastUtils;
 
+import java.io.Serializable;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -89,14 +92,26 @@ public class RecommendItemFragment extends Fragment {
                 recommendItemAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
                     @Override
                     public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
-                        DialogUtils.getInstance().showDialog(getContext(), "确认加入活动？", new DialogUtils.DialogCallBack() {
-                            @Override
-                            public void OkEvent() {
+                        switch (view.getId()) {
+                            case R.id.activity_apply:
+                                DialogUtils.getInstance().showDialog(getContext(), "确认加入活动？", new DialogUtils.DialogCallBack() {
+                                    @Override
+                                    public void OkEvent() {
+                                        ActivityItem activityItem = list.get(position);
+                                        applyRequest(recommendService, activityItem.getId());
+                                        ToastUtils.show(getContext(), "已提交申请，等待加入活动");
+                                    }
+                                });
+                                break;
+                            case R.id.activity_detailCard:
                                 ActivityItem activityItem = list.get(position);
-                                applyRequest(recommendService,activityItem.getId());
-                                ToastUtils.show(getContext(),"已提交申请，等待加入活动");
-                            }
-                        });
+                                Intent detail = new Intent(getActivity(), RecommendActivityDetail.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("detail_item",activityItem);
+                                detail.putExtras(bundle);
+                                startActivity(detail);
+                                break;
+                        }
                     }
                 });
             }
@@ -108,8 +123,8 @@ public class RecommendItemFragment extends Fragment {
         });
     }
 
-    private void applyRequest(RecommendService recommendService,int id) {
-        recommendService.applyActivity("Bearer " + GoFunApplication.token,id).enqueue(new Callback<ResponseBody>() {
+    private void applyRequest(RecommendService recommendService, int id) {
+        recommendService.applyActivity("Bearer " + GoFunApplication.token, id).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 swipeRefreshLayout.setRefreshing(true);

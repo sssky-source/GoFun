@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".fragment.Recommend.RecommendActivityDetail">
+
+    <!--标题-->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/ActivityDetail_Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:layout_scrollFlags="scroll|enterAlways|snap" >
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="U a I"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#4697E8" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!--地图-->
+        <com.amap.api.maps.MapView
+            android:id="@+id/ActivityDetail_Map"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+        <!--活动信息卡片-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ActivityDetail_Information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ActivityDetail_Map"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ActivityDetail_userImage"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp" />
+
+                <TextView
+                    android:id="@+id/ActivityDetail_username"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ActivityDetail_userImage"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="username"
+                    android:textColor="#f25d8e" />
+
+                <TextView
+                    android:id="@+id/ActivityDetail_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_toEndOf="@id/ActivityDetail_userImage"
+                    android:text="type"
+                    android:textColor="#f25d8e"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/ActivityDetail_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@id/ActivityDetail_type"
+                    android:text="title"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/ActivityDetail_introduction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ActivityDetail_title"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_toEndOf="@id/ActivityDetail_userImage"
+                    android:text="introduction"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/ActivityDetail_startTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ActivityDetail_introduction"
+                    android:layout_marginStart="15dp"
+                    android:layout_toEndOf="@id/ActivityDetail_userImage"
+                    android:text="开始时间"
+                    android:textColor="#99a2aa" />
+
+                <TextView
+                    android:id="@+id/ActivityDetail_endTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ActivityDetail_startTime"
+                    android:layout_marginStart="15dp"
+                    android:layout_toEndOf="@id/ActivityDetail_userImage"
+                    android:text="截止时间"
+                    android:textColor="#99a2aa" />
+
+                <TextView
+                    android:id="@+id/ActivityDetail_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="30dp"
+                    android:text="人数"
+                    android:textColor="#49cc90" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--评论发表模块-->
+        <LinearLayout
+            android:id="@+id/ActivityDetail_AddCommend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ActivityDetail_Information"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ActivityDetail_PersonUserImage"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="15dp" />
+
+        </LinearLayout>
+
+        <!--历史评论-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ActivityDetail_Commend"
+            android:layout_marginBottom="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/ActivityDetail_AddCommend"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    </RelativeLayout>
+
+    <!--底部-->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:elevation="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/ActivityDetail_Apply"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/apply"
+            android:textColor="#F9AA33" />
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

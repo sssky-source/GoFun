@@ -25,6 +25,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustPan">
+        <activity
+            android:name=".fragment.Recommend.RecommendActivityDetail"
+            android:exported="false" />
+        <activity android:name=".activity.LaunchActivity" />
         <activity android:name=".activity.TestActivity">
         </activity>
         <activity android:name=".activity.LaunchActivity" android:theme="@style/AppThemeone">

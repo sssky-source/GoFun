@@ -1,6 +1,8 @@
 package com.coolweather.gofun.fragment.Recommend.bean;
 
-public class ActivityItem {
+import java.io.Serializable;
+
+public class ActivityItem implements Serializable {
     private Integer id;
     private Integer userid;
     private String title;

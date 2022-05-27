@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/activity_detailCard"
     android:layout_margin="5dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="8dp">
@@ -90,13 +92,13 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/activity_apply"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/apply"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_below="@id/activity_userImage"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"
-            android:layout_below="@id/activity_userImage"
-            android:textColor="#F9AA33"/>
+            android:text="@string/apply"
+            android:textColor="#F9AA33" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

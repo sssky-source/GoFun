@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -33,6 +34,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class InfoCard extends Dialog implements View.OnClickListener {
 
     private Context context;
+    private Activity activity;
     private LinearLayout bt_detail;
     private ActivityItem activityItem = new ActivityItem();
     private TextView tv_type,tv_location,tv_creator;
@@ -44,7 +46,6 @@ public class InfoCard extends Dialog implements View.OnClickListener {
     private TextView textView_commitnone;
     private List<CommentItem> commentItemList = new ArrayList<>();
     private String url = "http://139.224.221.148:1145/user/16/default.jpg";
-    private Activity activity;
 
     final Handler mHandler = new Handler(){
         @Override
@@ -77,6 +78,7 @@ public class InfoCard extends Dialog implements View.OnClickListener {
                         join_committwo.setText(commentItem2.getComment());
                         join_datetwo.setText(commentItem2.getCreatetime().split("T")[0]
                                 + " " + commentItem2.getCreatetime().split("T")[1]);
+
                     }
                     break;
                 case 2:
@@ -89,7 +91,7 @@ public class InfoCard extends Dialog implements View.OnClickListener {
         }
     };
 
-    public InfoCard(@NonNull Context context,Activity activity, ActivityItem activityItem) {
+    public InfoCard(@NonNull Context context, Activity activity, ActivityItem activityItem) {
         super(context, R.style.dialog);
         this.context = context;
         this.activity = activity;
