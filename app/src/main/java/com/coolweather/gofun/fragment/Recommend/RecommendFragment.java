@@ -1,5 +1,6 @@
 package com.coolweather.gofun.fragment.Recommend;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -75,7 +76,7 @@ public class RecommendFragment extends Fragment {
         RecommendService recommendService = HttpRequest.create(RecommendService.class);
         recommendService.getActivityType("Bearer " + token).enqueue(new Callback<List<Activity>>() {
             @Override
-            public void onResponse(Call<List<Activity>> call, Response<List<Activity>> response) {
+            public void onResponse(@NonNull Call<List<Activity>> call, @NonNull Response<List<Activity>> response) {
                 List<Activity> list = response.body();
                 Collections.reverse(list);
                 for (Activity activity : list) {
@@ -94,7 +95,7 @@ public class RecommendFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Activity>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Activity>> call, @NonNull Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -106,6 +107,7 @@ public class RecommendFragment extends Fragment {
         inflater.inflate(R.menu.invite,menu);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){

@@ -32,4 +32,6 @@
     <string name="activity_type">活动类型</string>
     <string name="activity_introduce">活动简介</string>
     <string name="activity_location">活动地点</string>
+    <string name="commend">评论</string>
+    <string name="checkCommend">查看全部评论</string>
 </resources>

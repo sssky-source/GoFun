@@ -1,5 +1,6 @@
 package com.coolweather.gofun.fragment.Recommend;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +25,8 @@ import com.coolweather.gofun.net.RecommendService;
 import com.coolweather.gofun.util.DialogUtils;
 import com.coolweather.gofun.util.ToastUtils;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -44,9 +47,11 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     //创建者名字，活动类型，活动标题，介绍，开始结束时间
     private TextView userName, type, title, introduction, startTime, endTime;
     //申请按钮
-    private Button apply;
+    private Button apply,checkCommend;
     private RecyclerView recyclerView;
     private CommendAdapter commendAdapter;
+    private List<PersonComment> temp  = new ArrayList<>();
+    private List<PersonComment> list;
 
 
     @Override
@@ -69,15 +74,20 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     private void requestCommend() {
         commentService.getComment("Bearer " + GoFunApplication.token,item.getId()).enqueue(new Callback<List<PersonComment>>() {
             @Override
-            public void onResponse(Call<List<PersonComment>> call, Response<List<PersonComment>> response) {
-                List<PersonComment> list = response.body();
-                Collections.reverse(list);
-                commendAdapter = new CommendAdapter(R.layout.activity_commend_item,list);
+            public void onResponse(@NonNull Call<List<PersonComment>> call, @NonNull Response<List<PersonComment>> response) {
+                list = response.body();
+                //倒转list
+                if (list != null) {
+                    Collections.reverse(list);
+                }
+                //临时list保存最新评论
+                temp.add(list.get(0));
+                commendAdapter = new CommendAdapter(R.layout.activity_commend_item,temp);
                 recyclerView.setAdapter(commendAdapter);
             }
 
             @Override
-            public void onFailure(Call<List<PersonComment>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<PersonComment>> call, @NonNull Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -93,10 +103,12 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         startTime = findViewById(R.id.ActivityDetail_startTime);
         endTime = findViewById(R.id.ActivityDetail_endTime);
         apply = findViewById(R.id.ActivityDetail_Apply);
+        checkCommend = findViewById(R.id.ActivityDetail_CheckCommend);
         recyclerView = findViewById(R.id.ActivityDetail_Commend);
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(RecommendActivityDetail.this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        checkCommend.setOnClickListener(this);
         apply.setOnClickListener(this);
 
         Glide.with(RecommendActivityDetail.this).load(item.getImage()).into(userImage);
@@ -108,6 +120,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         endTime.setText(item.getEndtime());
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -120,19 +133,27 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                     }
                 });
                 break;
+            case R.id.ActivityDetail_CheckCommend:
+                Intent intent = new Intent(RecommendActivityDetail.this,RecommendCommendActivity.class);
+                Bundle bundle = new Bundle();
+                //传递评论list
+                bundle.putSerializable("commendList", (Serializable) list);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                break;
         }
     }
 
     private void applyRequest(RecommendService recommendService, int id) {
         recommendService.applyActivity("Bearer " + GoFunApplication.token, id).enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 finish();
                 ToastUtils.show(RecommendActivityDetail.this, "已提交申请，等待加入活动");
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                 t.printStackTrace();
             }
         });

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.coolweather.gofun">
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -26,14 +27,16 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustPan">
         <activity
+            android:name=".fragment.Recommend.RecommendCommendActivity"
+            android:exported="false" />
+        <activity
             android:name=".fragment.Recommend.RecommendActivityDetail"
             android:exported="false" />
-        <activity android:name=".activity.LaunchActivity" />
-        <activity android:name=".activity.TestActivity">
-        </activity>
-        <activity android:name=".activity.LaunchActivity" android:theme="@style/AppThemeone">
-
-        </activity>
+        <activity android:name=".activity.TestActivity"></activity>
+        <activity
+            android:name=".activity.LaunchActivity"
+            android:theme="@style/AppThemeone"
+            tools:ignore="DuplicateActivity"></activity>
         <activity
             android:name=".fragment.Mine.apply.PersonActivity"
             android:exported="false" />

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     app:cardElevation="0dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/commentItemUserImage"
@@ -36,11 +38,12 @@
             android:id="@+id/commentItemTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/commentItemUserName"
             android:layout_marginStart="6dp"
             android:layout_marginTop="6dp"
             android:layout_marginEnd="6dp"
             android:layout_marginBottom="6dp"
-            android:layout_toEndOf="@id/commentItemUserName"
+            android:layout_toEndOf="@id/commentItemUserImage"
             android:text="发表时间"
             android:textColor="#99a2aa" />
 
@@ -48,12 +51,22 @@
             android:id="@+id/commentItemContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/commentItemUserName"
+            android:layout_below="@id/commentItemTime"
             android:layout_marginStart="6dp"
             android:layout_marginTop="6dp"
             android:layout_marginEnd="6dp"
             android:layout_marginBottom="6dp"
             android:layout_toEndOf="@id/commentItemUserImage"
             android:text="@string/commit" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:layout_below="@id/commentItemContent"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="50dp"
+            android:background="#EAEBEC" />
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
