@@ -61,12 +61,12 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.3dp"
+            android:layout_height="1dp"
             android:layout_below="@id/commentItemContent"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="50dp"
-            android:background="#EAEBEC" />
+            android:background="#DBDDDF" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

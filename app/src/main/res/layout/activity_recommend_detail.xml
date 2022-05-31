@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:backgroundTint="#F1F2F3"
     android:orientation="vertical"
     tools:context=".fragment.Recommend.RecommendActivityDetail">
 
@@ -34,6 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -50,9 +52,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ActivityDetail_Map"
-                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 app:cardCornerRadius="15dp"
-                app:cardElevation="8dp">
+                app:cardElevation="0dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -139,38 +144,85 @@
             </androidx.cardview.widget.CardView>
 
             <!--评论发表模块-->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:id="@+id/ActivityDetail_AddCommend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ActivityDetail_Information"
-                android:orientation="horizontal">
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/ActivityDetail_PersonUserImage"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="15dp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@color/white">
 
-            </LinearLayout>
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ActivityDetail_PersonUserImage"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/ActivityDetail_AddCommendButton"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_toRightOf="@id/ActivityDetail_PersonUserImage"
+                        android:backgroundTint="#80F1F2F3"
+                        android:gravity="center_vertical"
+                        android:text="  进行评论"
+                        app:cornerRadius="20dp" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
 
             <!--历史评论-->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/ActivityDetail_Commend"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ActivityDetail_AddCommend" />
-            <!--历史评论-->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/ActivityDetail_CheckCommend"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ActivityDetail_Commend"
-                android:layout_centerInParent="true"
-                android:layout_marginBottom="60dp"
-                android:text="@string/checkCommend"
-                android:textColor="@color/pink" />
+                android:layout_below="@id/ActivityDetail_AddCommend"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/white"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/ActivityDetail_Commend"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <!--历史评论-->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/ActivityDetail_CheckCommend"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ActivityDetail_Commend"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="60dp"
+                        android:text="@string/checkCommend"
+                        android:textColor="@color/pink" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 

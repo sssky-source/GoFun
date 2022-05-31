@@ -76,12 +76,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
-        app:fabSize="mini"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:src="@drawable/saixuan"
         android:visibility="visible"
         app:backgroundTint="#FFF"
         app:backgroundTintMode="screen"
+        app:fabSize="mini"
         app:hoveredFocusedTranslationZ="18dp"
         app:pressedTranslationZ="18dp" />
 
