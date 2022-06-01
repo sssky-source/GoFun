@@ -160,6 +160,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                 Bundle bundle = new Bundle();
                 //传递评论list
                 bundle.putSerializable("commendList", (Serializable) list);
+                bundle.putSerializable("ActivityItem",item);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
