@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -22,12 +23,14 @@ import com.coolweather.gofun.R;
 import com.coolweather.gofun.fragment.Mine.bean.Person;
 import com.coolweather.gofun.fragment.Recommend.Adapter.CommendAdapter;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
+import com.coolweather.gofun.fragment.Recommend.bean.PersonAddComment;
 import com.coolweather.gofun.fragment.Recommend.bean.PersonComment;
 import com.coolweather.gofun.net.CommentService;
 import com.coolweather.gofun.net.HttpRequest;
 import com.coolweather.gofun.net.RecommendService;
 import com.coolweather.gofun.util.DialogUtils;
 import com.coolweather.gofun.util.ToastUtils;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import org.litepal.LitePal;
 
@@ -42,6 +45,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/*
+    活动介绍界面
+ */
+
 public class RecommendActivityDetail extends AppCompatActivity implements View.OnClickListener {
 
     private RecommendService recommendService;
@@ -54,11 +61,13 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     private TextView userName, type, title, introduction, startTime, endTime;
     //申请按钮
     private Button apply, checkCommend;
+    private TextView addCommend;
     private RecyclerView recyclerView;
     private CommendAdapter commendAdapter;
     private List<PersonComment> temp = new ArrayList<>();
     private List<PersonComment> list;
     private SqliteUtil sqliteUtil;
+    private Person person_LitePal;
 
 
     @Override
@@ -103,7 +112,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
 
     @SuppressLint({"SetTextI18n", "CheckResult"})
     private void initial() {
-        Person person_LitePal = LitePal.findFirst(Person.class);
+        person_LitePal = LitePal.findFirst(Person.class);
         creatorImage = findViewById(R.id.ActivityDetail_activityCreateImage);
         userImage = findViewById(R.id.ActivityDetail_PersonUserImage);
         userName = findViewById(R.id.ActivityDetail_username);
@@ -114,15 +123,16 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         endTime = findViewById(R.id.ActivityDetail_endTime);
         apply = findViewById(R.id.ActivityDetail_Apply);
         checkCommend = findViewById(R.id.ActivityDetail_CheckCommend);
+        addCommend = findViewById(R.id.ActivityDetail_AddCommendWays);
         recyclerView = findViewById(R.id.ActivityDetail_Commend);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(RecommendActivityDetail.this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        addCommend.setOnClickListener(this);
         checkCommend.setOnClickListener(this);
         apply.setOnClickListener(this);
 
         Glide.with(RecommendActivityDetail.this).load(item.getImage()).into(creatorImage);
-        Log.d("22222", sqliteUtil.getToken("token"));
         Glide.with(RecommendActivityDetail.this).load(person_LitePal.getImage()).into(userImage);
         userName.setText(item.getUsername());
         type.setText("[" + item.getType() + "]");
@@ -132,7 +142,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         endTime.setText(item.getEndtime());
     }
 
-    @SuppressLint("NonConstantResourceId")
+    @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -153,8 +163,50 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
+            case R.id.ActivityDetail_AddCommendWays:
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.dialog);
+                View dialogView = getLayoutInflater().inflate(R.layout.commend_bottomsheet,null,false);
+                bottomSheetDialog.setContentView(dialogView);
+                bottomSheetDialog.getWindow().findViewById(R.id.design_bottom_sheet);
+                bottomSheetDialog.show();
+                //dialog中的控件
+                CircleImageView sheetUserImage = dialogView.findViewById(R.id.sheetUserImage);
+                Glide.with(RecommendActivityDetail.this).load(person_LitePal.getImage()).into(sheetUserImage);
+                //设置点击事件找到实例使用上面的View来寻找
+                TextView textView = dialogView.findViewById(R.id.sheetActivity);
+                textView.setText("[" + item.getType() + "] " + item.getTitle());
+
+                EditText editText = dialogView.findViewById(R.id.sheetEditText);
+                Button button = dialogView.findViewById(R.id.sheetButton);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        addCommendPost(editText.getText().toString());
+                    }
+
+                    private void addCommendPost(String commend) {
+                        PersonAddComment personAddComment = new PersonAddComment();
+                        personAddComment.setCommentInfo(commend);
+                        personAddComment.setActivity_id(item.getId());
+                        commentService.addComment("Bearer " + GoFunApplication.token,personAddComment).enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                ToastUtils.show(RecommendActivityDetail.this,"成功发表评论");
+                                bottomSheetDialog.dismiss();
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                t.printStackTrace();
+                            }
+                        });
+                    }
+                });
+                break;
         }
     }
+
+
 
     private void applyRequest(RecommendService recommendService, int id) {
         recommendService.applyActivity("Bearer " + GoFunApplication.token, id).enqueue(new Callback<ResponseBody>() {
@@ -170,5 +222,4 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
             }
         });
     }
-
 }

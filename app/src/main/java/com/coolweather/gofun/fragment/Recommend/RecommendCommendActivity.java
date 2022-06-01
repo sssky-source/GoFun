@@ -16,6 +16,9 @@ import com.coolweather.gofun.fragment.Recommend.bean.PersonComment;
 
 import java.util.List;
 
+/*
+    查看全部评论
+ */
 public class RecommendCommendActivity extends AppCompatActivity {
 
     private List<PersonComment> list;
