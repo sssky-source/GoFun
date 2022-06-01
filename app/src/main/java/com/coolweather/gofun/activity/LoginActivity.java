@@ -240,7 +240,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         db.execSQL("delete from UserTable");
         ContentValues values = new ContentValues();
         //put(属性名，属性值) put("username","小明")；
-        values.put("username", username);
+        values.put("email", username);
         values.put("password", password);
         values.put("token",token);
         db.insert("UserTable", null, values);  //将数据插入数据库
@@ -257,7 +257,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         if(cursor.moveToFirst()) {
             do {
                 Integer ID = Integer.valueOf(cursor.getString(cursor.getColumnIndex("id")));
-                String username = cursor.getString(cursor.getColumnIndex("username"));
+                String username = cursor.getString(cursor.getColumnIndex("email"));
                 String password = cursor.getString(cursor.getColumnIndex("password"));
                 user = new User(username,password);
 

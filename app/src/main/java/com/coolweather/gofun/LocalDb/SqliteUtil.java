@@ -18,19 +18,31 @@ public class SqliteUtil {
         db = dbhelper.getWritableDatabase();
     }
 
-    public String getToken(){
+    public String getToken(String element){
         Cursor cursor = db.query("UserTable",null,null,null,null,null,null);
         String token = null;
+        String email = null;
         if(cursor.moveToFirst()) {
             do {
                 Integer ID = Integer.valueOf(cursor.getString(cursor.getColumnIndex("id")));
-                String username = cursor.getString(cursor.getColumnIndex("username"));
+                email = cursor.getString(cursor.getColumnIndex("email"));
                 String password = cursor.getString(cursor.getColumnIndex("password"));
                 token = cursor.getString(cursor.getColumnIndex("token"));
 
             } while (cursor.moveToNext());
         }
         cursor.close();
-        return token;
+        String output = null;
+        switch (element){
+            case "email":
+                output = email;
+                break;
+            case "token":
+                output = token;
+                break;
+            default:
+        }
+        return output;
+
     }
 }

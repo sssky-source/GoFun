@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.activity.MainActivity;
 import com.coolweather.gofun.fragment.Recommend.Adapter.FragmentAdapter;
 import com.coolweather.gofun.LocalDb.SqliteUtil;
@@ -65,7 +66,7 @@ public class RecommendFragment extends Fragment {
         setHasOptionsMenu(true);
         //本地数据库查找token
         SqliteUtil sqliteUtil = new SqliteUtil(getActivity());
-        token = sqliteUtil.getToken();
+        token = GoFunApplication.getToken();
         toolbar = view.findViewById(R.id.recommend_Toolbar);
         toolbar.setTitle("");
         //将Toolbar的实例传入

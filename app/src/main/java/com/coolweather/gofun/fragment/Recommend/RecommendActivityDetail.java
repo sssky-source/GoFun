@@ -1,5 +1,7 @@
 package com.coolweather.gofun.fragment.Recommend;
 
+import static com.coolweather.gofun.GoFunApplication.getContext;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,7 +17,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.coolweather.gofun.GoFunApplication;
+import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
+import com.coolweather.gofun.fragment.Mine.bean.Person;
 import com.coolweather.gofun.fragment.Recommend.Adapter.CommendAdapter;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 import com.coolweather.gofun.fragment.Recommend.bean.PersonComment;
@@ -24,6 +28,8 @@ import com.coolweather.gofun.net.HttpRequest;
 import com.coolweather.gofun.net.RecommendService;
 import com.coolweather.gofun.util.DialogUtils;
 import com.coolweather.gofun.util.ToastUtils;
+
+import org.litepal.LitePal;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -43,15 +49,16 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     //活动详情信息列表
     private ActivityItem item;
     //活动信息详情
-    private CircleImageView userImage;  //创建者头像
+    private CircleImageView creatorImage, userImage;  //创建者头像
     //创建者名字，活动类型，活动标题，介绍，开始结束时间
     private TextView userName, type, title, introduction, startTime, endTime;
     //申请按钮
-    private Button apply,checkCommend;
+    private Button apply, checkCommend;
     private RecyclerView recyclerView;
     private CommendAdapter commendAdapter;
-    private List<PersonComment> temp  = new ArrayList<>();
+    private List<PersonComment> temp = new ArrayList<>();
     private List<PersonComment> list;
+    private SqliteUtil sqliteUtil;
 
 
     @Override
@@ -59,6 +66,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend_detail);
 
+        sqliteUtil = new SqliteUtil(RecommendActivityDetail.this);
         recommendService = HttpRequest.create(RecommendService.class);
         commentService = HttpRequest.create(CommentService.class);
 
@@ -72,7 +80,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     }
 
     private void requestCommend() {
-        commentService.getComment("Bearer " + GoFunApplication.token,item.getId()).enqueue(new Callback<List<PersonComment>>() {
+        commentService.getComment("Bearer " + GoFunApplication.token, item.getId()).enqueue(new Callback<List<PersonComment>>() {
             @Override
             public void onResponse(@NonNull Call<List<PersonComment>> call, @NonNull Response<List<PersonComment>> response) {
                 list = response.body();
@@ -82,7 +90,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                 }
                 //临时list保存最新评论
                 temp.add(list.get(0));
-                commendAdapter = new CommendAdapter(R.layout.activity_commend_item,temp);
+                commendAdapter = new CommendAdapter(R.layout.activity_commend_item, temp);
                 recyclerView.setAdapter(commendAdapter);
             }
 
@@ -93,9 +101,11 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         });
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "CheckResult"})
     private void initial() {
-        userImage = findViewById(R.id.ActivityDetail_userImage);
+        Person person_LitePal = LitePal.findFirst(Person.class);
+        creatorImage = findViewById(R.id.ActivityDetail_activityCreateImage);
+        userImage = findViewById(R.id.ActivityDetail_PersonUserImage);
         userName = findViewById(R.id.ActivityDetail_username);
         type = findViewById(R.id.ActivityDetail_type);
         title = findViewById(R.id.ActivityDetail_title);
@@ -105,13 +115,15 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         apply = findViewById(R.id.ActivityDetail_Apply);
         checkCommend = findViewById(R.id.ActivityDetail_CheckCommend);
         recyclerView = findViewById(R.id.ActivityDetail_Commend);
-        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(RecommendActivityDetail.this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(RecommendActivityDetail.this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         checkCommend.setOnClickListener(this);
         apply.setOnClickListener(this);
 
-        Glide.with(RecommendActivityDetail.this).load(item.getImage()).into(userImage);
+        Glide.with(RecommendActivityDetail.this).load(item.getImage()).into(creatorImage);
+        Log.d("22222", sqliteUtil.getToken("token"));
+        Glide.with(RecommendActivityDetail.this).load(person_LitePal.getImage()).into(userImage);
         userName.setText(item.getUsername());
         type.setText("[" + item.getType() + "]");
         title.setText(item.getTitle());
@@ -134,7 +146,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                 });
                 break;
             case R.id.ActivityDetail_CheckCommend:
-                Intent intent = new Intent(RecommendActivityDetail.this,RecommendCommendActivity.class);
+                Intent intent = new Intent(RecommendActivityDetail.this, RecommendCommendActivity.class);
                 Bundle bundle = new Bundle();
                 //传递评论list
                 bundle.putSerializable("commendList", (Serializable) list);

@@ -27,8 +27,8 @@ public class GoFunApplication  extends Application {
         //初始化全局上下文
         applicationContext=this;
         SqliteUtil sqliteUtil = new SqliteUtil(getContext());
-        if(sqliteUtil.getToken()!=null){
-            token = sqliteUtil.getToken();
+        if(sqliteUtil.getToken("token")!=null){
+            token = sqliteUtil.getToken("token");
             Log.d("TOKENq",token);
         }else{
 

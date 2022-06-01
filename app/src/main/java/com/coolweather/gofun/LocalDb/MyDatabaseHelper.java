@@ -15,11 +15,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     public static final String CREATE_USER = "create table UserTable ("
             + "id integer primary key autoincrement, "
-            + "username text, "
             + "password text, "
+            + "email text,"
             + "token text)";
     //token
-
 
     public MyDatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -36,7 +35,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
     }
 }
 

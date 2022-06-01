@@ -1,6 +1,8 @@
 package com.coolweather.gofun.fragment.Mine.bean;
 
-public class Person {
+import org.litepal.crud.LitePalSupport;
+
+public class Person extends LitePalSupport {
 
     private Integer id;
     private String username;

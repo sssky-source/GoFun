@@ -65,7 +65,7 @@
                     android:layout_margin="20dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/ActivityDetail_userImage"
+                        android:id="@+id/ActivityDetail_activityCreateImage"
                         android:layout_width="55dp"
                         android:layout_height="55dp" />
 
@@ -73,7 +73,7 @@
                         android:id="@+id/ActivityDetail_username"
                         android:layout_width="55dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/ActivityDetail_userImage"
+                        android:layout_below="@id/ActivityDetail_activityCreateImage"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:text="username"
@@ -84,7 +84,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_toEndOf="@id/ActivityDetail_userImage"
+                        android:layout_toEndOf="@id/ActivityDetail_activityCreateImage"
                         android:text="type"
                         android:textColor="#f25d8e"
                         android:textSize="18sp" />
@@ -107,7 +107,7 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
-                        android:layout_toEndOf="@id/ActivityDetail_userImage"
+                        android:layout_toEndOf="@id/ActivityDetail_activityCreateImage"
                         android:text="introduction"
                         android:textSize="16sp" />
 
@@ -117,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ActivityDetail_introduction"
                         android:layout_marginStart="15dp"
-                        android:layout_toEndOf="@id/ActivityDetail_userImage"
+                        android:layout_toEndOf="@id/ActivityDetail_activityCreateImage"
                         android:text="开始时间"
                         android:textColor="#99a2aa" />
 
@@ -127,7 +127,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ActivityDetail_startTime"
                         android:layout_marginStart="15dp"
-                        android:layout_toEndOf="@id/ActivityDetail_userImage"
+                        android:layout_toEndOf="@id/ActivityDetail_activityCreateImage"
                         android:text="截止时间"
                         android:textColor="#99a2aa" />
 
@@ -196,7 +196,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="70dp"
                 android:background="@color/white"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="0dp">
@@ -217,7 +217,6 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ActivityDetail_Commend"
                         android:layout_centerInParent="true"
-                        android:layout_marginBottom="60dp"
                         android:text="@string/checkCommend"
                         android:textColor="@color/pink" />
                 </RelativeLayout>

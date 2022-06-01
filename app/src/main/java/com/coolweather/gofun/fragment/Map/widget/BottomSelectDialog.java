@@ -57,7 +57,7 @@ public class BottomSelectDialog extends BottomSheetDialog {
 
     private void initDatas() {
         SqliteUtil sqliteUtil = new SqliteUtil(context);
-        String token = sqliteUtil.getToken();
+        String token = sqliteUtil.getToken("token");
         MapService mapService = HttpRequest.create(MapService.class);
         mapService.getActivityType("Bearer" + token).enqueue(new Callback<List<Activity>>() {
             @Override
