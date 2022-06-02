@@ -46,6 +46,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private RadioButton rb_mine;
     private CustomViewPager vpager;
     private ImageView imageView;
+    private String token;
 
     private MyFragmentPagerAdapter myFragmentPagerAdapter;
 
@@ -59,6 +60,10 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent = getIntent();
+        token = intent.getStringExtra("token");
+        Log.d("111","create");
         //配置数据库
         LitePal.initialize(this);
         //获取数据库
@@ -70,16 +75,19 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         //请求个人信息
         requestPersonInfo(personService);
         rb_map.setChecked(true);
-
     }
 
     private void requestPersonInfo(PersonService personService) {
-        personService.getUserInfo("Bearer " + GoFunApplication.token).enqueue(new Callback<Person>() {
+        personService.getUserInfo("Bearer " + token).enqueue(new Callback<Person>() {
             @Override
             public void onResponse(Call<Person> call, Response<Person> response) {
+                Log.d("111",token);
                 Person person = response.body();
-                Log.d("000","id:" + person.getId());
+                Log.d("111","response" + response);
+                Log.d("111","response" + response.code());
+                Log.d("111","response" + response.body());
                 PersonLitePal person_LitePal = new PersonLitePal();
+
                 //要保证已经保存完成在查询数据库
                 //因为LitePal的原因 会将ID 默认作为主键，导致用户id不能保存下来
                 //所以另外建立了一个Bean id作为主键 用户ID写为userID
@@ -89,19 +97,24 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                     数据库的表中都会创建一个id的主键，而这个id的值会在新记录插入时被自动置为表中的Id，
                     也即是唯一值。如果你里面定义了个String id，运行会报错的。
                  */
-                person_LitePal.setUserID(person.getId());
-                person_LitePal.setEmail(person.getEmail());
-                person_LitePal.setUsername(person.getUsername());
-                person_LitePal.setImage(person.getImage());
-                person_LitePal.setSex(person.getSex());
-                person_LitePal.setAge(person.getAge());
-                person_LitePal.setBrief(person.getBrief());
-                person_LitePal.setX(person.getX());
-                person_LitePal.setY(person.getY());
-                person_LitePal.setHobby(person.getHobby());
-                person_LitePal.setLocation(person.getLocation());
-                //存入数据库
-                person_LitePal.save();
+                if (person != null){
+                    person_LitePal.setUserID(person.getId());
+                    person_LitePal.setEmail(person.getEmail());
+                    person_LitePal.setUsername(person.getUsername());
+                    person_LitePal.setImage(person.getImage());
+                    person_LitePal.setSex(person.getSex());
+                    person_LitePal.setAge(person.getAge());
+                    person_LitePal.setBrief(person.getBrief());
+                    person_LitePal.setX(person.getX());
+                    person_LitePal.setY(person.getY());
+                    person_LitePal.setHobby(person.getHobby());
+                    person_LitePal.setLocation(person.getLocation());
+                    Log.d("111","Ok request");
+                    //存入数据库
+                    person_LitePal.save();
+                }else {
+                    Log.d("111","not request");
+                }
             }
 
             @Override
@@ -133,7 +146,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-
         switch (checkedId) {
             case R.id.rb_location:
                 vpager.setCurrentItem(PAGE_ONE);
@@ -149,9 +161,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 break;
             default:
         }
-
     }
-
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -160,7 +170,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @Override
     public void onPageSelected(int state) {
-
 
     }
 
@@ -181,6 +190,5 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 rb_mine.setChecked(true);
                 break;
         }
-
     }
 }

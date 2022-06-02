@@ -190,6 +190,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 Log.d("kwwl", "response ==" + response);
 
                 String token = response.body().string();
+
                 Log.d("kwwl","token :" + token);
                 if (response.code() == 200) {
                     runOnUiThread(new Runnable() {
@@ -198,6 +199,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                          //   Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                             rememberUser(accountName,accountPassword,token);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("token",token);
                             startActivity(intent);
                             finish();
                         }

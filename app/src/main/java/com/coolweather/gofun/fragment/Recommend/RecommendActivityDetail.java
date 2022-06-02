@@ -93,6 +93,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         commentService.getComment("Bearer " + GoFunApplication.token, item.getId()).enqueue(new Callback<List<PersonComment>>() {
             @Override
             public void onResponse(@NonNull Call<List<PersonComment>> call, @NonNull Response<List<PersonComment>> response) {
+                Log.d("111","bearer " + GoFunApplication.token);
                 list = response.body();
                 //倒转list
                 if (list != null) {
