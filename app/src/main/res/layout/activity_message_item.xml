@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/message_CardView"
+    app:cardElevation="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/message_ActivityImage"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/message_ActivityType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@id/message_ActivityImage"
+            android:text="type"
+            android:textColor="#f25d8e"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/message_ActivityTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_toEndOf="@id/message_ActivityType"
+            android:text="title"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/message_ActivityTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:text="时间"
+            android:textColor="#49cc90" />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

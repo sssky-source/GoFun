@@ -21,6 +21,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/*
+    我加入的
+ */
 public class JoinActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swipeRefreshLayout;

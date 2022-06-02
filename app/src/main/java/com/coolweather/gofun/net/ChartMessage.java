@@ -1,6 +1,9 @@
 package com.coolweather.gofun.net;
 
 import com.coolweather.gofun.fragment.Message.bean.AddChartMessage;
+import com.coolweather.gofun.fragment.Message.bean.ChartMessageBean;
+
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -14,7 +17,7 @@ public interface ChartMessage {
 
     //获取聊天内容
     @GET("ChartMessage/showChartMessage")
-    Call<?> getChartMessage(@Header("Authorization") String token, @Query("activtiyId") int id);
+    Call<List<ChartMessageBean>> getChartMessage(@Header("Authorization") String token, @Query("activtiyId") int id);
 
     //添加聊天信息
     @POST("ChartMessage/addChartMessage")

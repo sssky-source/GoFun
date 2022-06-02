@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
-            android:textColor="#49cc90"
-            android:text="人数" />
+            android:text="人数"
+            android:textColor="#49cc90" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

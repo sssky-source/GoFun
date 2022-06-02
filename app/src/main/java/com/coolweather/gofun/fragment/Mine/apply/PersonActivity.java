@@ -24,6 +24,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/*
+    我申请的
+    TabLayout分类
+ */
 public class PersonActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;

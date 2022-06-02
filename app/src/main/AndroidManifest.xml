@@ -27,16 +27,19 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustPan">
         <activity
+            android:name=".fragment.Message.ActivityChartMessage"
+            android:exported="false" />
+        <activity
             android:name=".fragment.Recommend.RecommendCommendActivity"
             android:exported="false" />
         <activity
             android:name=".fragment.Recommend.RecommendActivityDetail"
             android:exported="false" />
-        <activity android:name=".activity.TestActivity"></activity>
+        <activity android:name=".activity.TestActivity" />
         <activity
             android:name=".activity.LaunchActivity"
             android:theme="@style/AppThemeone"
-            tools:ignore="DuplicateActivity"></activity>
+            tools:ignore="DuplicateActivity" />
         <activity
             android:name=".fragment.Mine.apply.PersonActivity"
             android:exported="false" />

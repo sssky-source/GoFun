@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.R;
+import com.coolweather.gofun.bean.PersonLitePal;
 import com.coolweather.gofun.fragment.Mine.bean.Person;
 import com.coolweather.gofun.fragment.Recommend.Adapter.CommendAdapter;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
@@ -48,7 +49,7 @@ public class RecommendCommendActivity extends AppCompatActivity {
     private CommendAdapter commendAdapter;
     private TextView commendNumber;
     private FloatingActionButton floatingActionButton;
-    private Person person_LitePal;
+    private PersonLitePal person_LitePal;
     //活动详情信息列表
     private ActivityItem item;
 
@@ -58,7 +59,7 @@ public class RecommendCommendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend_commend);
 
-        person_LitePal = LitePal.findFirst(Person.class);
+        person_LitePal = LitePal.findFirst(PersonLitePal.class);
         commentService = HttpRequest.create(CommentService.class);
         //接受评论list
         Intent intent = getIntent();

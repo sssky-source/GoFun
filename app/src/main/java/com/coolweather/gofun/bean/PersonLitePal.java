@@ -1,10 +1,10 @@
-package com.coolweather.gofun.fragment.Mine.bean;
+package com.coolweather.gofun.bean;
 
 import org.litepal.crud.LitePalSupport;
 
-public class Person  {
-
+public class PersonLitePal extends LitePalSupport {
     private Integer id;
+    private int userID;
     private String username;
     private String email;
     private String image;
@@ -22,6 +22,14 @@ public class Person  {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getUsername() {

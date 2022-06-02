@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
+import com.coolweather.gofun.bean.PersonLitePal;
 import com.coolweather.gofun.fragment.Mine.bean.Person;
 import com.coolweather.gofun.fragment.Recommend.Adapter.CommendAdapter;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
@@ -67,7 +68,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     private List<PersonComment> temp = new ArrayList<>();
     private List<PersonComment> list;
     private SqliteUtil sqliteUtil;
-    private Person person_LitePal;
+    private PersonLitePal person_LitePal;
 
 
     @Override
@@ -112,7 +113,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
 
     @SuppressLint({"SetTextI18n", "CheckResult"})
     private void initial() {
-        person_LitePal = LitePal.findFirst(Person.class);
+        person_LitePal = LitePal.findFirst(PersonLitePal.class);
         creatorImage = findViewById(R.id.ActivityDetail_activityCreateImage);
         userImage = findViewById(R.id.ActivityDetail_PersonUserImage);
         userName = findViewById(R.id.ActivityDetail_username);

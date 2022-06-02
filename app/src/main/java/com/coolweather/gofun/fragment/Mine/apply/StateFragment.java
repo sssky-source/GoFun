@@ -25,6 +25,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/*
+    我申请的活动详情
+ */
 public class StateFragment extends Fragment {
 
     private int id;

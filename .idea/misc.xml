@@ -19,6 +19,7 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/drawable/shape_userinfo.xml" value="0.1875" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/drawable/shape_userinfo2.xml" value="0.1875" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/drawable/textview_style.xml" value="0.176" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_chart_message.xml" value="0.264" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_commend_item.xml" value="0.505091649694501" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_detail_info.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_guidance.xml" value="0.24947916666666667" />
@@ -27,6 +28,7 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_launch.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_message_item.xml" value="0.264" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_person_activity.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_recommend_commend.xml" value="0.2" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_recommend_detail.xml" value="0.264" />
@@ -37,10 +39,13 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_state_item.xml" value="0.209375" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_statefragment.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/bottom_photo.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/chart_item_one.xml" value="0.4" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/chart_item_two.xml" value="0.4" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/commend_bottomsheet.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/dialog_bottom_select.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragment_blank.xml" value="0.109375" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragment_map.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragment_message.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragment_mine.xml" value="0.2" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragment_person.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragment_recommand.xml" value="0.264" />
