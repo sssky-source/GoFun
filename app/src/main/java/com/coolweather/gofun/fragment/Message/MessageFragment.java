@@ -2,6 +2,7 @@ package com.coolweather.gofun.fragment.Message;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +80,7 @@ public class MessageFragment extends Fragment {
                             case R.id.message_CardView:
                                 String groupName = list.get(position).getTitle();
                                 int number = list.get(position).getCurnumber();
-                                int id = list.get(position).getId();
+                                int id = list.get(position).getActivity_id();
                                 Intent chartMessage = new Intent(getActivity(),ActivityChartMessage.class);
                                 chartMessage.putExtra("groupName",groupName);
                                 chartMessage.putExtra("number",number);

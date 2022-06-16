@@ -2,9 +2,9 @@ package com.coolweather.gofun.fragment.Mine.bean;
 
 public class PersonActivityItem {
 
-    private Integer activity_id;
+    private Integer activity_id;    //活动id
     private Integer userid;
-    private Integer id;
+    private Integer id; //申请id
     private Integer status;
     private String applytime;
     private String title;

@@ -27,7 +27,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/chart_Image1"
-        android:backgroundTint="#F1F2F3"
+        android:backgroundTint="#FFFFFF"
         app:cardCornerRadius="15dp"
         app:cardElevation="0dp">
 

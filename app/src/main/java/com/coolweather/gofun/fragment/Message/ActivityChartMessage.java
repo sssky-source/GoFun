@@ -8,6 +8,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.coolweather.gofun.GoFunApplication;
@@ -15,22 +17,25 @@ import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.bean.PersonLitePal;
 import com.coolweather.gofun.fragment.Message.Adapter.ChartMessageAdapter;
+import com.coolweather.gofun.fragment.Message.bean.AddChartMessage;
 import com.coolweather.gofun.fragment.Message.bean.ChartMessageBean;
 import com.coolweather.gofun.fragment.Mine.bean.Person;
 import com.coolweather.gofun.fragment.Recommend.RecommendActivityDetail;
 import com.coolweather.gofun.net.ChartMessage;
 import com.coolweather.gofun.net.HttpRequest;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivityChartMessage extends AppCompatActivity {
+public class ActivityChartMessage extends AppCompatActivity implements View.OnClickListener {
 
     private RecyclerView recyclerView;
     private ChartMessageAdapter chartMessageAdapter;
@@ -38,6 +43,9 @@ public class ActivityChartMessage extends AppCompatActivity {
     private int activityID;
     private PersonLitePal person_LitePal;
     private List<ChartMessageBean> list = new ArrayList<>();
+    private ChartMessage chartMessage;
+    private TextInputEditText editText;
+    private Button sendButton;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -45,7 +53,7 @@ public class ActivityChartMessage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart_message);
 
-        ChartMessage chartMessage = HttpRequest.create(ChartMessage.class);
+        chartMessage = HttpRequest.create(ChartMessage.class);
 
         person_LitePal = LitePal.findFirst(PersonLitePal.class);
         Log.d("000","LitePal id111:" + person_LitePal.getUserID());
@@ -55,8 +63,12 @@ public class ActivityChartMessage extends AppCompatActivity {
         String name = intent.getStringExtra("groupName");
         int number = intent.getIntExtra("number",0);
         activityID = intent.getIntExtra("id",0);
+        Log.d("888","activityID" + activityID);
         recyclerView = findViewById(R.id.chart_RecyclerView);
         groupName = findViewById(R.id.chart_GroupName);
+        sendButton = findViewById(R.id.chart_SendMessageButton);
+        sendButton.setOnClickListener(this);
+        editText = findViewById(R.id.chart_SendMessageContent);
         groupName.setText(name + "(" + number + ")");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -69,20 +81,18 @@ public class ActivityChartMessage extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<ChartMessageBean>> call, Response<List<ChartMessageBean>> response) {
                 List<ChartMessageBean> chartMessageBeans = response.body();
-                for (ChartMessageBean bean : chartMessageBeans){
-                    Log.d("000","id:" + bean.getUserid());
-                    Log.d("000","LitePal id:" + person_LitePal.getUserID());
-                    if (person_LitePal.getUserID() == bean.getUserid()){
-                        list.add(new ChartMessageBean(2,bean.getMessage(),bean.getUsername(),bean.getImage()));
+                if (chartMessageBeans != null){
+                    for (ChartMessageBean bean : chartMessageBeans){
+                        if (person_LitePal.getUserID() == bean.getUserid()){
+                            list.add(new ChartMessageBean(2,bean.getMessage(),bean.getUsername(),bean.getImage()));
 
-                    }else {
-                        list.add(new ChartMessageBean(1,bean.getMessage(),bean.getUsername(),bean.getImage()));
-                        Log.d("000" , "66666666666" );
+                        }else {
+                            list.add(new ChartMessageBean(1,bean.getMessage(),bean.getUsername(),bean.getImage()));
+                        }
                     }
+                    chartMessageAdapter = new ChartMessageAdapter(list);
+                    recyclerView.setAdapter(chartMessageAdapter);
                 }
-
-                chartMessageAdapter = new ChartMessageAdapter(list);
-                recyclerView.setAdapter(chartMessageAdapter);
             }
 
             @Override
@@ -90,6 +100,39 @@ public class ActivityChartMessage extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
+    }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.chart_SendMessageButton:
+                String message = editText.getText().toString();
+                addMessagePost(message);
+                break;
+        }
+    }
+
+    private void addMessagePost(String message) {
+        AddChartMessage addChartMessage = new AddChartMessage();
+        addChartMessage.setActivity_id(activityID);
+        addChartMessage.setChartMessageInfo(message);
+        chartMessage.addChartMessage("Bearer " + GoFunApplication.token,addChartMessage).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                //清空对话框
+                editText.setText("");
+                //静态添加聊天内容
+                ChartMessageBean temp = new ChartMessageBean(2,message,person_LitePal.getUsername(),person_LitePal.getImage());
+                chartMessageAdapter.addData(temp);
+                //通知适配器数据改变
+                chartMessageAdapter.notifyDataSetChanged();
+                recyclerView.setAdapter(chartMessageAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }
