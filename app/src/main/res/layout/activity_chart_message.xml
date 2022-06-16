@@ -33,6 +33,7 @@
         android:id="@+id/chart_RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="114dp"
         android:background="#F1F2F3"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 

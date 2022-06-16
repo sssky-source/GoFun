@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -56,14 +57,14 @@ public class ActivityChartMessage extends AppCompatActivity implements View.OnCl
         chartMessage = HttpRequest.create(ChartMessage.class);
 
         person_LitePal = LitePal.findFirst(PersonLitePal.class);
-        Log.d("000","LitePal id111:" + person_LitePal.getUserID());
-        Log.d("000","LitePal id111:" + person_LitePal.getUsername());
-        Log.d("000","LitePal id111:" + person_LitePal.getImage());
+        Log.d("000", "LitePal id111:" + person_LitePal.getUserID());
+        Log.d("000", "LitePal id111:" + person_LitePal.getUsername());
+        Log.d("000", "LitePal id111:" + person_LitePal.getImage());
         Intent intent = getIntent();
         String name = intent.getStringExtra("groupName");
-        int number = intent.getIntExtra("number",0);
-        activityID = intent.getIntExtra("id",0);
-        Log.d("888","activityID" + activityID);
+        int number = intent.getIntExtra("number", 0);
+        activityID = intent.getIntExtra("id", 0);
+        Log.d("888", "activityID" + activityID);
         recyclerView = findViewById(R.id.chart_RecyclerView);
         groupName = findViewById(R.id.chart_GroupName);
         sendButton = findViewById(R.id.chart_SendMessageButton);
@@ -74,24 +75,29 @@ public class ActivityChartMessage extends AppCompatActivity implements View.OnCl
         recyclerView.setLayoutManager(linearLayoutManager);
 
         requestChartMessage(chartMessage);
+        //第一个时间：多长时间后会调用onFinish方法，第二个时间：多长时间会调用onTick方法
+        CountTime countTime = new CountTime(30000,3000);
+        countTime.start();
     }
 
+    //获取聊天历史记录
     private void requestChartMessage(ChartMessage chartMessage) {
-        chartMessage.getChartMessage("Bearer " + GoFunApplication.token,activityID).enqueue(new Callback<List<ChartMessageBean>>() {
+        chartMessage.getChartMessage("Bearer " + GoFunApplication.token, activityID).enqueue(new Callback<List<ChartMessageBean>>() {
             @Override
             public void onResponse(Call<List<ChartMessageBean>> call, Response<List<ChartMessageBean>> response) {
                 List<ChartMessageBean> chartMessageBeans = response.body();
-                if (chartMessageBeans != null){
-                    for (ChartMessageBean bean : chartMessageBeans){
-                        if (person_LitePal.getUserID() == bean.getUserid()){
-                            list.add(new ChartMessageBean(2,bean.getMessage(),bean.getUsername(),bean.getImage()));
-
-                        }else {
-                            list.add(new ChartMessageBean(1,bean.getMessage(),bean.getUsername(),bean.getImage()));
+                list.clear();
+                if (chartMessageBeans != null) {
+                    for (ChartMessageBean bean : chartMessageBeans) {
+                        if (person_LitePal.getUserID() == bean.getUserid()) {
+                            list.add(new ChartMessageBean(2, bean.getMessage(), bean.getUsername(), bean.getImage()));
+                        } else {
+                            list.add(new ChartMessageBean(1, bean.getMessage(), bean.getUsername(), bean.getImage()));
                         }
                     }
                     chartMessageAdapter = new ChartMessageAdapter(list);
                     recyclerView.setAdapter(chartMessageAdapter);
+                    recyclerView.scrollToPosition(list.size()-1);
                 }
             }
 
@@ -104,29 +110,33 @@ public class ActivityChartMessage extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.chart_SendMessageButton:
                 String message = editText.getText().toString();
                 addMessagePost(message);
+
                 break;
         }
     }
 
+    //发送新的聊天消息
     private void addMessagePost(String message) {
         AddChartMessage addChartMessage = new AddChartMessage();
         addChartMessage.setActivity_id(activityID);
         addChartMessage.setChartMessageInfo(message);
-        chartMessage.addChartMessage("Bearer " + GoFunApplication.token,addChartMessage).enqueue(new Callback<ResponseBody>() {
+        chartMessage.addChartMessage("Bearer " + GoFunApplication.token, addChartMessage).enqueue(new Callback<ResponseBody>() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 //清空对话框
                 editText.setText("");
                 //静态添加聊天内容
-                ChartMessageBean temp = new ChartMessageBean(2,message,person_LitePal.getUsername(),person_LitePal.getImage());
+                ChartMessageBean temp = new ChartMessageBean(2, message, person_LitePal.getUsername(), person_LitePal.getImage());
                 chartMessageAdapter.addData(temp);
                 //通知适配器数据改变
                 chartMessageAdapter.notifyDataSetChanged();
                 recyclerView.setAdapter(chartMessageAdapter);
+                recyclerView.scrollToPosition(list.size()-1);
             }
 
             @Override
@@ -134,5 +144,22 @@ public class ActivityChartMessage extends AppCompatActivity implements View.OnCl
                 t.printStackTrace();
             }
         });
+    }
+
+    //用于聊天记录定时刷新的内部类
+    class CountTime extends CountDownTimer {
+
+        public CountTime(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long l) {
+            requestChartMessage(chartMessage);
+        }
+
+        @Override
+        public void onFinish() {
+        }
     }
 }
