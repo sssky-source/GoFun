@@ -10,7 +10,7 @@ public class PersonActivityItem {
     private String title;
     private Double x;
     private Double y;
-    private Integer type;
+    private Integer typeId;
     private String location;
     private Integer maxnumber;
     private String introduction;
@@ -22,6 +22,7 @@ public class PersonActivityItem {
     private String creatorImage;
     private String username;
     private String userImage;
+    private String type;
 
     public Integer getActivity_id() {
         return activity_id;
@@ -69,15 +70,6 @@ public class PersonActivityItem {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
     }
 
     public String getLocation() {
@@ -182,5 +174,21 @@ public class PersonActivityItem {
 
     public void setY(Double y) {
         this.y = y;
+    }
+
+    public Integer getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

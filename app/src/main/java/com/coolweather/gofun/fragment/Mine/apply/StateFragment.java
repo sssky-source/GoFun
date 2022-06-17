@@ -1,6 +1,8 @@
 package com.coolweather.gofun.fragment.Mine.apply;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +60,7 @@ public class StateFragment extends Fragment {
         swipeRefreshLayout.setColorSchemeResources(R.color.pink);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onRefresh() {
                 request();
@@ -72,15 +75,18 @@ public class StateFragment extends Fragment {
         personService.getApplyStatusDetail("Bearer " + GoFunApplication.token,id).enqueue(new Callback<List<PersonActivityItem>>() {
             @Override
             public void onResponse(Call<List<PersonActivityItem>> call, Response<List<PersonActivityItem>> response) {
+                Log.d("22222222","code" + response.code());
                 List<PersonActivityItem> list = response.body();
                 stateItemAdapter = new StateItemAdapter(R.layout.activity_state_item,list);
                 recyclerView.setAdapter(stateItemAdapter);
                 swipeRefreshLayout.setRefreshing(false);
+                Log.d("22222222","stopState");
             }
 
             @Override
             public void onFailure(Call<List<PersonActivityItem>> call, Throwable t) {
                 t.printStackTrace();
+                Log.d("22222222","stopState111");
             }
         });
     }

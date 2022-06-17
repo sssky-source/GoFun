@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.R;
@@ -60,11 +61,13 @@ public class JoinActivity extends AppCompatActivity {
                 joinItemAdapter = new JoinItemAdapter(R.layout.activity_join_item,list);
                 recyclerView.setAdapter(joinItemAdapter);
                 swipeRefreshLayout.setRefreshing(false);
+                Log.d("22222222","stopJoin");
             }
 
             @Override
             public void onFailure(Call<List<PersonActivityItem>> call, Throwable t) {
                 t.printStackTrace();
+                Log.d("22222222","stopJoin111");
             }
         });
     }
