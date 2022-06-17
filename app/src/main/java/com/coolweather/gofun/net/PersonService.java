@@ -1,6 +1,8 @@
 package com.coolweather.gofun.net;
 
 import com.coolweather.gofun.fragment.Mine.bean.ActivityStatus;
+import com.coolweather.gofun.fragment.Mine.bean.CreateBean;
+import com.coolweather.gofun.fragment.Mine.bean.GetApplyID;
 import com.coolweather.gofun.fragment.Mine.bean.Person;
 import com.coolweather.gofun.fragment.Mine.bean.PersonActivityItem;
 import com.coolweather.gofun.fragment.Mine.bean.PersonChange;
@@ -41,4 +43,15 @@ public interface PersonService {
     //我加入的
     @GET("Activity/getGoingActivityOfApplicant")
     Call<List<PersonActivityItem>> getJoinActivity(@Header("Authorization") String token);
+
+    //我创建的
+    @GET("Activity/getActivityByCreator")
+    Call<List<CreateBean>> getCreateActivity(@Header("Authorization") String token);
+
+    //获取申请id
+    @GET("Activity/getApplyActivityOfCreator")
+    Call<List<GetApplyID>> getApplyID(@Header("Authorization") String token, @Query("activityId") int id, @Query("applyState") int state);
+
+    //通过申请
+    //不通过申请
 }

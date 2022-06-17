@@ -19,8 +19,11 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/drawable/shape_userinfo.xml" value="0.1875" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/drawable/shape_userinfo2.xml" value="0.1875" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/drawable/textview_style.xml" value="0.176" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_approved.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_chart_message.xml" value="0.264" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_commend_item.xml" value="0.505091649694501" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_create.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_create_item.xml" value="0.264" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_detail_info.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_guidance.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/activity_join.xml" value="0.22838137472283815" />
@@ -43,6 +46,8 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/chart_item_two.xml" value="0.4" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/commend_bottomsheet.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/dialog_bottom_select.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragment_approved.xml" value="0.264" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragment_approved_item.xml" value="0.264" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragment_blank.xml" value="0.109375" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragment_map.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/GoFun/GoFun/app/src/main/res/layout/fragment_message.xml" value="0.24947916666666667" />

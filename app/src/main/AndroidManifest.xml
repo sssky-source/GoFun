@@ -27,6 +27,12 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustPan">
         <activity
+            android:name=".fragment.Mine.create.ApprovedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".fragment.Mine.create.CreateActivity"
+            android:exported="false" />
+        <activity
             android:name=".fragment.Message.ActivityChartMessage"
             android:exported="false" />
         <activity

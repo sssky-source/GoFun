@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.fragment.Mine.apply.PersonActivity;
+import com.coolweather.gofun.fragment.Mine.create.CreateActivity;
 import com.coolweather.gofun.fragment.Mine.join.JoinActivity;
 import com.coolweather.gofun.util.ToastUtils;
 
@@ -45,7 +46,8 @@ public class PersonInformationCard extends RelativeLayout implements View.OnClic
                 getContext().startActivity(apply);
                 break;
             case R.id.sel3:
-                ToastUtils.show(getContext(), "我创建的");
+                Intent create = new Intent(getContext(), CreateActivity.class);
+                getContext().startActivity(create);
                 break;
         }
     }

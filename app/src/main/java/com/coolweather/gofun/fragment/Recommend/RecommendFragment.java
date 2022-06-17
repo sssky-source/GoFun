@@ -105,7 +105,7 @@ public class RecommendFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.invite,menu);
+        //inflater.inflate(R.menu.invite,menu);
     }
 
     @SuppressLint("NonConstantResourceId")
