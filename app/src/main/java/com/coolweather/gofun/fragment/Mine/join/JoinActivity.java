@@ -7,6 +7,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.R;
@@ -30,6 +31,7 @@ public class JoinActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private JoinItemAdapter joinItemAdapter;
+    private TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,8 @@ public class JoinActivity extends AppCompatActivity {
         setContentView(R.layout.activity_join);
         PersonService personService = HttpRequest.create(PersonService.class);
         recyclerView = findViewById(R.id.Join_RecyclerView);
+        title = findViewById(R.id.Join_title);
+        title.setText("我加入的");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(JoinActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
         swipeRefreshLayout = findViewById(R.id.Join_SwipeRefreshLayout);
@@ -61,13 +65,11 @@ public class JoinActivity extends AppCompatActivity {
                 joinItemAdapter = new JoinItemAdapter(R.layout.activity_join_item,list);
                 recyclerView.setAdapter(joinItemAdapter);
                 swipeRefreshLayout.setRefreshing(false);
-                Log.d("22222222","stopJoin");
             }
 
             @Override
             public void onFailure(Call<List<PersonActivityItem>> call, Throwable t) {
                 t.printStackTrace();
-                Log.d("22222222","stopJoin111");
             }
         });
     }

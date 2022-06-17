@@ -75,18 +75,15 @@ public class StateFragment extends Fragment {
         personService.getApplyStatusDetail("Bearer " + GoFunApplication.token,id).enqueue(new Callback<List<PersonActivityItem>>() {
             @Override
             public void onResponse(Call<List<PersonActivityItem>> call, Response<List<PersonActivityItem>> response) {
-                Log.d("22222222","code" + response.code());
                 List<PersonActivityItem> list = response.body();
                 stateItemAdapter = new StateItemAdapter(R.layout.activity_state_item,list);
                 recyclerView.setAdapter(stateItemAdapter);
                 swipeRefreshLayout.setRefreshing(false);
-                Log.d("22222222","stopState");
             }
 
             @Override
             public void onFailure(Call<List<PersonActivityItem>> call, Throwable t) {
                 t.printStackTrace();
-                Log.d("22222222","stopState111");
             }
         });
     }

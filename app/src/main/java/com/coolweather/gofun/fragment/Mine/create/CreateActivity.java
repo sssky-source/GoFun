@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
@@ -34,12 +35,15 @@ public class CreateActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private CreateAdapter adapter;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
         PersonService service = HttpRequest.create(PersonService.class);
+        textView = findViewById(R.id.Create_title);
+        textView.setText("我创建的");
         recyclerView = findViewById(R.id.Create_RecyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CreateActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);

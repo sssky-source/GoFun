@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.LocalDb.SqliteUtil;
@@ -30,6 +31,7 @@ import retrofit2.Response;
  */
 public class PersonActivity extends AppCompatActivity {
 
+    private TextView title;
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     final ArrayList<String> tabName = new ArrayList<>();
@@ -41,6 +43,8 @@ public class PersonActivity extends AppCompatActivity {
         setContentView(R.layout.activity_person_activity);
         PersonService personService = HttpRequest.create(PersonService.class);
 
+        title = findViewById(R.id.PersonActivity_title);
+        title.setText("我申请的");
         tabLayout = (TabLayout) findViewById(R.id.PersonActivity_TabLayout);
         viewPager2 = findViewById(R.id.PersonActivity_ViewPager2);
 
