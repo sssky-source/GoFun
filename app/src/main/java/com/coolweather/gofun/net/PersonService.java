@@ -16,6 +16,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface PersonService {
@@ -53,5 +54,10 @@ public interface PersonService {
     Call<List<GetApplyID>> getApplyID(@Header("Authorization") String token, @Query("activityId") int id, @Query("applyState") int state);
 
     //通过申请
+    @PUT("Activity/passApply")
+    Call<ResponseBody> passApply(@Header("Authorization") String token,@Query("applyId") int id);
+
     //不通过申请
+    @PUT("Activity/unpassApply")
+    Call<ResponseBody> unPassApply(@Header("Authorization") String token,@Query("applyId") int id);
 }

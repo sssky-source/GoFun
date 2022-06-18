@@ -26,6 +26,7 @@ import com.coolweather.gofun.util.ToastUtils;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -70,6 +71,7 @@ public class ApprovedFragment extends Fragment {
         requestApplyID();
     }
 
+    //获取申请ID，用于通过或者拒绝申请
     private void requestApplyID() {
         service.getApplyID("Bearer " + GoFunApplication.token, activityID, state).enqueue(new Callback<List<GetApplyID>>() {
             @Override
@@ -82,12 +84,13 @@ public class ApprovedFragment extends Fragment {
                 approvedAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
                     @Override
                     public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+                        int id = list.get(position).getId();
                         switch (view.getId()) {
                             case R.id.apply_agree:
-                                ToastUtils.show(getContext(), "同意申请");
+                                passApply(id);
                                 break;
                             case R.id.apply_refuse:
-                                ToastUtils.show(getContext(), "拒绝申请");
+                                unPassApply(id);
                                 break;
                         }
                     }
@@ -96,6 +99,36 @@ public class ApprovedFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<GetApplyID>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    //通过申请
+    private void unPassApply(int id) {
+        service.passApply("Bearer " + GoFunApplication.token,id).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                ToastUtils.show(getContext(),"已同意加入活动");
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    //拒绝申请
+    private void passApply(int id) {
+        service.unPassApply("Bearer " + GoFunApplication.token,id).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                ToastUtils.show(getContext(),"拒绝该成员加入活动");
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 t.printStackTrace();
             }
         });
