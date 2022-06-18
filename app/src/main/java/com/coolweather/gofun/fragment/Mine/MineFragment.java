@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.coolweather.gofun.R;
+import com.coolweather.gofun.bean.PersonLitePal;
 import com.coolweather.gofun.util.BitmapUtils;
 import com.coolweather.gofun.util.CameraUtils;
 import com.coolweather.gofun.util.ToastUtils;
@@ -37,14 +38,18 @@ import io.reactivex.functions.Consumer;
 
 import static android.app.Activity.RESULT_OK;
 
+import org.litepal.LitePal;
+
 /**
- * @author cyt on 20122/04/21.
+ * @author cyt on 2022/04/21.
  */
 
 
 public class MineFragment extends Fragment implements View.OnClickListener{
 
+    private PersonLitePal personLitePal;
     public ImageView imageViewhead;
+    private TextView userName;
     public View view;
     private BottomDialog mBottomPhotoDialog;
     private TextView cancel,takephoto,selectalbum;
@@ -73,6 +78,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.fragment_mine, container, false);
+        personLitePal  = LitePal.findFirst(PersonLitePal.class);
         initView();
         setListeners();
         return view;
@@ -80,7 +86,9 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 
     public void initView(){
         imageViewhead = (ImageView)view.findViewById(R.id.head);
-
+        userName = view.findViewById(R.id.username);
+        Glide.with(getContext()).load(personLitePal.getImage()).into(imageViewhead);
+        userName.setText(personLitePal.getUsername());
     }
     public void setListeners(){
         imageViewhead.setOnClickListener(this);

@@ -103,28 +103,25 @@
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/head"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/shape_mine_head_bg"
-        android:elevation="10dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/head"
-        android:scaleType="centerCrop"
         android:layout_width="100dp"
-        android:layout_height="100dp"/>
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_mine_head_bg"
+        android:elevation="10dp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/username"
-        android:layout_below="@+id/head"
-        android:text="未登录"
-        android:textSize="18sp"
-        android:elevation="10dp"
-        android:textColor="@color/black"
-        android:layout_marginTop="7dp"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/head"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="7dp"
+        android:elevation="10dp"
+        android:text="未登录"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
 
 </RelativeLayout>
