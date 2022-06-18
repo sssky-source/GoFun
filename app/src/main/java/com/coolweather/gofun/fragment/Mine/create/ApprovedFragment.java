@@ -104,12 +104,14 @@ public class ApprovedFragment extends Fragment {
         });
     }
 
-    //通过申请
+    //拒绝申请
     private void unPassApply(int id) {
-        service.passApply("Bearer " + GoFunApplication.token,id).enqueue(new Callback<ResponseBody>() {
+        service.unPassApply("Bearer " + GoFunApplication.token,id).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                ToastUtils.show(getContext(),"已同意加入活动");
+                ToastUtils.show(getContext(),"拒绝该成员加入活动");
+                swipeRefreshLayout.setRefreshing(true);
+                requestApplyID();
             }
 
             @Override
@@ -119,12 +121,14 @@ public class ApprovedFragment extends Fragment {
         });
     }
 
-    //拒绝申请
+    //通过申请
     private void passApply(int id) {
-        service.unPassApply("Bearer " + GoFunApplication.token,id).enqueue(new Callback<ResponseBody>() {
+        service.passApply("Bearer " + GoFunApplication.token,id).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                ToastUtils.show(getContext(),"拒绝该成员加入活动");
+                ToastUtils.show(getContext(),"已同意加入活动");
+                swipeRefreshLayout.setRefreshing(true);
+                requestApplyID();
             }
 
             @Override
