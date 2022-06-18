@@ -1,19 +1,14 @@
 package com.coolweather.gofun.fragment.Map;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.coolweather.gofun.GoFunApplication;
-import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.bean.CommentItem;
 import com.coolweather.gofun.fragment.Map.bean.TypeItem;
-import com.coolweather.gofun.fragment.Map.widget.BottomSelectDialog;
-import com.coolweather.gofun.fragment.Recommend.Adapter.RecommendItemAdapter;
 import com.coolweather.gofun.fragment.Recommend.bean.Activity;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 import com.coolweather.gofun.net.HttpRequest;

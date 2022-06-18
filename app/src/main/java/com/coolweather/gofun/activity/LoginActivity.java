@@ -1,8 +1,6 @@
 package com.coolweather.gofun.activity;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -17,18 +15,19 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.coolweather.gofun.Animation.SgfSplash6Activity;
 import com.coolweather.gofun.BaseActivity;
 import com.coolweather.gofun.GoFunApplication;
-import com.coolweather.gofun.LocalDb.MyDatabaseHelper;
-import com.coolweather.gofun.LocalDb.SqliteUtil;
+import com.coolweather.gofun.LocalDb.LitPalUtil;
 import com.coolweather.gofun.R;
+import com.coolweather.gofun.LocalDb.PersonLitePal;
 import com.coolweather.gofun.bean.User;
 import com.coolweather.gofun.config.Config;
-import com.coolweather.gofun.util.ToastUtils;
+import com.coolweather.gofun.fragment.Mine.bean.Person;
+import com.coolweather.gofun.net.HttpRequest;
+import com.coolweather.gofun.net.PersonService;
 import com.coolweather.gofun.util.OkhttpUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -38,8 +37,6 @@ import java.io.IOException;
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
@@ -51,9 +48,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private ProgressBar progressBar;
     private LinearLayout llLogin;
     private CheckBox checkBox;
-    private MyDatabaseHelper dbhelper;
+
     private CircleImageView QQ_Login,V_Login;
     SQLiteDatabase db;
+    private PersonService personService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +62,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void initView() {
+        personService = HttpRequest.create(PersonService.class);
         accountLoginName = (EditText) findViewById(R.id.i8_accountLogin_name);
         accountLoginPassword = (EditText) findViewById(R.id.i8_accountLogin_password);
         loginBtn = (Button) findViewById(R.id.i8_accountLogin_toLogin);
@@ -80,14 +79,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         accountLoginPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         checkBox.setBackgroundResource(R.drawable.icon_bukejian);
         Log.d("TOKEN", GoFunApplication.getToken());
-        //通过构造函数将参数将数据库名指定为UserList.db，版本为1
-        dbhelper = new MyDatabaseHelper(this,"UserList.db",null,1);
-        //进入活动运行到这一步后检测到没有数据库就会创建
-        db = dbhelper.getWritableDatabase();
         if(searchUser()!=null){
-            User user = searchUser();
-            accountLoginName.setText(user.getUsername());
-            accountLoginPassword.setText(user.getPassword());
+            accountLoginName.setText(searchUser().getEmail());
+            accountLoginPassword.setText(searchUser().getPassword());
         }
     }
 
@@ -190,14 +184,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 Log.d("kwwl", "response ==" + response);
 
                 String token = response.body().string();
-
-                Log.d("kwwl","token :" + token);
                 if (response.code() == 200) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                         //   Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                            rememberUser(accountName,accountPassword,token);
+                            //请求个人信息
+                            GoFunApplication.token = token;
+                            requestPersonInfo(personService,token,accountPassword);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra("token",token);
                             startActivity(intent);
@@ -237,37 +230,47 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
-    private void rememberUser(String username, String password,String token) {
-        db = dbhelper.getWritableDatabase();
-        db.execSQL("delete from UserTable");
-        ContentValues values = new ContentValues();
-        //put(属性名，属性值) put("username","小明")；
-        values.put("email", username);
-        values.put("password", password);
-        values.put("token",token);
-        db.insert("UserTable", null, values);  //将数据插入数据库
-        values.clear();
-        db.close();
+
+    private PersonLitePal searchUser(){
+        PersonLitePal personLitePal = null;
+        if(LitPalUtil.getPersonInfo() != null){
+            personLitePal  = LitPalUtil.getPersonInfo();
+        }
+        return personLitePal;
     }
 
-    private User searchUser(){
-      /*Cursor是相当于一个游标，便利表中没个条目，然后获取不同属性，找到与自己查找相符合
-          的属性就将此条提取出来
-      */
-        User user = null;
-        Cursor cursor = db.query("UserTable",null,null,null,null,null,null);
-        if(cursor.moveToFirst()) {
-            do {
-                Integer ID = Integer.valueOf(cursor.getString(cursor.getColumnIndex("id")));
-                String username = cursor.getString(cursor.getColumnIndex("email"));
-                String password = cursor.getString(cursor.getColumnIndex("password"));
-                user = new User(username,password);
+    /*
+    登陆成功的话获取用户的全部信息，存入数据库
+    */
+    private void requestPersonInfo(PersonService personService,String token,String password) {
+        personService.getUserInfo("Bearer " + token).enqueue(new retrofit2.Callback<Person>() {
+            @Override
+            public void onResponse(retrofit2.Call<Person> call, retrofit2.Response<Person> response) {
+                Log.d("111",token);
+                Person person = response.body();
+                Log.d("111","response" + response);
+                Log.d("111","response" + response.code());
+                Log.d("111","response" + response.body());
 
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        //  db.close();
-        return user;
+                //要保证已经保存完成在查询数据库
+                //因为LitePal的原因 会将ID 默认作为主键，导致用户id不能保存下来
+                //所以另外建立了一个Bean id作为主键 用户ID写为userID
+                /*
+                    LitePal不支持自定义主键，默认的主键为id,不管一个实体类对象有没有设置id字段，
+                    数据库的表中都会创建一个id的主键，而这个id的值会在新记录插入时被自动置为表中的Id，
+                    也即是唯一值。如果你里面定义了个String id，运行会报错的。
+                 */
+                if (person != null){
+                    LitPalUtil.setUserInfo(person,token,password);
+                }else {
+                    Log.d("111","not request");
+                }
+            }
+            @Override
+            public void onFailure(retrofit2.Call<Person> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
 }

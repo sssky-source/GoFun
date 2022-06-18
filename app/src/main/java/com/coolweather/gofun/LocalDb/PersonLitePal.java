@@ -1,4 +1,4 @@
-package com.coolweather.gofun.bean;
+package com.coolweather.gofun.LocalDb;
 
 import org.litepal.crud.LitePalSupport;
 
@@ -6,6 +6,7 @@ public class PersonLitePal extends LitePalSupport {
     private Integer id;
     private int userID;
     private String username;
+    private String password;
     private String email;
     private String image;
     private String sex;
@@ -15,6 +16,7 @@ public class PersonLitePal extends LitePalSupport {
     private String hobby;
     private Double y;
     private String location;
+    private String token;
 
     public Integer getId() {
         return id;
@@ -110,5 +112,21 @@ public class PersonLitePal extends LitePalSupport {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

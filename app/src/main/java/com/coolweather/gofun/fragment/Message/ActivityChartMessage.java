@@ -14,14 +14,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.coolweather.gofun.GoFunApplication;
-import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
-import com.coolweather.gofun.bean.PersonLitePal;
+import com.coolweather.gofun.LocalDb.PersonLitePal;
 import com.coolweather.gofun.fragment.Message.Adapter.ChartMessageAdapter;
 import com.coolweather.gofun.fragment.Message.bean.AddChartMessage;
 import com.coolweather.gofun.fragment.Message.bean.ChartMessageBean;
-import com.coolweather.gofun.fragment.Mine.bean.Person;
-import com.coolweather.gofun.fragment.Recommend.RecommendActivityDetail;
 import com.coolweather.gofun.net.ChartMessage;
 import com.coolweather.gofun.net.HttpRequest;
 import com.google.android.material.textfield.TextInputEditText;

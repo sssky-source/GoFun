@@ -5,7 +5,9 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
-import com.coolweather.gofun.LocalDb.SqliteUtil;
+import com.coolweather.gofun.LocalDb.LitPalUtil;
+
+import org.litepal.LitePal;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,13 +28,15 @@ public class GoFunApplication  extends Application {
         instance = this;
         //初始化全局上下文
         applicationContext=this;
-        SqliteUtil sqliteUtil = new SqliteUtil(getContext());
-        if(sqliteUtil.getToken("token")!=null){
-            token = sqliteUtil.getToken("token");
+        //配置数据库
+        LitePal.initialize(this);
+        if(LitPalUtil.getPersonInfo() != null){
+            token = LitPalUtil.getPersonInfo().getToken();
             Log.d("TOKENq",token);
         }else{
-
+            Log.d("TOKENq","token为空");
         }
+
     }
 
     public  static Context getGlobalApplication() {

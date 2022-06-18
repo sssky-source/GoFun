@@ -1,7 +1,5 @@
 package com.coolweather.gofun.fragment.Recommend;
 
-import static com.coolweather.gofun.GoFunApplication.getContext;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,10 +16,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.coolweather.gofun.GoFunApplication;
-import com.coolweather.gofun.LocalDb.SqliteUtil;
+import com.coolweather.gofun.LocalDb.LitPalUtil;
 import com.coolweather.gofun.R;
-import com.coolweather.gofun.bean.PersonLitePal;
-import com.coolweather.gofun.fragment.Mine.bean.Person;
+import com.coolweather.gofun.LocalDb.PersonLitePal;
 import com.coolweather.gofun.fragment.Recommend.Adapter.CommendAdapter;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 import com.coolweather.gofun.fragment.Recommend.bean.PersonAddComment;
@@ -32,8 +29,6 @@ import com.coolweather.gofun.net.RecommendService;
 import com.coolweather.gofun.util.DialogUtils;
 import com.coolweather.gofun.util.ToastUtils;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-
-import org.litepal.LitePal;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -67,7 +62,6 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     private CommendAdapter commendAdapter;
     private List<PersonComment> temp = new ArrayList<>();
     private List<PersonComment> list;
-    private SqliteUtil sqliteUtil;
     private PersonLitePal person_LitePal;
 
 
@@ -76,7 +70,6 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend_detail);
 
-        sqliteUtil = new SqliteUtil(RecommendActivityDetail.this);
         recommendService = HttpRequest.create(RecommendService.class);
         commentService = HttpRequest.create(CommentService.class);
 
@@ -115,7 +108,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
 
     @SuppressLint({"SetTextI18n", "CheckResult"})
     private void initial() {
-        person_LitePal = LitePal.findFirst(PersonLitePal.class);
+        person_LitePal = LitPalUtil.getPersonInfo();
         creatorImage = findViewById(R.id.ActivityDetail_activityCreateImage);
         userImage = findViewById(R.id.ActivityDetail_PersonUserImage);
         userName = findViewById(R.id.ActivityDetail_username);

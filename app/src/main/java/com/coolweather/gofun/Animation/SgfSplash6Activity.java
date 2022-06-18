@@ -2,7 +2,6 @@ package com.coolweather.gofun.Animation;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
 
 import java.util.ArrayList;
@@ -48,7 +46,6 @@ public class SgfSplash6Activity extends AppCompatActivity {
         textViews.add(tv_course);
 //        showAnimation(textViews);
         showAnimation();
-        SqliteUtil sqliteUtil = new SqliteUtil(this);
 
     }
 

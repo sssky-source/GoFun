@@ -23,7 +23,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.coolweather.gofun.R;
-import com.coolweather.gofun.bean.PersonLitePal;
+import com.coolweather.gofun.LocalDb.PersonLitePal;
 import com.coolweather.gofun.util.BitmapUtils;
 import com.coolweather.gofun.util.CameraUtils;
 import com.coolweather.gofun.util.ToastUtils;
@@ -61,7 +61,6 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     private Bitmap orc_bitmap;
     //是否拥有权限
     private boolean hasPermissions =false;
-
     //存储拍完照后的图片
     private File outputImagePath;
     //启动相机标识
@@ -246,7 +245,6 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         // 设置背景为透明色 那么白色的就能呈现出来了
         mBottomPhotoDialog.getDelegate().findViewById(R.id.design_bottom_sheet)
                 .setBackgroundColor(getResources().getColor(R.color.transparent));
-
         mBottomPhotoDialog.show();
 
     }

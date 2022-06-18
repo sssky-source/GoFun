@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.coolweather.gofun.GoFunApplication;
-import com.coolweather.gofun.LocalDb.SqliteUtil;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.fragment.Mine.Adapter.ActivityAdapter;
 import com.coolweather.gofun.fragment.Mine.bean.ActivityStatus;

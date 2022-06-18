@@ -3,28 +3,20 @@ package com.coolweather.gofun.fragment.Map.widget;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.coolweather.gofun.LocalDb.SqliteUtil;
+import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.R;
-import com.coolweather.gofun.fragment.Map.adapter.TypeAdapter;
 import com.coolweather.gofun.fragment.Map.adapter.TypeAdapterone;
 import com.coolweather.gofun.fragment.Map.bean.TypeItem;
-import com.coolweather.gofun.fragment.Recommend.Adapter.FragmentAdapter;
-import com.coolweather.gofun.fragment.Recommend.RecommendItemFragment;
 import com.coolweather.gofun.fragment.Recommend.bean.Activity;
 import com.coolweather.gofun.net.HttpRequest;
 import com.coolweather.gofun.net.MapService;
-import com.coolweather.gofun.util.ToastUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,10 +48,8 @@ public class BottomSelectDialog extends BottomSheetDialog {
     }
 
     private void initDatas() {
-        SqliteUtil sqliteUtil = new SqliteUtil(context);
-        String token = sqliteUtil.getToken("token");
         MapService mapService = HttpRequest.create(MapService.class);
-        mapService.getActivityType("Bearer" + token).enqueue(new Callback<List<Activity>>() {
+        mapService.getActivityType("Bearer" + GoFunApplication.token).enqueue(new Callback<List<Activity>>() {
             @Override
             public void onResponse(Call<List<Activity>> call, Response<List<Activity>> response) {
                 List<Activity> list = response.body();

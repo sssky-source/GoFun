@@ -2,6 +2,7 @@ package com.coolweather.gofun.fragment.Recommend;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,7 +18,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.activity.MainActivity;
 import com.coolweather.gofun.fragment.Recommend.Adapter.FragmentAdapter;
-import com.coolweather.gofun.LocalDb.SqliteUtil;
+
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.fragment.Recommend.bean.Activity;
 import com.coolweather.gofun.net.HttpRequest;
@@ -64,8 +65,7 @@ public class RecommendFragment extends Fragment {
         fragmentList.clear();
         //指出fragment愿意添加item到选项菜单
         setHasOptionsMenu(true);
-        //本地数据库查找token
-        SqliteUtil sqliteUtil = new SqliteUtil(getActivity());
+        Log.d("TOKEN","查看" + GoFunApplication.token);
         token = GoFunApplication.getToken();
         toolbar = view.findViewById(R.id.recommend_Toolbar);
         toolbar.setTitle("");

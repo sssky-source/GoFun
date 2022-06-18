@@ -32,7 +32,7 @@
     	</list>
     -->
     <list>
-        <mapping class = "com.coolweather.gofun.bean.PersonLitePal"></mapping>
+        <mapping class = "com.coolweather.gofun.LocalDb.PersonLitePal"></mapping>
     </list>
 
     <!--
