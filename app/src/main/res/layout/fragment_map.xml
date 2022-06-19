@@ -7,7 +7,7 @@
     android:gravity="center">
 
     <!--地图-->
-    <com.amap.api.maps.MapView
+    <com.amap.api.maps.TextureMapView
         android:id="@+id/map_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

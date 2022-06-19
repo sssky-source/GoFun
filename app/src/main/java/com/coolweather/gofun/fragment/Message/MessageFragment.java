@@ -12,7 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.amap.api.maps.model.LatLng;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.coolweather.gofun.GoFunApplication;
@@ -45,6 +47,7 @@ public class MessageFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private JoinActivityAdapter joinActivityAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
@@ -52,6 +55,8 @@ public class MessageFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_message, container, false);
         return view;
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -61,7 +66,16 @@ public class MessageFragment extends Fragment {
         recyclerView = view.findViewById(R.id.message_RecyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
-
+        swipeRefreshLayout = view.findViewById(R.id.message_SwipeRefreshLayout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.pink);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                requestGoingActivity(personService);
+                joinActivityAdapter.notifyDataSetChanged();
+            }
+        });
+        swipeRefreshLayout.setRefreshing(true);
         requestGoingActivity(personService);
     }
 
@@ -72,6 +86,7 @@ public class MessageFragment extends Fragment {
                 List<PersonActivityItem> list = response.body();
                 joinActivityAdapter = new JoinActivityAdapter(R.layout.activity_message_item,list);
                 recyclerView.setAdapter(joinActivityAdapter);
+                swipeRefreshLayout.setRefreshing(false);
 
                 joinActivityAdapter.setOnItemClickListener(new OnItemClickListener() {
                     @Override
@@ -98,6 +113,7 @@ public class MessageFragment extends Fragment {
             }
         });
     }
+
 
 
 }

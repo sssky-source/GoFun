@@ -42,6 +42,7 @@ import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.MapsInitializer;
+import com.amap.api.maps.TextureMapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.CameraPosition;
@@ -94,7 +95,7 @@ public class MapFragment extends Fragment implements
     public AMapLocationClient mLocationClient = null;
     //声明AMapLocationClientOption对象
     public AMapLocationClientOption mLocationOption = null;
-    private MapView mapView;
+    private TextureMapView mapView;
     //地图控制器
     private AMap aMap = null;
     //位置更改监听
@@ -780,6 +781,5 @@ public class MapFragment extends Fragment implements
             addMarker(latLng,img,i);
         }
     }
-
 
 }

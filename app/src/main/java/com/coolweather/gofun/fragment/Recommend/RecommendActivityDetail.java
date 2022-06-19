@@ -9,11 +9,29 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationListener;
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdate;
+import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.LocationSource;
+import com.amap.api.maps.MapView;
+import com.amap.api.maps.MapsInitializer;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.CameraPosition;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.maps.model.animation.Animation;
+import com.amap.api.maps.model.animation.RotateAnimation;
 import com.bumptech.glide.Glide;
 import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.LocalDb.LitPalUtil;
@@ -45,7 +63,7 @@ import retrofit2.Response;
     活动介绍界面
  */
 
-public class RecommendActivityDetail extends AppCompatActivity implements View.OnClickListener {
+public class RecommendActivityDetail extends AppCompatActivity implements View.OnClickListener, AMapLocationListener, LocationSource{
 
     private RecommendService recommendService;
     private CommentService commentService;
@@ -63,16 +81,24 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     private List<PersonComment> temp = new ArrayList<>();
     private List<PersonComment> list;
     private PersonLitePal person_LitePal;
+    private MapView mapView = null;
+    //地图控制器
+    private AMap aMap = null;
+    //位置更改监听
+    private OnLocationChangedListener mListener;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend_detail);
-
+        MapsInitializer.updatePrivacyShow(this,true,true);
+        MapsInitializer.updatePrivacyAgree(this,true);
         recommendService = HttpRequest.create(RecommendService.class);
         commentService = HttpRequest.create(CommentService.class);
-
+        mapView = findViewById(R.id.ActivityDetail_Map);
+        mapView.onCreate(savedInstanceState);
+        aMap = mapView.getMap();
         //接受传递的list
         Intent intent = getIntent();
         item = (ActivityItem) intent.getSerializableExtra("detail_item");
@@ -80,6 +106,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         initial();
 
         requestCommend();
+        addMark();
     }
 
     private void requestCommend() {
@@ -121,6 +148,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         checkCommend = findViewById(R.id.ActivityDetail_CheckCommend);
         addCommend = findViewById(R.id.ActivityDetail_AddCommendWays);
         recyclerView = findViewById(R.id.ActivityDetail_Commend);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(RecommendActivityDetail.this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -218,5 +246,67 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                 t.printStackTrace();
             }
         });
+    }
+
+
+    private void addMark(){
+        LatLng latLng = new LatLng(item.getY(),item.getX());
+        Log.d("item",item.getImage() + item.getX());
+        String img = item.getImage();
+        //添加标点
+       aMap.addMarker(new MarkerOptions().position(latLng).snippet("活动地点"));
+       updateMapCenter(latLng);
+
+    }
+
+    /**
+     * 改变地图中心位置
+     * @param latLng 位置
+     */
+    private void updateMapCenter(LatLng latLng) {
+        // CameraPosition 第一个参数： 目标位置的屏幕中心点经纬度坐标。
+        // CameraPosition 第二个参数： 目标可视区域的缩放级别
+        // CameraPosition 第三个参数： 目标可视区域的倾斜度，以角度为单位。
+        // CameraPosition 第四个参数： 可视区域指向的方向，以角度为单位，从正北向顺时针方向计算，从0度到360度
+        CameraPosition cameraPosition = new CameraPosition(latLng, 16, 30, 0);
+        //位置变更
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+        //改变位置
+        aMap.moveCamera(cameraUpdate);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //在activity执行onResume时执行mMapView.onResume ()，重新绘制加载地图
+        mapView.onResume();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //在activity执行onPause时执行mMapView.onPause ()，暂停地图的绘制
+        mapView.onPause();
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //在activity执行onSaveInstanceState时执行mMapView.onSaveInstanceState (outState)，保存地图当前的状态
+        mapView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onLocationChanged(AMapLocation aMapLocation) {
+
+    }
+
+    @Override
+    public void activate(OnLocationChangedListener onLocationChangedListener) {
+
+    }
+
+    @Override
+    public void deactivate() {
+
     }
 }

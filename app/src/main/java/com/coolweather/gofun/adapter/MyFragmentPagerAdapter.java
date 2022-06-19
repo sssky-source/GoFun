@@ -47,8 +47,10 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case MainActivity.PAGE_ONE:
                 fragment = mapfragment;
+              //  fragment = testFragment;
                 break;
             case MainActivity.PAGE_TWO:
+            //    fragment = testFragment2;
                 fragment = recommendFragment;
                 break;
             case MainActivity.PAGE_THREE:

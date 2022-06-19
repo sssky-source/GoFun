@@ -51,8 +51,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         //获取数据库
         LitePal.getDatabase();
         myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
-        //在主活动获取用户个人信息
-        PersonService personService = HttpRequest.create(PersonService.class);
         initView();
         rb_map.setChecked(true);
     }

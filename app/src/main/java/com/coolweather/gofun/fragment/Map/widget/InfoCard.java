@@ -59,6 +59,13 @@ public class InfoCard extends Dialog implements View.OnClickListener {
                     }else if(commentItemList.size() == 1){
                         textView_commitnone.setVisibility(View.INVISIBLE);
                         comment_two.setVisibility(View.INVISIBLE);
+                        CommentItem commentItem1 = commentItemList.get(0);
+                        Glide.with(context).load(commentItem1.getImage()).into(join_imageone);
+                        Log.d("img","username" + commentItem1.getUsername());
+                        join_nameone.setText(commentItem1.getUsername());
+                        join_commitone.setText(commentItem1.getComment());
+                        join_dateone.setText(commentItem1.getCreatetime().split("T")[0]
+                                + " " + commentItem1.getCreatetime().split("T")[1]);
                     }else{
                         Log.d("img", "size" + String.valueOf(commentItemList.size()));
                         textView_commitnone.setVisibility(View.INVISIBLE);
@@ -143,7 +150,6 @@ public class InfoCard extends Dialog implements View.OnClickListener {
     public void onClick(View view) {
         Intent intent = new Intent(context, DetailInfoActivity.class);
         context.startActivity(intent);
-        activity.finish();
     }
 
 }
