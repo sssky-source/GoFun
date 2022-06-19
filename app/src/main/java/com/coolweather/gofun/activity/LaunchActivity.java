@@ -417,6 +417,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onTimeSelected(long timestamp) {
                 mTvSelectedDate.setText(DateFormatUtils.long2Str(timestamp, false));
+                Log.d("time",DateFormatUtils.long2Str(timestamp, false));
             }
         }, beginTimestamp, endTimestamp);
         // 不允许点击屏幕或物理返回键关闭
