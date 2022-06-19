@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/dp_350"
-    android:layout_height="@dimen/dp_640"
+    android:layout_height="@dimen/dp_500"
     android:background="@drawable/bg_card"
     android:paddingLeft="@dimen/dp_10"
     android:paddingTop="@dimen/dp_10"
@@ -33,6 +33,26 @@
                 android:ellipsize="end"
                 android:text="1111111111111111"/>
 
+        </TableRow>
+
+        <TableRow
+            android:padding="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:maxEms="10"
+                android:text="欢乐斗地主"/>
         </TableRow>
 
         <TableRow

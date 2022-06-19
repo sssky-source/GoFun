@@ -11,11 +11,12 @@
     <string name="launch">发布</string>
     <string name="type">类型：</string>
     <string name="location">地点：</string>
+    <string name="title">标题：</string>
     <string name="creator">创建者：</string>
     <string name="commit">评论</string>
     <string name="detail">查看详情</string>
     <string name="apply">申请活动</string>
-    <string name="title">请选择时间</string>
+    <string name="time">请选择时间</string>
     <string name="confirm">确定</string>
     <string name="year">年</string>
     <string name="month">月</string>

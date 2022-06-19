@@ -59,7 +59,7 @@ public class BottomSelectDialog extends BottomSheetDialog {
                     Log.d("Bottom2","111111111");
                     TypeItem typeItem = new TypeItem();
                     typeItem.setType(list.get(i).getType1());
-                    typeItem.setImage(R.drawable.head);
+                    typeItem.setImage(R.drawable.all);
                     Log.d("Bottom","type" + typeItem.getType());
                  //   Log.d("Bottom2",list.get(i))
                   //  typeItemList.get(i).setImage(R.drawable.head);

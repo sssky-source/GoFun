@@ -78,7 +78,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         registerAccountBtn.getPaint().setAntiAlias(true);//抗锯齿
         accountLoginPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         checkBox.setBackgroundResource(R.drawable.icon_bukejian);
-        Log.d("TOKEN", GoFunApplication.getToken());
+        Log.d("TOKEN222", GoFunApplication.getToken());
         if(searchUser()!=null){
             accountLoginName.setText(searchUser().getEmail());
             accountLoginPassword.setText(searchUser().getPassword());
@@ -183,7 +183,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 Log.d("kwwl", "response.code()==" + response.code());
                 Log.d("kwwl", "response ==" + response);
 
-                String token = response.body().string();
+                String token = response.body().string().trim();
+                Log.d("tokenn", "login中的token" + token );
                 if (response.code() == 200) {
                     runOnUiThread(new Runnable() {
                         @Override
@@ -235,6 +236,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         PersonLitePal personLitePal = null;
         if(LitPalUtil.getPersonInfo() != null){
             personLitePal  = LitPalUtil.getPersonInfo();
+        }else {
+            Log.d("login","1111111");
         }
         return personLitePal;
     }
@@ -248,9 +251,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             public void onResponse(retrofit2.Call<Person> call, retrofit2.Response<Person> response) {
                 Log.d("111",token);
                 Person person = response.body();
-                Log.d("111","response" + response);
-                Log.d("111","response" + response.code());
-                Log.d("111","response" + response.body());
 
                 //要保证已经保存完成在查询数据库
                 //因为LitePal的原因 会将ID 默认作为主键，导致用户id不能保存下来

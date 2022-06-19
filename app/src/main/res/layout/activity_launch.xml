@@ -9,14 +9,6 @@
     <include layout="@layout/toolbar_layout"/>
 
 
-
-    <!--分割线-->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/black"/>
-
-
     <com.amap.api.maps.MapView
         android:id="@+id/map_view"
         android:layout_width="match_parent"
@@ -325,15 +317,18 @@
                     android:textSize="15sp"
                     android:scrollbars="vertical" />
 
-
-
             </LinearLayout>
 
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+
                 android:id="@+id/bt_order"
-                android:layout_marginTop="10dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/login_btn_bg"
                 android:text="@string/confirm"
                 app:layout_constraintTop_toBottomOf="@+id/ll_spinner"/>

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -39,6 +40,8 @@ import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.ServiceSettings;
+import com.amap.api.services.geocoder.GeocodeAddress;
+import com.amap.api.services.geocoder.GeocodeQuery;
 import com.amap.api.services.geocoder.GeocodeResult;
 import com.amap.api.services.geocoder.GeocodeSearch;
 import com.amap.api.services.geocoder.RegeocodeAddress;
@@ -106,7 +109,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
     private String str;
     private List<Tip> autoTips;
     private boolean isfirstinput = true;
-    private AddActivityItem addActivityItem = null;
+    private AddActivityItem addActivityItem = new AddActivityItem();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +119,12 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         MapsInitializer.updatePrivacyAgree(this,true);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         getActivityType();
         findViewById(R.id.ll_date).setOnClickListener(this);
         mTvSelectedDate = findViewById(R.id.tv_selected_date);
@@ -162,6 +171,10 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String newText = s.toString().trim();
                 if (newText.length() > 0) {
+
+                    // name表示地址，第二个参数表示查询城市，中文或者中文全拼，citycode、adcode
+                    GeocodeQuery query = new GeocodeQuery(newText,city);
+                    geocodeSearch.getFromLocationNameAsyn(query);
                     InputtipsQuery inputquery = new InputtipsQuery(newText, city);
                     Inputtips inputTips = new Inputtips(LaunchActivity.this, inputquery);
                     inputquery.setCityLimit(true);
@@ -222,9 +235,10 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-
                 //拿到被选择项的值
                 str = (String) spinner.getSelectedItem();
+                addActivityItem.setType(position);
+                Log.d("item",str + position);
                 TextView tv = (TextView)view;
                 tv.setTextColor(R.color.selected_time_text);
             }
@@ -254,16 +268,36 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
                 mTimerPickerone.show(mTvSelectedTimeend.getText().toString());
                 break;
             case R.id.bt_order:
+                String address = autoCompleteTextView.getText().toString();
+                if(address.length() == 0){
+                    Log.d("autoCompleteTextView11","autoCompleteTextView" + autoCompleteTextView.getText().toString());
+                    ToastUtils.show(LaunchActivity.this,"地址不能为空");
+                    break;
+                }
                 if(Long.parseLong(starttime) >= Long.parseLong(entime)){
-                    Toast.makeText(LaunchActivity.this,"开始时间不能大于等于截止时间",Toast.LENGTH_SHORT).show();
+                    ToastUtils.show(LaunchActivity.this,"开始时间不能大于等于截止时间");
+                    break;
+                }
+                if(introduce.getText().length() == 0){
+                    ToastUtils.show(LaunchActivity.this,"活动简介不能为空");
                     break;
                 }
                 if(numofpeople.getText().toString().length() == 0 ||theme.getText().toString().length() == 0){
-                    Toast.makeText(LaunchActivity.this,"主题和人数不能为空",Toast.LENGTH_SHORT).show();
+                    ToastUtils.show(LaunchActivity.this,"主题和人数不能为空");
                 }
                 else {
                     snumofpeople = Integer.parseInt(numofpeople.getText().toString().trim());
                     stheme = theme.getText().toString().trim();
+
+                    addActivityItem.setLocation(address);
+                    addActivityItem.setTitle(stheme);
+                    addActivityItem.setMaxnumber(snumofpeople);
+                    addActivityItem.setIntroduction(introduce.getText().toString().trim());
+                    Log.d("item",addActivityItem.getEndtime());
+                    Log.d("item",addActivityItem.getType().toString());
+                    Log.d("item",String.valueOf(addActivityItem.getX()));
+                    addActivity(addActivityItem);
+                    finish();
 //                    Intent intent = new Intent(LaunchActivity.this,FreeroomActivity.class);
 //                    Order order = new Order();
 //                    order.setIdofpeople(BmobUser.getCurrentUser(BmobUser.class).getUsername());
@@ -310,23 +344,27 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
     /*
     创建活动
     */
-    private void addActivity() {
+    private void addActivity(AddActivityItem activityItem) {
         RecommendService recommendService = HttpRequest.create(RecommendService.class);
-        recommendService.addActivity(GoFunApplication.token,addActivityItem).enqueue(new Callback<ResponseBody>() {
+        Log.d("tokenn22",GoFunApplication.token);
+        Log.d("tokenn11",LitPalUtil.getPersonInfo().getToken());
+        recommendService.addActivity("Bearer " + GoFunApplication.token,activityItem).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("item","response " + response.code());
+                Log.d("item","response " + response.body().toString());
                 if(response.code() == 200){
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ToastUtils.show(getApplicationContext(),"发起活动成功");
+                            ToastUtils.show(LaunchActivity.this,"发起活动成功");
                         }
                     });
                 }else {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ToastUtils.show(getApplicationContext(),"发起活动失败");
+                            ToastUtils.show(LaunchActivity.this,"发起活动失败");
                         }
                     });
                 }
@@ -394,16 +432,16 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
     private void initTimerPicker() {
         String beginTime = "2018-10-17 18:00";
         String endTime = DateFormatUtils.long2Str(System.currentTimeMillis(), true);
-
         mTvSelectedTime.setText(endTime);
         mTvSelectedTimeend.setText(endTime);
-        Log.d("SubscribeActivity",endTime);
+        addActivityItem.setStarttime(beginTime.replace(" ","T"));
+        addActivityItem.setEndtime(endTime.replace(" ","T"));
         // 通过日期字符串初始化日期，格式请用：yyyy-MM-dd HH:mm
         mTimerPicker = new CustomDatePicker(this, new CustomDatePicker.Callback() {
             @Override
             public void onTimeSelected(long timestamp) {
                 starttime = String.valueOf(timestamp);
-                Log.d("Freeeee",starttime);
+                addActivityItem.setStarttime(DateFormatUtils.long2Str(timestamp, true).replace(" ","T"));
                 mTvSelectedTime.setText(DateFormatUtils.long2Str(timestamp, true));
             }
         }, beginTime, endTime);
@@ -412,6 +450,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onTimeSelected(long timestamp) {
                 entime = String.valueOf(timestamp);
+                addActivityItem.setEndtime(DateFormatUtils.long2Str(timestamp, true).replace(" ","T"));
                 mTvSelectedTimeend.setText(DateFormatUtils.long2Str(timestamp, true));
             }
         }, beginTime, endTime);
@@ -571,8 +610,26 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
      */
     @Override
     public void onGeocodeSearched(GeocodeResult geocodeResult, int rCode) {
+        if (rCode == PARSE_SUCCESS_CODE) {
+            List<GeocodeAddress> geocodeAddressList = geocodeResult.getGeocodeAddressList();
+            if(geocodeAddressList!=null && geocodeAddressList.size()>0){
+                LatLonPoint latLonPoint = geocodeAddressList.get(0).getLatLonPoint();
+                //显示解析后的坐标
+                Log.d("add","坐标：" + latLonPoint.getLongitude()+"，"+latLonPoint.getLatitude());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        addActivityItem.setX(latLonPoint.getLongitude());
+                        addActivityItem.setY(latLonPoint.getLatitude());
+                    }
+                });
+            }
 
+        } else {
+            ToastUtils.show(LaunchActivity.this,"地址获取失败");
+        }
     }
+
 
     /**
      * 通过经纬度获取地址
@@ -586,11 +643,6 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         //异步获取地址信息
         geocodeSearch.getFromLocationAsyn(query);
     }
-
-
-
-
-
 
 
 }

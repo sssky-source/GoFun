@@ -8,6 +8,7 @@ import org.litepal.LitePal;
 
 public class LitPalUtil {
     public static void setUserInfo(Person person,String token,String password) {
+        LitePal.deleteAll(PersonLitePal.class);
         PersonLitePal person_LitePal = new PersonLitePal();
 
         //要保证已经保存完成在查询数据库

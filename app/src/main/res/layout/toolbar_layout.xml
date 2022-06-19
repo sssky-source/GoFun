@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:title=""
+        app:title="  "
         app:navigationIcon="@drawable/back"
         tools:ignore="MissingConstraints" >
 
@@ -20,7 +20,7 @@
             android:layout_gravity="center"
             android:gravity="center_vertical"
             android:textSize="@dimen/dp_25"
-            android:text="选择活动"/>
+            android:text="发起活动"/>
 
     </androidx.appcompat.widget.Toolbar>
 

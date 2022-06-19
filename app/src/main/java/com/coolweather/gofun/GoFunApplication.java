@@ -32,9 +32,9 @@ public class GoFunApplication  extends Application {
         LitePal.initialize(this);
         if(LitPalUtil.getPersonInfo() != null){
             token = LitPalUtil.getPersonInfo().getToken();
-            Log.d("TOKENq",token);
+            Log.d("GoFunApplication",token);
         }else{
-            Log.d("TOKENq","token为空");
+            Log.d("GoFunApplication","token为空");
         }
 
     }

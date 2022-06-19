@@ -37,7 +37,7 @@ public class InfoCard extends Dialog implements View.OnClickListener {
     private Activity activity;
     private LinearLayout bt_detail;
     private ActivityItem activityItem = new ActivityItem();
-    private TextView tv_type,tv_location,tv_creator;
+    private TextView tv_type,tv_location,tv_creator,tv_title;
     private CircleImageView join_imageone,join_imagetwo;
     private TextView join_nameone,join_nametwo;
     private TextView join_commitone,join_committwo;
@@ -45,7 +45,6 @@ public class InfoCard extends Dialog implements View.OnClickListener {
     private LinearLayout linearLayout_commit,comment_one,comment_two;
     private TextView textView_commitnone;
     private List<CommentItem> commentItemList = new ArrayList<>();
-    private String url = "http://139.224.221.148:1145/user/16/default.jpg";
 
     final Handler mHandler = new Handler(){
         @Override
@@ -118,6 +117,7 @@ public class InfoCard extends Dialog implements View.OnClickListener {
         tv_type = view.findViewById(R.id.tv_type);
         tv_location = view.findViewById(R.id.tv_location);
         tv_creator = view.findViewById(R.id.tv_creator);
+        tv_title = view.findViewById(R.id.tv_title);
         bt_detail.setOnClickListener(this);
         join_imageone = view.findViewById(R.id.join_imageone);
         join_imagetwo = view.findViewById(R.id.join_imagetwo);
@@ -134,24 +134,10 @@ public class InfoCard extends Dialog implements View.OnClickListener {
         tv_type.setText(activityItem.getType());
         tv_location.setText(activityItem.getLocation());
         tv_creator.setText(activityItem.getUsername());
-        Log.d("ac", String.valueOf(activityItem.getId()));
+        tv_title.setText(activityItem.getTitle());
         setContentView(view);
     }
 
-    private void bindViews() {
-        bt_detail = findViewById(R.id.bt_detail);
-        tv_type = findViewById(R.id.tv_type);
-        tv_location = findViewById(R.id.tv_location);
-        tv_creator = findViewById(R.id.tv_creator);
-        bt_detail.setOnClickListener(this);
-        join_imageone = findViewById(R.id.join_imageone);
-        join_imagetwo = findViewById(R.id.join_imagetwo);
-        join_commitone = findViewById(R.id.join_commitone);
-        join_committwo = findViewById(R.id.join_committwo);
-        join_dateone = findViewById(R.id.join_dateone);
-        join_datetwo = findViewById(R.id.join_datetwo);
-
-    }
 
     @Override
     public void onClick(View view) {

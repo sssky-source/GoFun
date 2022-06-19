@@ -141,13 +141,12 @@ public class MapFragment extends Fragment implements
     private List<Marker> markerList = new ArrayList<>();
     private RecyclerView recyclerView;
 
-
     private BottomSelectDialog bottomSheetDialog;
 
     private TypeAdapter typeAdapter;
     private List<TypeItem> titleList = new ArrayList<>();
     private List<ActivityItem> activityItemList = new ArrayList<>();
-    private List<ActivityItem> allactivityItemList = new ArrayList<>();
+
     private NetRequset netRequset = new NetRequset();
 
 
@@ -202,16 +201,11 @@ public class MapFragment extends Fragment implements
         fabClearMarker = getActivity().findViewById(R.id.fab_clear_marker);
         fabSelectType = getActivity().findViewById(R.id.fab_select);
         recyclerView = getActivity().findViewById(R.id.type_recyclerview);
-     //   initActivityType();
         ivSearch.setOnClickListener(this::onClick);
         ivClose.setOnClickListener(this::onClick);
         edSearch.setOnKeyListener(this);
         fabClearMarker.setOnClickListener(this::onClick);
         fabSelectType.setOnClickListener(this::onClick);
-        Log.d("ss","11111111");
-        // toolbar = getActivity().findViewById(R.id.toolbar);
-        // ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-
     }
 
     @Override
@@ -311,7 +305,7 @@ public class MapFragment extends Fragment implements
         }
         //设置监听
         geocodeSearch.setOnGeocodeSearchListener(this);
-        Log.d("ss","444444444");
+        netRequset.initTypeActivity(mHandler,0);
     }
 
     /**
@@ -771,7 +765,7 @@ public class MapFragment extends Fragment implements
         InfoCard infoCard = new InfoCard(getContext(),getActivity(),activityItemList.get(Integer.parseInt(indntify)));
         // infoCard.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
         //此处设置位置窗体大小，
-        infoCard.getWindow().setLayout(800,1000);
+        infoCard.getWindow().setLayout(800,1050);
         infoCard.show();
     }
 

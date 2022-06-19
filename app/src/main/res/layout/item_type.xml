@@ -3,17 +3,20 @@
     android:layout_width="wrap_content"
     android:layout_height="@dimen/dp_130"
     android:layout_marginTop="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10"
     android:orientation="vertical"
     android:id="@+id/item_select"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/img_type"
+        android:fitsSystemWindows="true"
         android:layout_width="@dimen/dp_100"
         android:layout_height="@dimen/dp_100"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="centerCrop"
         android:src="@drawable/head"/>
 
     <TextView
