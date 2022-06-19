@@ -47,16 +47,31 @@ import com.amap.api.services.geocoder.RegeocodeResult;
 import com.amap.api.services.help.Inputtips;
 import com.amap.api.services.help.InputtipsQuery;
 import com.amap.api.services.help.Tip;
+import com.coolweather.gofun.GoFunApplication;
+import com.coolweather.gofun.LocalDb.LitPalUtil;
 import com.coolweather.gofun.R;
+import com.coolweather.gofun.bean.AddActivityItem;
 import com.coolweather.gofun.datepicker.CustomDatePicker;
 import com.coolweather.gofun.datepicker.DateFormatUtils;
+import com.coolweather.gofun.fragment.Recommend.Adapter.FragmentAdapter;
+import com.coolweather.gofun.fragment.Recommend.RecommendItemFragment;
+import com.coolweather.gofun.fragment.Recommend.bean.Activity;
+import com.coolweather.gofun.net.HttpRequest;
+import com.coolweather.gofun.net.RecommendService;
 import com.coolweather.gofun.util.ToastUtils;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LaunchActivity extends AppCompatActivity implements View.OnClickListener, AMapLocationListener,
         LocationSource,AMap.OnMapClickListener,GeocodeSearch.OnGeocodeSearchListener{
@@ -91,17 +106,17 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
     private String str;
     private List<Tip> autoTips;
     private boolean isfirstinput = true;
+    private AddActivityItem addActivityItem = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
-
         MapsInitializer.updatePrivacyShow(this, true, true);
         MapsInitializer.updatePrivacyAgree(this,true);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        initSpinner();
+        getActivityType();
         findViewById(R.id.ll_date).setOnClickListener(this);
         mTvSelectedDate = findViewById(R.id.tv_selected_date);
         mTvSelectedDate.setClickable(false);
@@ -191,14 +206,12 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
-    private void initSpinner() {
+    private void initSpinner(List<Activity> list) {
         spinner=(Spinner)findViewById(R.id.ed_spinner);
         str=(String)spinner.getSelectedItem();
-        data_list.add("任意");
-        data_list.add("圆形");
-        data_list.add("教室型");
-        data_list.add("方框型");
-        data_list.add("主席台U型");
+        for (int i = 0; i < list.size(); i++){
+            data_list.add(list.get(i).getType1());
+        }
         arr_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data_list);
         arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //加载适配器
@@ -270,6 +283,60 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
                 break;
 
         }
+    }
+
+    private List<Activity> getActivityType(){
+        RecommendService recommendService = HttpRequest.create(RecommendService.class);
+        recommendService.getActivityType("Bearer " + GoFunApplication.token).enqueue(new Callback<List<Activity>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Activity>> call, @NonNull Response<List<Activity>> response) {
+                List<Activity> list = response.body();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        initSpinner(list);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Activity>> call, @NonNull Throwable t) {
+                t.printStackTrace();
+            }
+        });
+        return null;
+    }
+
+    /*
+    创建活动
+    */
+    private void addActivity() {
+        RecommendService recommendService = HttpRequest.create(RecommendService.class);
+        recommendService.addActivity(GoFunApplication.token,addActivityItem).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code() == 200){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.show(getApplicationContext(),"发起活动成功");
+                        }
+                    });
+                }else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.show(getApplicationContext(),"发起活动失败");
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
