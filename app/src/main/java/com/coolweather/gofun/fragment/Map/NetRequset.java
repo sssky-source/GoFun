@@ -111,7 +111,6 @@ public class NetRequset {
             @Override
             public void onResponse(Call<List<CommentItem>> call, Response<List<CommentItem>> response) {
                 List<CommentItem> list = response.body();
-                Log.d("com", String.valueOf(list.size()));
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("commentlist",(Serializable)list);
                 Message message = new Message();

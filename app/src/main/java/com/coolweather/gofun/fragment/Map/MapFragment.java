@@ -481,17 +481,6 @@ public class MapFragment extends Fragment implements
     private void addMarker(LatLng latLng,String img,int indentify) {
         //显示浮动按钮
         fabClearMarker.show();
-        //添加标点
-//        Marker marker = aMap.addMarker(new MarkerOptions().position(latLng).title("标题").snippet("详细信息"));
-//        marker.showInfoWindow();
-//        //设置标点的绘制动画效果
-//        Animation animation = new RotateAnimation(marker.getRotateAngle(),marker.getRotateAngle()+180,0,0,0);
-//        long duration = 1000L;
-//        animation.setDuration(duration);
-//        animation.setInterpolator(new LinearInterpolator());
-//        marker.setAnimation(animation);
-//        marker.startAnimation();
-//        markerList.add(marker);
         View view = LayoutInflater.from(getContext()).inflate(R.layout.marker_layout,null);
         ImageView userPic = view.findViewById(R.id.iv_head);
         Glide.with(getContext()).load(img).into(userPic);
@@ -502,7 +491,6 @@ public class MapFragment extends Fragment implements
         markerOptions.icon(BitmapDescriptorFactory.fromView(view));
         Marker marker = aMap.addMarker(markerOptions);
         markerList.add(marker);
-        Log.d("i","00000000000");
     }
 
 

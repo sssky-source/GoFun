@@ -175,7 +175,6 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                     @Override
                     public void OkEvent() {
                         applyRequest(recommendService, item.getId());
-
                     }
                 });
                 break;

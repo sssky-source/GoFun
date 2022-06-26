@@ -23,6 +23,7 @@ import com.coolweather.gofun.R;
 import com.coolweather.gofun.activity.DetailInfoActivity;
 import com.coolweather.gofun.bean.CommentItem;
 import com.coolweather.gofun.fragment.Map.NetRequset;
+import com.coolweather.gofun.fragment.Recommend.RecommendActivityDetail;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 import com.coolweather.gofun.util.BitmapUtils;
 
@@ -148,7 +149,8 @@ public class InfoCard extends Dialog implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(context, DetailInfoActivity.class);
+        Intent intent = new Intent(context, RecommendActivityDetail.class);
+        intent.putExtra("detail_item",activityItem);
         context.startActivity(intent);
     }
 
