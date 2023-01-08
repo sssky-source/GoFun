@@ -4,8 +4,10 @@
     <string name="nav_recommand">推荐</string>
     <string name="nav_message">消息</string>
     <string name="nav_mine">我的</string>
+    <string name="nav_dynamics">动态</string>
     <string name="nav_launch">发布</string>
     <string name="takephoto">拍照</string>
+    <string name="num">数量</string>
     <string name="selectfromalbum">从相册中选择</string>
     <string name="cancel">取消</string>
     <string name="launch">发布</string>

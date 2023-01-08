@@ -31,6 +31,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private RadioButton rb_recommand;
     private RadioButton rb_message;
     private RadioButton rb_mine;
+    private RadioButton rb_dynamics;
     private CustomViewPager vpager;
     private ImageView imageView;
    // private String token;
@@ -42,6 +43,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     public static final int PAGE_TWO = 1;
     public static final int PAGE_THREE = 2;
     public static final int PAGE_FOUR = 3;
+    public static final int PAGE_FIVE = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         rb_recommand = findViewById(R.id.rb_recommand);
         rb_message = findViewById(R.id.rb_message);
         rb_mine = findViewById(R.id.rb_mine);
+        rb_dynamics = findViewById(R.id.rb_dynamics);
         imageView = findViewById(R.id.rbAdd);
         rg_all.setOnCheckedChangeListener(this);
         vpager.setAdapter(myFragmentPagerAdapter);
@@ -92,6 +95,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             case R.id.rb_mine:
                 vpager.setCurrentItem(PAGE_FOUR);
                 break;
+            case R.id.rb_dynamics:
+                vpager.setCurrentItem(PAGE_FIVE);
             default:
         }
     }
@@ -121,6 +126,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 break;
             case PAGE_FOUR:
                 rb_mine.setChecked(true);
+            case PAGE_FIVE:
+                rb_dynamics.setChecked(true);
                 break;
         }
     }

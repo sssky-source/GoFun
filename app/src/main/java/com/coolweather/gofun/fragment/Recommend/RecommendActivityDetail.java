@@ -86,6 +86,9 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     private AMap aMap = null;
     //位置更改监听
     private OnLocationChangedListener mListener;
+    //收藏
+    private ImageView collect;
+    private TextView collectNum;
 
 
     @Override
@@ -105,8 +108,27 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
 
         initial();
 
+        //评论
         requestCommend();
         addMark();
+
+        //获取收藏人数
+        requestStarActivityNum();
+    }
+
+    private void requestStarActivityNum() {
+        recommendService.getStarActivityNum("Bearer " + GoFunApplication.token).enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                collectNum.setText(response.body().toString());
+                Log.d("111020","111:"+ response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     private void requestCommend() {
@@ -148,6 +170,8 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         checkCommend = findViewById(R.id.ActivityDetail_CheckCommend);
         addCommend = findViewById(R.id.ActivityDetail_AddCommendWays);
         recyclerView = findViewById(R.id.ActivityDetail_Commend);
+        collect = findViewById(R.id.collect);
+        collectNum = findViewById(R.id.collect_Num);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(RecommendActivityDetail.this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -155,6 +179,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         addCommend.setOnClickListener(this);
         checkCommend.setOnClickListener(this);
         apply.setOnClickListener(this);
+        collect.setOnClickListener(this);
 
         Glide.with(RecommendActivityDetail.this).load(item.getImage()).into(creatorImage);
         Glide.with(RecommendActivityDetail.this).load(person_LitePal.getImage()).into(userImage);
@@ -164,6 +189,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         introduction.setText(item.getIntroduction());
         startTime.setText(item.getStarttime());
         endTime.setText(item.getEndtime());
+
     }
 
     @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
@@ -227,11 +253,32 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                     }
                 });
                 break;
+
+            //收藏
+            case R.id.collect:
+                //更改收藏和取消收藏图标
+                recommendService.starActivity("Bearer " + GoFunApplication.token, item.getId()).enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        ToastUtils.show(RecommendActivityDetail.this,"收藏成功");
+                        collect.setImageDrawable(getDrawable(R.drawable.collect_press));
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+
+
+                //取消收藏
+                //collect.setImageDrawable(getDrawable(R.drawable.collect));
+                break;
         }
     }
 
 
-
+    //申请加入活动
     private void applyRequest(RecommendService recommendService, int id) {
         recommendService.applyActivity("Bearer " + GoFunApplication.token, id).enqueue(new Callback<ResponseBody>() {
             @Override

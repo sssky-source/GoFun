@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.coolweather.gofun.activity.MainActivity;
+import com.coolweather.gofun.fragment.Dynamics.DynamicsFragment;
 import com.coolweather.gofun.fragment.Map.MapFragment;
 import com.coolweather.gofun.fragment.Message.MessageFragment;
 import com.coolweather.gofun.fragment.Mine.MineFragment;
@@ -17,12 +18,13 @@ import com.coolweather.gofun.fragment.TestFragment4;
 
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private final int PAGER_COUNT = 4;
+    private final int PAGER_COUNT = 5;
 
     private MapFragment mapfragment;
     private RecommendFragment recommendFragment;
     private MessageFragment messagefragment;
     private MineFragment minefragment;
+    private DynamicsFragment dynamicsfragment;
     private TestFragment testFragment;
     private TestFragment1 testFragment1;
     private TestFragment2 testFragment2;
@@ -34,6 +36,8 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
         recommendFragment = new RecommendFragment();
         messagefragment = new MessageFragment();
         minefragment = new MineFragment();
+        dynamicsfragment = new DynamicsFragment();
+
         testFragment = new TestFragment();
         testFragment1 = new TestFragment1();
         testFragment2 = new TestFragment2();
@@ -47,10 +51,10 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case MainActivity.PAGE_ONE:
                 fragment = mapfragment;
-              //  fragment = testFragment;
+                //  fragment = testFragment;
                 break;
             case MainActivity.PAGE_TWO:
-            //    fragment = testFragment2;
+                //    fragment = testFragment2;
                 fragment = recommendFragment;
                 break;
             case MainActivity.PAGE_THREE:
@@ -59,7 +63,9 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
             case MainActivity.PAGE_FOUR:
                 fragment = minefragment;
                 break;
-                default:
+            case MainActivity.PAGE_FIVE:
+                fragment = dynamicsfragment;
+            default:
         }
         return fragment;
 

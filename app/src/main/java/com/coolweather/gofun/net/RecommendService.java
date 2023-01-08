@@ -9,6 +9,7 @@ import java.util.List;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -41,4 +42,19 @@ public interface RecommendService {
     @POST("Activity/addActivity")
     Call<ResponseBody> addActivity(@Header("Authorization") String token, @Body AddActivityItem activityItem);
 
+    //收藏活动
+    @POST("Activity/starActivity")
+    Call<ResponseBody> starActivity(@Header("Authorization") String token,@Query("activityId") int id);
+
+    //取消收藏
+    @DELETE("Activity/unStarActivity")
+    Call<ResponseBody> unStarActivity(@Header("Authorization") String token,@Query("activityId") int id);
+
+    //获取收藏列表
+    @GET("Activity/getStarActivities")
+    Call<List<ActivityItem>> getStarActivities(@Header("Authorization") String token);
+
+    //单个活动收藏总数
+    @GET("Activity/getStarActivityNum")
+    Call<Integer> getStarActivityNum(@Header("Authorization") String token);
 }
