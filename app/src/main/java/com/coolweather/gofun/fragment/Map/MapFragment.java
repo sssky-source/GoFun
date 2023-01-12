@@ -3,6 +3,7 @@ package com.coolweather.gofun.fragment.Map;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
@@ -23,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -67,6 +69,7 @@ import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.coolweather.gofun.R;
+import com.coolweather.gofun.activity.RouteActivity;
 import com.coolweather.gofun.fragment.Map.adapter.TypeAdapter;
 import com.coolweather.gofun.fragment.Map.bean.TypeItem;
 import com.coolweather.gofun.fragment.Map.widget.InfoCard;
@@ -218,12 +221,7 @@ public class MapFragment extends Fragment implements
         initLocation();
         //初始化地图
         initMap(savedInstanceState);
-        Log.d("ss","3333333333");
-
-
         checkingAndroidVersion();
-
-
     }
 
     /**
@@ -653,14 +651,17 @@ public class MapFragment extends Fragment implements
             //获取输入框的值
             String address = edSearch.getText().toString().trim();
             if (address == null || address.isEmpty()) {
-                ToastUtils.show(getContext(),"请输入地址");
+                Toast.makeText(getContext(),"请输入地址",Toast.LENGTH_SHORT).show();
             }else {
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                //隐藏软键盘
-                imm.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);
-                // name表示地址，第二个参数表示查询城市，中文或者中文全拼，citycode、adcode
-                GeocodeQuery query = new GeocodeQuery(address,city);
-                geocodeSearch.getFromLocationNameAsyn(query);
+//                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                //隐藏软键盘
+//                imm.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);
+//                // name表示地址，第二个参数表示查询城市，中文或者中文全拼，citycode、adcode
+//                GeocodeQuery query = new GeocodeQuery(address,city);
+//                geocodeSearch.getFromLocationNameAsyn(query);
+                Intent intent = new Intent(getActivity(), RouteActivity.class);
+                intent.putExtra("address",address);
+                startActivity(intent);
             }
             return true;
         }
