@@ -104,7 +104,9 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         aMap = mapView.getMap();
         //接受传递的list
         Intent intent = getIntent();
+
         item = (ActivityItem) intent.getSerializableExtra("detail_item");
+        Log.d("111020","star：" + item.getStar());
 
         initial();
 
@@ -114,10 +116,18 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
 
         //获取收藏人数
         requestStarActivityNum();
+
+        //判断isStar 是否已经收藏
+        if (item.getStar()){
+            //已经收藏则图标改位收藏
+            collect.setImageDrawable(getDrawable(R.drawable.collect_press));
+            Log.d("111020","isStar");
+        }
     }
 
+    //获取收藏人数
     private void requestStarActivityNum() {
-        recommendService.getStarActivityNum("Bearer " + GoFunApplication.token).enqueue(new Callback<Integer>() {
+        recommendService.getStarActivityNum("Bearer " + GoFunApplication.token,item.getId()).enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 collectNum.setText(response.body().toString());
@@ -131,6 +141,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         });
     }
 
+    //评论
     private void requestCommend() {
         commentService.getComment("Bearer " + GoFunApplication.token, item.getId()).enqueue(new Callback<List<PersonComment>>() {
             @Override
@@ -257,22 +268,43 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
             //收藏
             case R.id.collect:
                 //更改收藏和取消收藏图标
-                recommendService.starActivity("Bearer " + GoFunApplication.token, item.getId()).enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        ToastUtils.show(RecommendActivityDetail.this,"收藏成功");
-                        collect.setImageDrawable(getDrawable(R.drawable.collect_press));
-                    }
+                //原本未收藏
+                if (!item.getStar()){
+                    recommendService.starActivity("Bearer " + GoFunApplication.token, item.getId()).enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            ToastUtils.show(RecommendActivityDetail.this,"收藏成功");
+                            Log.d("111020","afterStar：" + item.getStar());
+                            Log.d("111020","code:" + response.code());
+                            //isStar状态没有改变
+                            collect.setImageDrawable(getDrawable(R.drawable.collect_press));
+                            //collectNum.setText((Integer.parseInt(collectNum.toString())+1));
+                            collectNum.setText(String.valueOf(Integer.parseInt(collectNum.getText().toString())+1));
+                            //setText()方法不能传int类型参数 会被认为是资源的id int类型的数据需要转为string类型
+                        }
 
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        t.printStackTrace();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
+                }else if (item.getStar()){
+                    //取消收藏
+                    //collect.setImageDrawable(getDrawable(R.drawable.collect));
+                    recommendService.unStarActivity("Bearer " + GoFunApplication.token, item.getId()).enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            ToastUtils.show(RecommendActivityDetail.this,"取消收藏");
+                            collect.setImageDrawable(getDrawable(R.drawable.collect));
+                            collectNum.setText(String.valueOf(Integer.parseInt(collectNum.getText().toString())-1));
+                        }
 
-
-                //取消收藏
-                //collect.setImageDrawable(getDrawable(R.drawable.collect));
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
+                }
                 break;
         }
     }

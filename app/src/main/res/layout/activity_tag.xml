@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.TagActivity">
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:chipSpacingHorizontal="20dp">
+
+        <com.google.android.material.chip.Chip
+            app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="222222"
+            android:textSize="20sp"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:checked="true" />
+
+        <com.google.android.material.chip.Chip
+            android:checkable="true"
+            app:chipIcon="@mipmap/dynamics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="333" />
+
+        <com.google.android.material.chip.Chip
+            android:checkable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="444" />
+    </com.google.android.material.chip.ChipGroup>
+
+
+</LinearLayout>

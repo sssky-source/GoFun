@@ -27,8 +27,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustPan">
-        <activity android:name=".activity.RouteDetailActivity"></activity>
-        <activity android:name=".activity.RouteActivity" />
+        <activity
+            android:name=".activity.TagActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".fragment.Mine.create.ApprovedActivity"
             android:exported="false" />

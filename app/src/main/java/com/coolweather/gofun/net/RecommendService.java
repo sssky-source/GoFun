@@ -56,5 +56,5 @@ public interface RecommendService {
 
     //单个活动收藏总数
     @GET("Activity/getStarActivityNum")
-    Call<Integer> getStarActivityNum(@Header("Authorization") String token);
+    Call<Integer> getStarActivityNum(@Header("Authorization") String token ,@Query("activityId") int id);
 }

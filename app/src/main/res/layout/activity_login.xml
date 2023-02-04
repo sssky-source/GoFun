@@ -213,6 +213,11 @@
                     app:civ_border_width="2dp" />
             </LinearLayout>
         </LinearLayout>
+
+        <Button
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:id="@+id/test"/>
     </LinearLayout>
 
 

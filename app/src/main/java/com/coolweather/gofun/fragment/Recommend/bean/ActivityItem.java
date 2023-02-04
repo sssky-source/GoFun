@@ -18,6 +18,7 @@ public class ActivityItem implements Serializable {
     private Integer typeID;
     private String type;
     private String username;
+    private Boolean isStar;
 
     public Integer getId() {
         return id;
@@ -137,5 +138,13 @@ public class ActivityItem implements Serializable {
 
     public void setY(Double y) {
         this.y = y;
+    }
+
+    public Boolean getStar() {
+        return isStar;
+    }
+
+    public void setStar(Boolean star) {
+        isStar = star;
     }
 }

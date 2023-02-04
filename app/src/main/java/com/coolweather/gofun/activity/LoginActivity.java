@@ -49,6 +49,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private LinearLayout llLogin;
     private CheckBox checkBox;
 
+    private Button test;
+
     private CircleImageView QQ_Login,V_Login;
     SQLiteDatabase db;
     private PersonService personService;
@@ -83,6 +85,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             accountLoginName.setText(searchUser().getEmail());
             accountLoginPassword.setText(searchUser().getPassword());
         }
+
+        test = findViewById(R.id.test);
+        test.setOnClickListener(this);
     }
 
 
@@ -145,6 +150,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.QQ_Login:
             case R.id.V_Login:
               //  ToastUtils.show(this,"敬请期待");
+                break;
+            case R.id.test:
+                Intent test = new Intent(LoginActivity.this,TagActivity.class);
+                startActivity(test);
                 break;
             default:
                 break;
