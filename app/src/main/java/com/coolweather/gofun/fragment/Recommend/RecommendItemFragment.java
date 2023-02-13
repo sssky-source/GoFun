@@ -79,14 +79,17 @@ public class RecommendItemFragment extends Fragment {
         request(recommendService);
     }
 
+    //根据活动类型ID获取活动条目
     private void request(RecommendService recommendService) {
-        recommendService.getActivityItem("Bearer " + token, id).enqueue(new Callback<List<ActivityItem>>() {
+        recommendService.getActivityItemByType("Bearer " + token, id).enqueue(new Callback<List<ActivityItem>>() {
             @Override
             public void onResponse(Call<List<ActivityItem>> call, Response<List<ActivityItem>> response) {
                 List<ActivityItem> list = response.body();
                 recommendItemAdapter = new RecommendItemAdapter(R.layout.activity_recommend_item_detail, list);
                 recyclerView.setAdapter(recommendItemAdapter);
                 swipeRefreshLayout.setRefreshing(false);
+                Log.d("99999",":" + response.code() );
+                Log.d("99999",":" + list.size() );
 
                 //封装一个确认和取消的提示框
                 recommendItemAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
@@ -104,11 +107,20 @@ public class RecommendItemFragment extends Fragment {
                                 });
                                 break;
                             case R.id.activity_detailCard:
-                                ActivityItem activityItem = list.get(position);
-                                Intent detail = new Intent(getActivity(), RecommendActivityDetail.class);
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable("detail_item",activityItem);
-                                detail.putExtras(bundle);
+
+                                /**
+                                 * 将ActivityItem 整个活动信息传入
+                                 * ActivityItem activityItem = list.get(position);
+                                 * Intent detail = new Intent(getActivity(), RecommendActivityDetail.class);
+                                 * Bundle bundle = new Bundle();
+                                 * bundle.putSerializable("detail_item",activityItem);
+                                 * detail.putExtras(bundle);
+                                 */
+
+                                Intent detail = new Intent(getActivity(),RecommendActivityDetail.class);
+                                //传入活动ID
+                                int activityId = list.get(position).getId();
+                                detail.putExtra("activityId",activityId);
                                 startActivity(detail);
                                 break;
                         }

@@ -76,10 +76,10 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view =  inflater.inflate(R.layout.fragment_mine, container, false);
+        view =  inflater.inflate(R.layout.fragment_newmine, container, false);
         personLitePal  = LitePal.findFirst(PersonLitePal.class);
-        initView();
-        setListeners();
+        //initView();
+        //setListeners();
         return view;
     }
 

@@ -22,6 +22,7 @@
             android:layout_marginBottom="7dp">
 
             <RelativeLayout
+                android:id="@+id/mine_help"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -46,6 +47,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/mine_about"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -75,7 +77,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <RelativeLayout
+                android:id="@+id/mine_out"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -100,6 +104,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/mine_set"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">

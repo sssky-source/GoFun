@@ -69,6 +69,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     private CommentService commentService;
     //活动详情信息列表
     private ActivityItem item;
+    private int activityId;
     //活动信息详情
     private CircleImageView creatorImage, userImage;  //创建者头像
     //创建者名字，活动类型，活动标题，介绍，开始结束时间
@@ -105,18 +106,26 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         //接受传递的list
         Intent intent = getIntent();
 
-        item = (ActivityItem) intent.getSerializableExtra("detail_item");
-        Log.d("111020","star：" + item.getStar());
+        //item = (ActivityItem) intent.getSerializableExtra("detail_item");
+        activityId = intent.getIntExtra("activityId",0);
+        //Log.d("111020","star：" + item.getStar());
 
         initial();
 
+        //根据传入的活动id获取活动详细信息
+        requestActivityById();
+
         //评论
         requestCommend();
+
         addMark();
 
         //获取收藏人数
         requestStarActivityNum();
 
+        /**
+         * 怎么判断用户是否已经收藏活动了呢？
+         */
         //判断isStar 是否已经收藏
         if (item.getStar()){
             //已经收藏则图标改位收藏
@@ -125,9 +134,24 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         }
     }
 
+    //根据传入的活动id获取活动详细信息
+    private void requestActivityById() {
+        recommendService.getActivityItemById("Bearer " + GoFunApplication.token,activityId).enqueue(new Callback<ActivityItem>() {
+            @Override
+            public void onResponse(Call<ActivityItem> call, Response<ActivityItem> response) {
+                item = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<ActivityItem> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
     //获取收藏人数
     private void requestStarActivityNum() {
-        recommendService.getStarActivityNum("Bearer " + GoFunApplication.token,item.getId()).enqueue(new Callback<Integer>() {
+        recommendService.getStarActivityNum("Bearer " + GoFunApplication.token,activityId).enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 collectNum.setText(response.body().toString());
@@ -143,7 +167,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
 
     //评论
     private void requestCommend() {
-        commentService.getComment("Bearer " + GoFunApplication.token, item.getId()).enqueue(new Callback<List<PersonComment>>() {
+        commentService.getComment("Bearer " + GoFunApplication.token, activityId).enqueue(new Callback<List<PersonComment>>() {
             @Override
             public void onResponse(@NonNull Call<List<PersonComment>> call, @NonNull Response<List<PersonComment>> response) {
                 list = response.body();
@@ -207,14 +231,17 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            //活动申请
             case R.id.ActivityDetail_Apply:
                 DialogUtils.getInstance().showDialog(RecommendActivityDetail.this, "确认加入活动？", new DialogUtils.DialogCallBack() {
                     @Override
                     public void OkEvent() {
-                        applyRequest(recommendService, item.getId());
+                        applyRequest(recommendService, activityId);
                     }
                 });
                 break;
+
+                //评论
             case R.id.ActivityDetail_CheckCommend:
                 Intent intent = new Intent(RecommendActivityDetail.this, RecommendCommendActivity.class);
                 Bundle bundle = new Bundle();
@@ -224,6 +251,8 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
+
+                //在此进行评论
             case R.id.ActivityDetail_AddCommendWays:
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.dialog);
                 View dialogView = getLayoutInflater().inflate(R.layout.commend_bottomsheet,null,false);
@@ -248,7 +277,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                     private void addCommendPost(String commend) {
                         PersonAddComment personAddComment = new PersonAddComment();
                         personAddComment.setCommentInfo(commend);
-                        personAddComment.setActivity_id(item.getId());
+                        personAddComment.setActivity_id(activityId);
                         commentService.addComment("Bearer " + GoFunApplication.token,personAddComment).enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -270,7 +299,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                 //更改收藏和取消收藏图标
                 //原本未收藏
                 if (!item.getStar()){
-                    recommendService.starActivity("Bearer " + GoFunApplication.token, item.getId()).enqueue(new Callback<ResponseBody>() {
+                    recommendService.starActivity("Bearer " + GoFunApplication.token, activityId).enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             ToastUtils.show(RecommendActivityDetail.this,"收藏成功");
@@ -281,6 +310,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                             //collectNum.setText((Integer.parseInt(collectNum.toString())+1));
                             collectNum.setText(String.valueOf(Integer.parseInt(collectNum.getText().toString())+1));
                             //setText()方法不能传int类型参数 会被认为是资源的id int类型的数据需要转为string类型
+                            item.setStar(true);
                         }
 
                         @Override
@@ -291,12 +321,13 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                 }else if (item.getStar()){
                     //取消收藏
                     //collect.setImageDrawable(getDrawable(R.drawable.collect));
-                    recommendService.unStarActivity("Bearer " + GoFunApplication.token, item.getId()).enqueue(new Callback<ResponseBody>() {
+                    recommendService.unStarActivity("Bearer " + GoFunApplication.token, activityId).enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             ToastUtils.show(RecommendActivityDetail.this,"取消收藏");
                             collect.setImageDrawable(getDrawable(R.drawable.collect));
                             collectNum.setText(String.valueOf(Integer.parseInt(collectNum.getText().toString())-1));
+                            item.setStar(false);
                         }
 
                         @Override

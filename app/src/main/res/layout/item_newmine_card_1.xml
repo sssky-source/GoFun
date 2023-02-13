@@ -1,50 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="15dp"
     android:layout_marginStart="15dp"
-    android:layout_marginEnd="15dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_marginTop="15dp"
+    android:layout_marginEnd="15dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="160dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="8dp"
         app:cardCornerRadius="15dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="50dp" />
 
             <TextView
                 android:id="@+id/mine_username"
-                android:layout_marginTop="12dp"
-                android:layout_below="@id/view"
-                android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/view"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
                 android:text="名字"
-                android:textSize="20sp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mine_username"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/mine_tag"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </LinearLayout>
+
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
     <RelativeLayout
-        android:elevation="15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:elevation="15dp">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_user"
+            android:id="@+id/mine_userImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerInParent="true"
@@ -55,14 +76,15 @@
             app:strokeWidth="2dp" />
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/mine_sex"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignEnd="@+id/iv_user"
-            android:layout_alignBottom="@+id/iv_user"
-            app:shapeAppearanceOverlay="@style/circleImageStyle"
-            android:src="@drawable/minewrite"
+            android:layout_alignEnd="@+id/mine_userImage"
+            android:layout_alignBottom="@+id/mine_userImage"
             android:background="#666666"
             android:padding="1dp"
+            android:src="@drawable/minewrite"
+            app:shapeAppearanceOverlay="@style/circleImageStyle"
             app:strokeColor="#FFF"
             app:strokeWidth="2dp" />
     </RelativeLayout>

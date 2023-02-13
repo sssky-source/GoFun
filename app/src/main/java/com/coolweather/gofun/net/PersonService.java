@@ -6,6 +6,7 @@ import com.coolweather.gofun.fragment.Mine.bean.GetApplyID;
 import com.coolweather.gofun.fragment.Mine.bean.Person;
 import com.coolweather.gofun.fragment.Mine.bean.PersonActivityItem;
 import com.coolweather.gofun.fragment.Mine.bean.PersonChange;
+import com.coolweather.gofun.fragment.Mine.bean.UserTag;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 
 import java.util.List;
@@ -60,4 +61,8 @@ public interface PersonService {
     //不通过申请
     @PUT("Activity/unpassApply")
     Call<ResponseBody> unPassApply(@Header("Authorization") String token,@Query("applyId") int id);
+
+    //个人标签
+    @GET("User/getUserTag")
+    Call<List<UserTag>> getUserTag(@Header("Authorization") String token,@Query("userId") int id);
 }
