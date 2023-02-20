@@ -88,8 +88,8 @@ public class RecommendItemFragment extends Fragment {
                 recommendItemAdapter = new RecommendItemAdapter(R.layout.activity_recommend_item_detail, list);
                 recyclerView.setAdapter(recommendItemAdapter);
                 swipeRefreshLayout.setRefreshing(false);
-                Log.d("99999",":" + response.code() );
-                Log.d("99999",":" + list.size() );
+                //Log.d("99999",":" + response.code() );
+                //Log.d("99999",":" + list.size() );
 
                 //封装一个确认和取消的提示框
                 recommendItemAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {

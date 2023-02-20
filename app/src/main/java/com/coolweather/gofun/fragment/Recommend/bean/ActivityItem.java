@@ -2,6 +2,7 @@ package com.coolweather.gofun.fragment.Recommend.bean;
 
 import java.io.Serializable;
 
+//活动信息
 public class ActivityItem implements Serializable {
     private Integer id;
     private Integer userid;

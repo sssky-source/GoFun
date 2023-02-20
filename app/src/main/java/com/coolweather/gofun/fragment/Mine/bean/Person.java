@@ -2,6 +2,7 @@ package com.coolweather.gofun.fragment.Mine.bean;
 
 import org.litepal.crud.LitePalSupport;
 
+//个人信息
 public class Person  {
 
     private Integer id;

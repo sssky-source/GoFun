@@ -1,5 +1,6 @@
 package com.coolweather.gofun.fragment.Mine.bean;
 
+//个人活动
 public class PersonActivityItem {
 
     private Integer activity_id;    //活动id

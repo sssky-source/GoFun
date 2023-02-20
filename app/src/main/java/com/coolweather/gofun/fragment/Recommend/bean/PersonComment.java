@@ -2,6 +2,7 @@ package com.coolweather.gofun.fragment.Recommend.bean;
 
 import java.io.Serializable;
 
+//评论
 public class PersonComment implements Serializable {
 
     private Integer comment_id;

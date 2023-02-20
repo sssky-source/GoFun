@@ -1,5 +1,6 @@
 package com.coolweather.gofun.fragment.Recommend.bean;
 
+//推荐活动 活动类型
 public class Activity {
     private int id;
     private String type1;

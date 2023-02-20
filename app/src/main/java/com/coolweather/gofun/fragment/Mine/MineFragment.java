@@ -40,10 +40,6 @@ import static android.app.Activity.RESULT_OK;
 
 import org.litepal.LitePal;
 
-/**
- * @author cyt on 2022/04/21.
- */
-
 
 public class MineFragment extends Fragment implements View.OnClickListener{
 

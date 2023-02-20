@@ -1,5 +1,6 @@
 package com.coolweather.gofun.fragment.Recommend.bean;
 
+//添加评论
 public class PersonAddComment {
 
     private Integer activity_id;

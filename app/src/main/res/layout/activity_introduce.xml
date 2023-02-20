@@ -1,9 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.Mine.introduce.Introduce">
+    tools:context=".fragment.Mine.introduce.Introduce"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:background="@color/pink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="账号资料"
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <!--头像-->
+    <LinearLayout
+        android:padding="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="头像"
+            android:layout_gravity="center_vertical"/>
+        <View
+            android:layout_width="250dp"
+            android:layout_height="match_parent"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/intro_img"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            app:shapeAppearanceOverlay="@style/circleImageStyle" />
+
+    </LinearLayout>
+
+    <!--昵称-->
+    <LinearLayout
+        android:padding="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="昵称"
+            android:layout_gravity="center_vertical"/>
+        <View
+            android:layout_width="250dp"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:gravity="end"
+            android:id="@+id/intro_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!--性别-->
+    <LinearLayout
+        android:padding="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="性别"
+            android:layout_gravity="center_vertical"/>
+        <View
+            android:layout_width="250dp"
+            android:layout_height="match_parent"/>
+
+        <EditText
+            android:background="@null"
+            android:id="@+id/intro_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!--年龄-->
+    <LinearLayout
+        android:padding="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="年龄"
+            android:layout_gravity="center_vertical"/>
+        <View
+            android:layout_width="250dp"
+            android:layout_height="match_parent"/>
+
+        <EditText
+            android:background="@null"
+            android:id="@+id/intro_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!--简介-->
+    <LinearLayout
+        android:padding="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="简介"
+            android:layout_gravity="center_vertical"/>
+        <View
+            android:layout_width="250dp"
+            android:layout_height="match_parent"/>
+
+        <EditText
+            android:background="@null"
+            android:id="@+id/intro_brief"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/intro_save"
+        android:layout_margin="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="保存修改"/>
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 package com.coolweather.gofun.fragment.Mine.bean;
 
+//个人标签
 public class UserTag {
     private Integer id;
     private Integer tagId;

@@ -1,5 +1,6 @@
 package com.coolweather.gofun.fragment.Mine.bean;
 
+//创建
 public class CreateBean {
     private Integer id;
     private Integer userid;

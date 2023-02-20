@@ -1,5 +1,6 @@
 package com.coolweather.gofun.fragment.Mine.bean;
 
+//修改个人信息
 public class PersonChange {
     private String sex;
     private Integer age;
