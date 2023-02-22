@@ -174,9 +174,9 @@ public class RecommendItemFragment extends Fragment {
                  */
 
                 //是否打开自动加载更多
-                recommendItemAdapter.getLoadMoreModule().setAutoLoadMore(true);
+                recommendItemAdapter.getLoadMoreModule().setAutoLoadMore(false);
                 //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多
-                recommendItemAdapter.getLoadMoreModule().setEnableLoadMoreIfNotFullPage(true);
+                recommendItemAdapter.getLoadMoreModule().setEnableLoadMoreIfNotFullPage(false);
                 Log.d("size", "After size:" + list.size());
                 lastId = list.get(list.size()-1).getId();
                 Log.d("size", "lastId:" + lastId);
