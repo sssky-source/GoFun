@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.module.LoadMoreModule;
+import com.chad.library.adapter.base.module.UpFetchModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.coolweather.gofun.R;
 
@@ -18,7 +20,7 @@ import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 
 import java.util.List;
 
-public class RecommendItemAdapter extends BaseQuickAdapter<ActivityItem, BaseViewHolder> {
+public class RecommendItemAdapter extends BaseQuickAdapter<ActivityItem, BaseViewHolder> implements LoadMoreModule{
     public RecommendItemAdapter(int layoutResId, @Nullable List<ActivityItem> data) {
         super(layoutResId, data);
         //点击事件添加

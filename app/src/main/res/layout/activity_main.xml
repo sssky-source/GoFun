@@ -70,12 +70,6 @@
 
         <RadioButton
             style="@style/Custom.TabRadioButton"
-            android:id="@+id/rb_dynamics"
-            android:text="@string/nav_dynamics"
-            android:drawableTop="@drawable/nav_dynamics_selector"/>
-
-        <RadioButton
-            style="@style/Custom.TabRadioButton"
             android:id="@+id/rb_mine"
             android:drawableTop="@drawable/nav_mine_selector"
             android:text="@string/nav_mine"/>

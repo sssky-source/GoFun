@@ -118,20 +118,10 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         //评论
         requestCommend();
 
-        addMark();
 
         //获取收藏人数
         requestStarActivityNum();
 
-        /**
-         * 怎么判断用户是否已经收藏活动了呢？
-         */
-        //判断isStar 是否已经收藏
-        if (item.getStar()){
-            //已经收藏则图标改位收藏
-            collect.setImageDrawable(getDrawable(R.drawable.collect_press));
-            Log.d("111020","isStar");
-        }
     }
 
     //根据传入的活动id获取活动详细信息
@@ -140,6 +130,25 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
             @Override
             public void onResponse(Call<ActivityItem> call, Response<ActivityItem> response) {
                 item = response.body();
+                Glide.with(RecommendActivityDetail.this).load(item.getImage()).into(creatorImage);
+                Glide.with(RecommendActivityDetail.this).load(person_LitePal.getImage()).into(userImage);
+                userName.setText(item.getUsername());
+                type.setText("[" + item.getType() + "]");
+                title.setText(item.getTitle());
+                introduction.setText(item.getIntroduction());
+                startTime.setText(item.getStarttime());
+                endTime.setText(item.getEndtime());
+                addMark();
+
+                /**
+                 * 怎么判断用户是否已经收藏活动了呢？
+                 */
+                //判断isStar 是否已经收藏
+                if (item.getStar()){
+                    //已经收藏则图标改位收藏
+                    collect.setImageDrawable(getDrawable(R.drawable.collect_press));
+                    Log.d("111020","isStar");
+                }
             }
 
             @Override
@@ -215,15 +224,6 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         checkCommend.setOnClickListener(this);
         apply.setOnClickListener(this);
         collect.setOnClickListener(this);
-
-        Glide.with(RecommendActivityDetail.this).load(item.getImage()).into(creatorImage);
-        Glide.with(RecommendActivityDetail.this).load(person_LitePal.getImage()).into(userImage);
-        userName.setText(item.getUsername());
-        type.setText("[" + item.getType() + "]");
-        title.setText(item.getTitle());
-        introduction.setText(item.getIntroduction());
-        startTime.setText(item.getStarttime());
-        endTime.setText(item.getEndtime());
 
     }
 

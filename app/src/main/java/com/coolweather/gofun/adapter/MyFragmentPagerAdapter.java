@@ -24,7 +24,6 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     private RecommendFragment recommendFragment;
     private MessageFragment messagefragment;
     private MineFragment minefragment;
-    private DynamicsFragment dynamicsfragment;
     private TestFragment testFragment;
     private TestFragment1 testFragment1;
     private TestFragment2 testFragment2;
@@ -36,7 +35,6 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
         recommendFragment = new RecommendFragment();
         messagefragment = new MessageFragment();
         minefragment = new MineFragment();
-        dynamicsfragment = new DynamicsFragment();
 
         testFragment = new TestFragment();
         testFragment1 = new TestFragment1();
@@ -63,8 +61,6 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
             case MainActivity.PAGE_FOUR:
                 fragment = minefragment;
                 break;
-            case MainActivity.PAGE_FIVE:
-                fragment = dynamicsfragment;
             default:
         }
         return fragment;

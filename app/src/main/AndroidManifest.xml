@@ -57,6 +57,7 @@
             android:name=".fragment.Recommend.RecommendActivityDetail"
             android:exported="false" />
         <activity android:name=".activity.TestActivity" />
+        <activity android:name=".activity.RouteActivity"/>
         <activity
             android:name=".activity.LaunchActivity"
             android:theme="@style/AppThemeone"

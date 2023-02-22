@@ -32,7 +32,7 @@ public interface RecommendService {
 
     //根据活动类型ID获取活动条目
     @GET("Activity/getActivityByType")
-    Call<List<ActivityItem>> getActivityItemByType(@Header("Authorization") String token, @Query("typeId") int id);
+    Call<List<ActivityItem>> getActivityItemByType(@Header("Authorization") String token, @Query("typeId") int typeId,@Query("lastId") int lastId);
 
     //根据活动ID获取活动信息
     @GET("Activity/getActivityById")
