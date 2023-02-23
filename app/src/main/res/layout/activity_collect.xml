@@ -5,28 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.Mine.apply.PersonActivity">
+    tools:context=".fragment.Mine.apply.CollectActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <!-- app:layout_scrollFlags="scroll|enterAlways|snap"
-                用这句可以 滑动时候一起隐藏-->
+        用这句可以 滑动时候一起隐藏-->
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/Join_Toolbar"
+            android:id="@+id/Collect_Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white">
-
             <TextView
-                android:id="@+id/Join_title"
+                android:id="@+id/Collect_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textSize="16sp"/>
         </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -36,15 +36,15 @@
         android:layout_height="match_parent"
         android:background="@drawable/recommend_color"
         android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/Join_SwipeRefreshLayout"
+            android:id="@+id/Collect_SwipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/Join_RecyclerView"
+                android:id="@+id/Collect_RecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#F1F2F3"

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,6 +50,9 @@ public class MessageFragment extends Fragment {
     private JoinActivityAdapter joinActivityAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    //空布局
+    private LinearLayout empty;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,6 +72,7 @@ public class MessageFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         swipeRefreshLayout = view.findViewById(R.id.message_SwipeRefreshLayout);
         swipeRefreshLayout.setColorSchemeResources(R.color.pink);
+        empty = view.findViewById(R.id.message_empty);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -87,6 +92,10 @@ public class MessageFragment extends Fragment {
                 joinActivityAdapter = new JoinActivityAdapter(R.layout.activity_message_item,list);
                 recyclerView.setAdapter(joinActivityAdapter);
                 swipeRefreshLayout.setRefreshing(false);
+
+                if (list.isEmpty()){
+                    empty.setVisibility(View.VISIBLE);
+                }
 
                 joinActivityAdapter.setOnItemClickListener(new OnItemClickListener() {
                     @Override

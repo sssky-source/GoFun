@@ -10,12 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- app:layout_scrollFlags="scroll|enterAlways|snap"
+        用这句可以 滑动时候一起隐藏-->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/Create_Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
-            app:layout_scrollFlags="scroll|enterAlways|snap" >
+           >
             <TextView
                 android:id="@+id/Create_title"
                 android:layout_width="wrap_content"

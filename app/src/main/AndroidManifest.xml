@@ -28,6 +28,9 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustPan">
         <activity
+            android:name=".fragment.Mine.collect.CollectActivity"
+            android:exported="false" />
+        <activity
             android:name=".fragment.Mine.introduce.Introduce"
             android:exported="false">
             <meta-data
@@ -57,7 +60,7 @@
             android:name=".fragment.Recommend.RecommendActivityDetail"
             android:exported="false" />
         <activity android:name=".activity.TestActivity" />
-        <activity android:name=".activity.RouteActivity"/>
+        <activity android:name=".activity.RouteActivity" />
         <activity
             android:name=".activity.LaunchActivity"
             android:theme="@style/AppThemeone"

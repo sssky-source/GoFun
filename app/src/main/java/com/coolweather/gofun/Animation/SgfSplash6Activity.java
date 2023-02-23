@@ -22,12 +22,12 @@ import butterknife.ButterKnife;
 public class SgfSplash6Activity extends AppCompatActivity {
     @BindView(R.id.lin)
     LinearLayout lin;
-    @BindView(R.id.tv_sbs)
-    TextView tv_sbs;
-    @BindView(R.id.tv_search)
-    TextView tv_search;
-    @BindView(R.id.tv_course)
-    TextView tv_course;
+    //@BindView(R.id.tv_sbs)
+    //TextView tv_sbs;
+    //@BindView(R.id.tv_search)
+    //TextView tv_search;
+    //@BindView(R.id.tv_course)
+    //TextView tv_course;
     @BindView(R.id.logo)
     ImageView logo;
     private Handler mHandler = new Handler();
@@ -41,18 +41,18 @@ public class SgfSplash6Activity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         ArrayList<TextView> textViews = new ArrayList<>();
-        textViews.add(tv_sbs);
-        textViews.add(tv_search);
-        textViews.add(tv_course);
+        //textViews.add(tv_sbs);
+        //textViews.add(tv_search);
+        //textViews.add(tv_course);
 //        showAnimation(textViews);
         showAnimation();
 
     }
 
     private void showAnimation() {
-        tv_sbs.setVisibility(View.INVISIBLE);
-        tv_search.setVisibility(View.INVISIBLE);
-        tv_course.setVisibility(View.INVISIBLE);
+        //tv_sbs.setVisibility(View.INVISIBLE);
+        //tv_search.setVisibility(View.INVISIBLE);
+        //tv_course.setVisibility(View.INVISIBLE);
         logo.setVisibility(View.INVISIBLE);
         Animation animation = AnimationUtils.loadAnimation(SgfSplash6Activity.this, R.anim.my_anim_scale2);
         logo.startAnimation(animation);
@@ -61,8 +61,8 @@ public class SgfSplash6Activity extends AppCompatActivity {
             @Override
             public void run() {
                 Animation animation = AnimationUtils.loadAnimation(SgfSplash6Activity.this, R.anim.my_anim_scale2);
-                tv_sbs.startAnimation(animation);
-                tv_sbs.setVisibility(View.VISIBLE);
+                //tv_sbs.startAnimation(animation);
+                //tv_sbs.setVisibility(View.VISIBLE);
                 mHandler.postDelayed(new Runnable() {
 
                     @Override
@@ -70,16 +70,16 @@ public class SgfSplash6Activity extends AppCompatActivity {
 
                         //动画效果
                         Animation animation = AnimationUtils.loadAnimation(SgfSplash6Activity.this, R.anim.my_anim_scale2);
-                        tv_search.startAnimation(animation);
-                        tv_search.setVisibility(View.VISIBLE);
+                        //tv_search.startAnimation(animation);
+                        //tv_search.setVisibility(View.VISIBLE);
                         mHandler.postDelayed(new Runnable() {
 
                             @Override
                             public void run() {
                                 //动画效果
                                 Animation animation = AnimationUtils.loadAnimation(SgfSplash6Activity.this, R.anim.my_anim_scale2);
-                                tv_course.startAnimation(animation);
-                                tv_course.setVisibility(View.VISIBLE);
+                                //tv_course.startAnimation(animation);
+                                //tv_course.setVisibility(View.VISIBLE);
                                 mHandler.postDelayed(new Runnable() {
                                     public void run() {
                                         //startActivity(new Intent(SgfSplash6Activity.this,.class));

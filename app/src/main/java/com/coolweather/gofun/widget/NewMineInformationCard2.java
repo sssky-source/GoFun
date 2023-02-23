@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.fragment.Mine.apply.PersonActivity;
+import com.coolweather.gofun.fragment.Mine.collect.CollectActivity;
 import com.coolweather.gofun.fragment.Mine.create.CreateActivity;
 import com.coolweather.gofun.fragment.Mine.join.JoinActivity;
 
@@ -61,7 +62,8 @@ public class NewMineInformationCard2 extends CardView implements View.OnClickLis
 
                 //收藏的
             case R.id.relative_star:
-                Toast.makeText(getContext(),"收藏",Toast.LENGTH_SHORT).show();
+                Intent collect = new Intent(getContext(), CollectActivity.class);
+                getContext().startActivity(collect);
                 break;
         }
     }

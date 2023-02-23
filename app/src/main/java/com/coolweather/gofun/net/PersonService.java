@@ -1,6 +1,7 @@
 package com.coolweather.gofun.net;
 
 import com.coolweather.gofun.fragment.Mine.bean.ActivityStatus;
+import com.coolweather.gofun.fragment.Mine.bean.CollectBean;
 import com.coolweather.gofun.fragment.Mine.bean.CreateBean;
 import com.coolweather.gofun.fragment.Mine.bean.GetApplyID;
 import com.coolweather.gofun.fragment.Mine.bean.Person;
@@ -54,6 +55,10 @@ public interface PersonService {
     //我创建的
     @GET("Activity/getActivityByCreator")
     Call<List<CreateBean>> getCreateActivity(@Header("Authorization") String token);
+
+    //我收藏的
+    @GET("Activity/getStarActivities")
+    Call<List<CollectBean>> getStarActivity(@Header("Authorization") String token);
 
     //获取申请id
     @GET("Activity/getApplyActivityOfCreator")

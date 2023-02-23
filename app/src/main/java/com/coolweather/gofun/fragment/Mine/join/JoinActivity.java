@@ -58,6 +58,7 @@ public class JoinActivity extends AppCompatActivity {
     }
 
     private void request(PersonService personService) {
+        Log.d("test","test22" + GoFunApplication.token);
         personService.getJoinActivity("Bearer " + GoFunApplication.token).enqueue(new Callback<List<PersonActivityItem>>() {
             @Override
             public void onResponse(Call<List<PersonActivityItem>> call, Response<List<PersonActivityItem>> response) {

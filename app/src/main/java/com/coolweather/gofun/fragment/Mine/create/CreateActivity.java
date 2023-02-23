@@ -41,6 +41,7 @@ public class CreateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
+
         PersonService service = HttpRequest.create(PersonService.class);
         textView = findViewById(R.id.Create_title);
         textView.setText("我创建的");
