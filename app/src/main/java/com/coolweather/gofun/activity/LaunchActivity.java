@@ -16,7 +16,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -113,6 +115,13 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
     private boolean isfirstinput = true;
     private AddActivityItem addActivityItem = new AddActivityItem();
     private SwitchMaterial switchMaterial;
+    private LinearLayout moneyExtend;
+    private final String[] moneyTypes = new String[]{"悬赏","付款"};
+    private Spinner money_type;
+    private EditText money_number;
+    private String moneyType;
+    private int moneyTypeId;
+    private ArrayAdapter<String> money_adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +152,22 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         theme = findViewById(R.id.ed_theme);
         introduce = findViewById(R.id.ed_introduce);
         switchMaterial = findViewById(R.id.money);
+        moneyExtend = findViewById(R.id.money_extend);
+
+
+        switchMaterial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    moneyExtend.setVisibility(View.VISIBLE);
+                    moneySpinner(moneyTypes);
+                }else {
+                    moneyExtend.setVisibility(View.GONE);
+                    addActivityItem.setPayment(null);
+                }
+            }
+        });
+
         introduce.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -195,6 +220,38 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    /**
+     * 悬赏 0
+     * 付款 1
+     * @param moneyTypes
+     */
+    private void moneySpinner(String[] moneyTypes) {
+        money_type = findViewById(R.id.money_type);
+        money_number = findViewById(R.id.money_number);
+        moneyType = (String) money_type.getSelectedItem();
+        money_adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,moneyTypes);
+        money_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        money_type.setAdapter(money_adapter);
+        money_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                moneyType = (String) money_type.getSelectedItem();
+                Log.d("item", "" + i);
+                Log.d("item",moneyType + i);
+
+                moneyTypeId = i;
+                //addActivityItem.setPayment(new Payment(,i));
+                TextView tv = (TextView)view;
+                tv.setTextColor(R.color.selected_time_text);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // TODO Auto-generated method stub
+            }
+        });
+    }
 
 
     Inputtips.InputtipsListener inputtipsListener = new Inputtips.InputtipsListener() {
@@ -222,7 +279,6 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
     };
 
 
-
     private void initSpinner(List<Activity> list) {
         spinner=(Spinner)findViewById(R.id.ed_spinner);
         str=(String)spinner.getSelectedItem();
@@ -241,7 +297,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
                                        int position, long id) {
                 //拿到被选择项的值
                 str = (String) spinner.getSelectedItem();
-                addActivityItem.setType(position);
+                addActivityItem.setType(position+1);
                 Log.d("item",str + position);
                 TextView tv = (TextView)view;
                 tv.setTextColor(R.color.selected_time_text);
@@ -289,6 +345,9 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
                 if(numofpeople.getText().toString().length() == 0 ||theme.getText().toString().length() == 0){
                     ToastUtils.show(LaunchActivity.this,"主题和人数不能为空");
                 }
+                if (switchMaterial.isChecked() && money_number.getText().toString().length() == 0){
+                    ToastUtils.show(LaunchActivity.this,"悬赏金额不能为空");
+                }
                 else {
                     snumofpeople = Integer.parseInt(numofpeople.getText().toString().trim());
                     stheme = theme.getText().toString().trim();
@@ -299,8 +358,10 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
                     addActivityItem.setIntroduction(introduce.getText().toString().trim());
 
                     /**
-                     * 悬赏编写
+                     * 悬赏和标签编写
                      */
+                    addActivityItem.setPayment(new Payment(Integer.parseInt(money_number.getText().toString().trim()),moneyTypeId));
+                    addActivityItem.setTags(new ArrayList<>());
 
                     Log.d("item",addActivityItem.getEndtime());
                     Log.d("item",addActivityItem.getType().toString());
@@ -361,7 +422,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d("item","response " + response.code());
-                Log.d("item","response " + response.body().toString());
+                //Log.d("item","response " + response.body().toString());
                 if(response.code() == 200){
                     runOnUiThread(new Runnable() {
                         @Override
@@ -552,7 +613,6 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-
     /**
      * 初始化定位
      */
@@ -653,6 +713,4 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         //异步获取地址信息
         geocodeSearch.getFromLocationAsyn(query);
     }
-
-
 }

@@ -2,10 +2,12 @@ package com.coolweather.gofun.fragment.Recommend;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -126,6 +128,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     //根据传入的活动id获取活动详细信息
     private void requestActivityById() {
         recommendService.getActivityItemById("Bearer " + GoFunApplication.token,activityId).enqueue(new Callback<ActivityItem>() {
+            @SuppressLint({"ResourceAsColor", "SetTextI18n"})
             @Override
             public void onResponse(Call<ActivityItem> call, Response<ActivityItem> response) {
                 item = response.body();
@@ -137,6 +140,20 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                 introduction.setText(item.getIntroduction());
                 startTime.setText(item.getStarttime());
                 endTime.setText(item.getEndtime());
+                if (item.getPayment() != null){
+                    Log.d("item","type" + item.getPayment().getType());
+                    if (item.getPayment().getType() == 0){
+                        //方法弃用：'getColor(int)' is deprecated as of API 23: Android 6.0 (Marshmallow)
+                        //money.setTextColor(getResources().getColor(R.color.red));
+                        //下为6.0之后使用的方法
+                        money.setTextColor(ContextCompat.getColor(RecommendActivityDetail.this,R.color.blue));
+                    }else if (item.getPayment().getType() == 1){
+                        money.setTextColor(ContextCompat.getColor(RecommendActivityDetail.this,R.color.red));
+                    }
+                    money.setText("￥:" + item.getPayment().getPayment1());
+                }
+
+
                 addMark();
 
                 /**
