@@ -21,6 +21,9 @@ public class ActivityItem implements Serializable {
     private String username;
     private Boolean isStar;
 
+    //悬赏
+    private Payment payment;
+
     public Integer getId() {
         return id;
     }
@@ -147,5 +150,13 @@ public class ActivityItem implements Serializable {
 
     public void setStar(Boolean star) {
         isStar = star;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 }

@@ -37,18 +37,19 @@
                 android:textSize="20sp" />
 
             <LinearLayout
+                android:id="@+id/mine_tagChange"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/mine_username"
-                android:orientation="vertical"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/mine_tag"
-                    android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
 
 
                 </com.google.android.material.chip.ChipGroup>
@@ -70,6 +71,7 @@
             android:layout_height="100dp"
             android:layout_centerInParent="true"
             android:padding="1dp"
+            android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher"
             app:shapeAppearanceOverlay="@style/circleImageStyle"
             app:strokeColor="#FFF"

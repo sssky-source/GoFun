@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,6 +52,8 @@ public class RecommendFragment extends Fragment {
     final ArrayList<String> tabName = new ArrayList<>();
     final ArrayList<Fragment> fragmentList = new ArrayList<>();
 
+    private TextView title;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,6 +76,8 @@ public class RecommendFragment extends Fragment {
         ((MainActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
         tabLayout = view.findViewById(R.id.recommend_TabLayout);
         viewPager2 = view.findViewById(R.id.recommend_ViewPager2);
+        title = view.findViewById(R.id.title);
+        title.setText("推荐活动");
 
         RecommendService recommendService = HttpRequest.create(RecommendService.class);
         recommendService.getActivityType("Bearer " + token).enqueue(new Callback<List<Activity>>() {

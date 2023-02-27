@@ -73,7 +73,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     //活动信息详情
     private CircleImageView creatorImage, userImage;  //创建者头像
     //创建者名字，活动类型，活动标题，介绍，开始结束时间
-    private TextView userName, type, title, introduction, startTime, endTime;
+    private TextView userName, type, title, introduction, startTime, endTime,money;
     //申请按钮
     private Button apply, checkCommend;
     private TextView addCommend;
@@ -121,7 +121,6 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
 
         //获取收藏人数
         requestStarActivityNum();
-
     }
 
     //根据传入的活动id获取活动详细信息
@@ -148,6 +147,10 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                     //已经收藏则图标改位收藏
                     collect.setImageDrawable(getDrawable(R.drawable.collect_press));
                     Log.d("111020","isStar");
+                }
+
+                if (item.getPayment() == null){
+                    money.setVisibility(View.GONE);
                 }
             }
 
@@ -216,6 +219,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         recyclerView = findViewById(R.id.ActivityDetail_Commend);
         collect = findViewById(R.id.collect);
         collectNum = findViewById(R.id.collect_Num);
+        money = findViewById(R.id.ActivityDetail_money);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(RecommendActivityDetail.this);
         recyclerView.setLayoutManager(linearLayoutManager);

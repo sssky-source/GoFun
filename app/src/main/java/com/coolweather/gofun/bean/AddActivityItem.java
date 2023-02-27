@@ -1,6 +1,7 @@
 package com.coolweather.gofun.bean;
 
 import com.coolweather.gofun.fragment.Map.bean.TypeItem;
+import com.coolweather.gofun.fragment.Recommend.bean.Payment;
 
 public class AddActivityItem {
     private String title;
@@ -12,6 +13,9 @@ public class AddActivityItem {
     private Integer maxnumber;
     private String starttime;
     private String endtime;
+
+    //悬赏
+    private Payment payment;
 
     public String getTitle() {
         return title;
@@ -83,5 +87,13 @@ public class AddActivityItem {
 
     public void setEndtime(String endtime) {
         this.endtime = endtime;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,6 +53,7 @@ public class MessageFragment extends Fragment {
 
     //空布局
     private LinearLayout empty;
+    private TextView title;
 
     @Nullable
     @Override
@@ -67,6 +69,8 @@ public class MessageFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         PersonService personService = HttpRequest.create(PersonService.class);
         ChartMessage chartMessage = HttpRequest.create(ChartMessage.class);
+        title = view.findViewById(R.id.title);
+        title.setText("我的消息");
         recyclerView = view.findViewById(R.id.message_RecyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);

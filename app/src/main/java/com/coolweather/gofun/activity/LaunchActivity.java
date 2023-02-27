@@ -59,9 +59,11 @@ import com.coolweather.gofun.datepicker.DateFormatUtils;
 import com.coolweather.gofun.fragment.Recommend.Adapter.FragmentAdapter;
 import com.coolweather.gofun.fragment.Recommend.RecommendItemFragment;
 import com.coolweather.gofun.fragment.Recommend.bean.Activity;
+import com.coolweather.gofun.fragment.Recommend.bean.Payment;
 import com.coolweather.gofun.net.HttpRequest;
 import com.coolweather.gofun.net.RecommendService;
 import com.coolweather.gofun.util.ToastUtils;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -110,6 +112,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
     private List<Tip> autoTips;
     private boolean isfirstinput = true;
     private AddActivityItem addActivityItem = new AddActivityItem();
+    private SwitchMaterial switchMaterial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +142,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         numofpeople = findViewById(R.id.ed_number);
         theme = findViewById(R.id.ed_theme);
         introduce = findViewById(R.id.ed_introduce);
+        switchMaterial = findViewById(R.id.money);
         introduce.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -293,6 +297,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
                     addActivityItem.setTitle(stheme);
                     addActivityItem.setMaxnumber(snumofpeople);
                     addActivityItem.setIntroduction(introduce.getText().toString().trim());
+
+                    /**
+                     * 悬赏编写
+                     */
+
                     Log.d("item",addActivityItem.getEndtime());
                     Log.d("item",addActivityItem.getType().toString());
                     Log.d("item",String.valueOf(addActivityItem.getX()));
@@ -372,7 +381,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                t.printStackTrace();
             }
         });
     }

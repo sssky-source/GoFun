@@ -39,6 +39,7 @@ public class TagActivity extends AppCompatActivity {
                     //动态创建标签
                     Chip chip = new Chip(TagActivity.this);
                     chip.setCheckable(true);
+                    chip.setChecked(true);
                     chip.setChipIconVisible(true);
                     //chip.setCheckedIconVisible(true);
                     chip.setChipIcon(getResources().getDrawable(R.mipmap.dynamics));

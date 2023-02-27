@@ -93,12 +93,13 @@ public class RecommendItemFragment extends Fragment {
                 recommendItemAdapter = new RecommendItemAdapter(R.layout.activity_recommend_item_detail, list);
                 recyclerView.setAdapter(recommendItemAdapter);
                 swipeRefreshLayout.setRefreshing(false);
-                Log.d("size", "size:" + list.size());
-                lastId = list.get(list.size()-1).getId();
+                //Log.d("size", "size:" + list.size());
+                if (list != null){
+                    lastId = list.get(list.size()-1).getId();
+                }
 
                 //lastId = list.get(9).getId();
-                Log.d("size", "lastid:" + lastId);
-
+                //Log.d("size", "lastid:" + lastId);
 
                 //封装一个确认和取消的提示框
                 recommendItemAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {

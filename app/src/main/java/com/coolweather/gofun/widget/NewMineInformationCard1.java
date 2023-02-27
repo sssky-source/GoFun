@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,8 +18,10 @@ import com.coolweather.gofun.LocalDb.PersonLitePal;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.fragment.Mine.bean.UserTag;
 import com.coolweather.gofun.fragment.Mine.introduce.Introduce;
+import com.coolweather.gofun.fragment.Mine.tag.MineTagActivity;
 import com.coolweather.gofun.net.HttpRequest;
 import com.coolweather.gofun.net.PersonService;
+import com.coolweather.gofun.util.ToastUtils;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -43,6 +46,7 @@ public class NewMineInformationCard1 extends CardView implements View.OnClickLis
 
     //标签
     private ChipGroup chipGroup;
+    private LinearLayout layout;
 
     public NewMineInformationCard1(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -59,6 +63,7 @@ public class NewMineInformationCard1 extends CardView implements View.OnClickLis
     private void initView() {
 
         chipGroup = findViewById(R.id.mine_tag);
+        layout = findViewById(R.id.mine_tagChange);
         username = findViewById(R.id.mine_username);
         username.setText(personLitePal.getUsername());
 
@@ -72,6 +77,7 @@ public class NewMineInformationCard1 extends CardView implements View.OnClickLis
             Log.d("999999","女");
         }
 
+        layout.setOnClickListener(this);
         username.setOnClickListener(this);
         userImage.setOnClickListener(this);
         sex.setOnClickListener(this);
@@ -86,10 +92,18 @@ public class NewMineInformationCard1 extends CardView implements View.OnClickLis
                 for (UserTag userTag : list){
                     Chip chip = new Chip(getContext());
                     chip.setText(userTag.getName());
+                    chip.setCheckable(false);
+                    chip.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent tagChange = new Intent(getContext(), MineTagActivity.class);
+                            getContext().startActivity(tagChange);
+                        }
+                    });
                     chipGroup.addView(chip);
                 }
-            }
 
+            }
             @Override
             public void onFailure(Call<List<UserTag>> call, Throwable t) {
                 t.printStackTrace();
@@ -100,6 +114,7 @@ public class NewMineInformationCard1 extends CardView implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            //修改个人资料
             case R.id.mine_username:
             case R.id.mine_userImage:
             case R.id.mine_sex:
@@ -107,6 +122,16 @@ public class NewMineInformationCard1 extends CardView implements View.OnClickLis
                 getContext().startActivity(introduce);
                 break;
 
+                //修改标签
+            case R.id.mine_tagChange:
+            case R.id.mine_tag:
+                Intent tagChange = new Intent(getContext(), MineTagActivity.class);
+                //传入userID用于在修改标签页面 确定已经是用户的标签
+                tagChange.putExtra("userID",personLitePal.getUserID());
+                getContext().startActivity(tagChange);
+                break;
+            default:
+                break;
         }
 
     }

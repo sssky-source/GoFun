@@ -101,7 +101,6 @@ public class Introduce extends AppCompatActivity implements View.OnClickListener
     //请求按钮
     private Button save;
 
-
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,

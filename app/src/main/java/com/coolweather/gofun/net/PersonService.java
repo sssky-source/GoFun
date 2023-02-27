@@ -7,6 +7,7 @@ import com.coolweather.gofun.fragment.Mine.bean.GetApplyID;
 import com.coolweather.gofun.fragment.Mine.bean.Person;
 import com.coolweather.gofun.fragment.Mine.bean.PersonActivityItem;
 import com.coolweather.gofun.fragment.Mine.bean.PersonChange;
+import com.coolweather.gofun.fragment.Mine.bean.TagChange;
 import com.coolweather.gofun.fragment.Mine.bean.UserTag;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 
@@ -17,6 +18,7 @@ import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
@@ -35,7 +37,13 @@ public interface PersonService {
     @POST("User/editUserInfo")
     Call<ResponseBody> editUserInfo(@Header("Authorization") String token, @Body PersonChange personChange);
 
-    //上传头像
+    /**
+     * 上传头像
+     * 传文件 打Multipart标签
+     * @param token
+     * @param file
+     * @return
+     */
     @Multipart
     @POST("User/uploadHeadImg")
     Call<ResponseBody> uploadHeadImg(@Header("Authorization") String token, @Part MultipartBody.Part file);
@@ -75,4 +83,21 @@ public interface PersonService {
     //个人标签
     @GET("User/getUserTag")
     Call<List<UserTag>> getUserTag(@Header("Authorization") String token,@Query("userId") int id);
+
+    //全部标签
+    @GET("User/GetAllTag")
+    Call<List<TagChange>> getAllTag(@Header("Authorization") String token);
+
+    //修改标签
+    @POST("User/CoverUserTag")
+    Call<ResponseBody> coverUserTag(@Header("Authorization") String token,@Body String tags);
+
+    //添加标签
+    @POST("User/AddUserTag")
+    Call<ResponseBody> AddUserTag(@Header("Authorization") String token,@Body int tags[] );
+
+    //删除标签
+    @DELETE("User/delUserTag")
+    Call<ResponseBody> delUserTag(@Header("Authorization") String token,@Query("tagId") int tagId);
+
 }

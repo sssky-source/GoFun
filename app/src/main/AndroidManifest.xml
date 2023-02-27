@@ -28,6 +28,9 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustPan">
         <activity
+            android:name=".fragment.Mine.tag.MineTagActivity"
+            android:exported="false" />
+        <activity
             android:name=".fragment.Mine.collect.CollectActivity"
             android:exported="false" />
         <activity
