@@ -2,6 +2,9 @@ package com.coolweather.gofun.bean;
 
 import com.coolweather.gofun.fragment.Map.bean.TypeItem;
 import com.coolweather.gofun.fragment.Recommend.bean.Payment;
+import com.coolweather.gofun.fragment.Recommend.bean.Tags;
+
+import java.util.List;
 
 public class AddActivityItem {
     private String title;
@@ -16,6 +19,7 @@ public class AddActivityItem {
 
     //悬赏
     private Payment payment;
+    private List<Tags> tags;
 
     public String getTitle() {
         return title;
@@ -95,5 +99,13 @@ public class AddActivityItem {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public List<Tags> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tags> tags) {
+        this.tags = tags;
     }
 }

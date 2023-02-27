@@ -1,6 +1,7 @@
 package com.coolweather.gofun.fragment.Recommend.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 //活动信息
 public class ActivityItem implements Serializable {
@@ -23,6 +24,8 @@ public class ActivityItem implements Serializable {
 
     //悬赏
     private Payment payment;
+
+    private List<Tags> tags;
 
     public Integer getId() {
         return id;
@@ -158,5 +161,13 @@ public class ActivityItem implements Serializable {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public List<Tags> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tags> tags) {
+        this.tags = tags;
     }
 }
