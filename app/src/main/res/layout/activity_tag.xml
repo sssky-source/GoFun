@@ -5,36 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".activity.TagActivity">
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tag_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:chipSpacingHorizontal="20dp">
-
-        <com.google.android.material.chip.Chip
-            app:shapeAppearance="?attr/shapeAppearanceSmallComponent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="222222"
-            android:textSize="20sp"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:checked="true" />
-
-        <com.google.android.material.chip.Chip
-            android:checkable="true"
-            app:chipIcon="@mipmap/dynamics"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="333" />
-
-        <com.google.android.material.chip.Chip
-            android:checkable="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="444" />
-    </com.google.android.material.chip.ChipGroup>
-
+        android:layout_height="match_parent" />
 
 </LinearLayout>
