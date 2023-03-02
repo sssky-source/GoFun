@@ -75,7 +75,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     //活动信息详情
     private CircleImageView creatorImage, userImage;  //创建者头像
     //创建者名字，活动类型，活动标题，介绍，开始结束时间
-    private TextView userName, type, title, introduction, startTime, endTime,money;
+    private TextView userName, type, title, introduction, startTime, endTime,money,number;
     //申请按钮
     private Button apply, checkCommend;
     private TextView addCommend;
@@ -91,7 +91,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     private OnLocationChangedListener mListener;
     //收藏
     private ImageView collect;
-    private TextView collectNum;
+    private TextView collectNum,item_name;
 
 
     @Override
@@ -137,7 +137,9 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                 userName.setText(item.getUsername());
                 type.setText("[" + item.getType() + "]");
                 title.setText(item.getTitle());
+                item_name.setText(item.getTitle());
                 introduction.setText(item.getIntroduction());
+                number.setText("人数：" + item.getCurnumber() + "/" + item.getMaxnumber());
                 startTime.setText(item.getStarttime());
                 endTime.setText(item.getEndtime());
                 if (item.getPayment() != null){
@@ -228,6 +230,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         type = findViewById(R.id.ActivityDetail_type);
         title = findViewById(R.id.ActivityDetail_title);
         introduction = findViewById(R.id.ActivityDetail_introduction);
+        number = findViewById(R.id.ActivityDetail_number);
         startTime = findViewById(R.id.ActivityDetail_startTime);
         endTime = findViewById(R.id.ActivityDetail_endTime);
         apply = findViewById(R.id.ActivityDetail_Apply);
@@ -237,6 +240,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         collect = findViewById(R.id.collect);
         collectNum = findViewById(R.id.collect_Num);
         money = findViewById(R.id.ActivityDetail_money);
+        item_name = findViewById(R.id.item_name);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(RecommendActivityDetail.this);
         recyclerView.setLayoutManager(linearLayoutManager);

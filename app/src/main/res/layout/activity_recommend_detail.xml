@@ -18,12 +18,13 @@
             android:id="@+id/ActivityDetail_Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            app:layout_scrollFlags="scroll|enterAlways|snap">
+            android:background="@color/white">
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:textColor="#4697E8"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -136,7 +137,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="30dp"
+                        android:layout_marginEnd="10dp"
                         android:text="人数"
                         android:textColor="#49cc90" />
 

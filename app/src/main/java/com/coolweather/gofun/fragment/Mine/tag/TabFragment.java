@@ -96,6 +96,7 @@ public class TabFragment extends Fragment {
                         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                             if (b) {
 
+                                //添加标签 传ID数组
                                 int addTag[];
                                 addTag = new int[]{tagItem.getId()};
                                 personService.AddUserTag("Bearer " + GoFunApplication.token, addTag).enqueue(new Callback<ResponseBody>() {

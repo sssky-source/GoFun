@@ -1,5 +1,6 @@
 package com.coolweather.gofun.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -17,9 +18,15 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.coolweather.gofun.GoFunApplication;
+import com.coolweather.gofun.LocalDb.LitPalUtil;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.bean.User;
 import com.coolweather.gofun.config.Config;
+import com.coolweather.gofun.fragment.Mine.bean.Person;
+import com.coolweather.gofun.fragment.Mine.bean.UserTag;
+import com.coolweather.gofun.net.HttpRequest;
+import com.coolweather.gofun.net.PersonService;
 import com.coolweather.gofun.util.OkhttpUtil;
 import com.coolweather.gofun.util.ToastUtils;
 
@@ -27,6 +34,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,6 +42,7 @@ import java.util.regex.Pattern;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 import static android.text.InputType.*;
 
@@ -50,13 +59,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText register_name,register_password,register_email;
     private Button registerBtn;
     private CheckBox checkBox;
+    private PersonService personService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        personService = HttpRequest.create(PersonService.class);
         initViews();
         initListener();
+
     }
 
     private void initViews() {
@@ -145,11 +157,73 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void run() {
                             Toast.makeText(RegisterActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
-                            User user = new User(username,password,email);
-                            Intent intent = new Intent();
-                            intent.putExtra("user",user);
-                            setResult(RESULT_OK,intent);
-                            finish();
+//                            User user = new User(username,password,email);
+//                            Intent intent = new Intent();
+//                            intent.putExtra("user",user);
+//                            setResult(RESULT_OK,intent);
+//                            finish();
+
+                            final String url = Config.BASE_URL + "User/login";
+
+                            User login = new User();
+                            Log.d("test","email:" + email);
+                            Log.d("test","password:" + password);
+                            login.setPassword(password);
+                            login.setEmail(email);
+                            //String value = JSON.toJSONString(login);
+                            //Log.d("test","value:" + value);
+
+//                            OkhttpUtil.requestpostone(url, value, new Callback() {
+//                                @Override
+//                                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+//                                    Log.d("test", "获取数据失败了");
+//                                }
+//
+//                                @Override
+//                                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+//
+//                                    Log.d("test", "1" + response);
+//                                    Log.d("test", "2" + response.headers());
+//                                    Log.d("test", "3" + response.request());
+//                                    Log.d("test", "4" + response.networkResponse());
+//                                    Log.d("test", "code:" + response.code());
+//                                    Log.d("test","" + response.request().body());
+//
+//                                }
+//                            });
+                            /**
+                             * okhttp3的方式post 需要转成json格式
+                             * retrofit2方式post 不需要转成json格式？？？
+                             */
+                            personService.login(login).enqueue(new retrofit2.Callback<ResponseBody>() {
+                                @Override
+                                public void onResponse(retrofit2.Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                                    String token = null;
+                                    Log.d("test",":" + response);
+                                    Log.d("test","body:" + response.body());
+                                    Log.d("test","code: " + response.code());
+                                    Log.d("test","message:" + response.message());
+                                    Log.d("test","message:" + response.errorBody());
+                                    Log.d("test","call.request:" + call.request());
+                                    try {
+                                        token = response.body().string().trim();
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                    GoFunApplication.token = token;
+                                    //GoFunApplication.token = response.body().string().trim();
+                                    requestPersonInfo(personService,token,password);
+                                    Intent intent = new Intent(RegisterActivity.this,TagActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+
+                                @Override
+                                public void onFailure(retrofit2.Call<ResponseBody> call, Throwable t) {
+                                    Log.d("test","t.getCause:" + t.getCause());
+                                    t.printStackTrace();
+                                }
+                            });
                         }
                     });
                 }else if(response.code() == 400){
@@ -160,6 +234,35 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         }
                     });
                 }
+            }
+        });
+    }
+
+    private void requestPersonInfo(PersonService personService, String token, String password) {
+
+        personService.getUserInfo("Bearer " + token).enqueue(new retrofit2.Callback<Person>() {
+            @Override
+            public void onResponse(retrofit2.Call<Person> call, retrofit2.Response<Person> response) {
+                Log.d("111",token);
+                Person person = response.body();
+
+                //要保证已经保存完成在查询数据库
+                //因为LitePal的原因 会将ID 默认作为主键，导致用户id不能保存下来
+                //所以另外建立了一个Bean id作为主键 用户ID写为userID
+                /*
+                    LitePal不支持自定义主键，默认的主键为id,不管一个实体类对象有没有设置id字段，
+                    数据库的表中都会创建一个id的主键，而这个id的值会在新记录插入时被自动置为表中的Id，
+                    也即是唯一值。如果你里面定义了个String id，运行会报错的。
+                 */
+                if (person != null){
+                    LitPalUtil.setUserInfo(person,token,password);
+                }else {
+                    Log.d("111","not request");
+                }
+            }
+            @Override
+            public void onFailure(retrofit2.Call<Person> call, Throwable t) {
+                t.printStackTrace();
             }
         });
     }

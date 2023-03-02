@@ -1,5 +1,6 @@
 package com.coolweather.gofun.net;
 
+import com.coolweather.gofun.bean.User;
 import com.coolweather.gofun.fragment.Mine.bean.ActivityStatus;
 import com.coolweather.gofun.fragment.Mine.bean.CollectBean;
 import com.coolweather.gofun.fragment.Mine.bean.CreateBean;
@@ -28,6 +29,10 @@ import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface PersonService {
+
+    //登陆
+    @POST("User/login")
+    Call<ResponseBody> login(@Body User value);
 
     //个人信息
     @GET("User/getUserInfo")

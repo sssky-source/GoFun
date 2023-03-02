@@ -3,6 +3,7 @@ package com.coolweather.gofun.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -17,6 +18,7 @@ import com.coolweather.gofun.LocalDb.PersonLitePal;
 import com.coolweather.gofun.fragment.Mine.bean.Person;
 import com.coolweather.gofun.net.HttpRequest;
 import com.coolweather.gofun.net.PersonService;
+import com.coolweather.gofun.util.ToastUtils;
 
 import org.litepal.LitePal;
 
@@ -42,6 +44,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     public static final int PAGE_TWO = 1;
     public static final int PAGE_THREE = 2;
     public static final int PAGE_FOUR = 3;
+
+    // 用来计算返回键的点击间隔时间
+    private long exitTime = 0;
 
 
     @Override
@@ -125,4 +130,22 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 break;
         }
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                //弹出提示，可以有多种方式
+                ToastUtils.show(MainActivity.this,"再按一次退出程序");
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
 }

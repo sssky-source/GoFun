@@ -49,7 +49,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private LinearLayout llLogin;
     private CheckBox checkBox;
 
-    private Button test;
 
     private CircleImageView QQ_Login,V_Login;
     SQLiteDatabase db;
@@ -86,8 +85,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             accountLoginPassword.setText(searchUser().getPassword());
         }
 
-        test = findViewById(R.id.test);
-        test.setOnClickListener(this);
     }
 
 
@@ -137,7 +134,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.register_account_btn:
                 //跳转到注册界面
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivityForResult(intent,1);
+                //startActivityForResult(intent,1);
+                startActivity(intent);
                 break;
             case R.id.viewpager:
                 Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
@@ -150,10 +148,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.QQ_Login:
             case R.id.V_Login:
               //  ToastUtils.show(this,"敬请期待");
-                break;
-            case R.id.test:
-                Intent test = new Intent(LoginActivity.this,TagActivity.class);
-                startActivity(test);
                 break;
             default:
                 break;
@@ -181,7 +175,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         user.setPassword(accountPassword);
 
         String value = JSON.toJSONString(user);
-
 
         OkhttpUtil.requestpostone(url, value, new Callback() {
 
@@ -225,20 +218,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case 1:
-                if (resultCode == RESULT_OK) {
-                    User user = (User)data.getSerializableExtra("user");
-                    accountLoginName.setText(user.getUsername());
-                    accountLoginPassword.setText(user.getPassword());
-                }
-                break;
-            default:
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        switch (requestCode) {
+//            case 1:
+//                if (resultCode == RESULT_OK) {
+//                    User user = (User)data.getSerializableExtra("user");
+//                    accountLoginName.setText(user.getUsername());
+//                    accountLoginPassword.setText(user.getPassword());
+//                }
+//                break;
+//            default:
+//        }
+//    }
 
 
     private PersonLitePal searchUser(){
