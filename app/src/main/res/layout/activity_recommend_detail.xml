@@ -260,6 +260,30 @@
                 />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/navigate"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/navigate"
+                />
+
+            <TextView
+                android:id="@+id/navigate_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/num"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
+
         <TextView
             android:id="@+id/ActivityDetail_money"
             android:layout_width="wrap_content"

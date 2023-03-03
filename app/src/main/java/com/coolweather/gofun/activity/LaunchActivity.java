@@ -80,6 +80,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/*
+*  点击发布加号后的页面（发起活动）
+*
+ */
+
 public class LaunchActivity extends AppCompatActivity implements View.OnClickListener, AMapLocationListener,
         LocationSource,AMap.OnMapClickListener,GeocodeSearch.OnGeocodeSearchListener{
 

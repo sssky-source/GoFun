@@ -39,6 +39,7 @@ import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.LocalDb.LitPalUtil;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.LocalDb.PersonLitePal;
+import com.coolweather.gofun.activity.RouteActivity;
 import com.coolweather.gofun.fragment.Recommend.Adapter.CommendAdapter;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 import com.coolweather.gofun.fragment.Recommend.bean.PersonAddComment;
@@ -90,8 +91,9 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     //位置更改监听
     private OnLocationChangedListener mListener;
     //收藏
-    private ImageView collect;
+    private ImageView collect,navigate;
     private TextView collectNum,item_name;
+    private String location;
 
 
     @Override
@@ -142,6 +144,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                 number.setText("人数：" + item.getCurnumber() + "/" + item.getMaxnumber());
                 startTime.setText(item.getStarttime());
                 endTime.setText(item.getEndtime());
+                location = item.getLocation();
                 if (item.getPayment() != null){
                     Log.d("item","type" + item.getPayment().getType());
                     if (item.getPayment().getType() == 0){
@@ -238,6 +241,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         addCommend = findViewById(R.id.ActivityDetail_AddCommendWays);
         recyclerView = findViewById(R.id.ActivityDetail_Commend);
         collect = findViewById(R.id.collect);
+        navigate = findViewById(R.id.navigate);
         collectNum = findViewById(R.id.collect_Num);
         money = findViewById(R.id.ActivityDetail_money);
         item_name = findViewById(R.id.item_name);
@@ -361,6 +365,13 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                         }
                     });
                 }
+                break;
+            case R.id.navigate:
+                Intent navigate = new Intent(this, RouteActivity.class);
+                navigate.putExtra("address",location);
+                startActivity(navigate);
+                break;
+            default:
                 break;
         }
     }
