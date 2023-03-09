@@ -32,6 +32,7 @@ public class NetRequset {
 
 
     public void initActivityType(final Handler mHandler) {
+        final int[] iconList = {R.drawable.party,R.drawable.game,R.drawable.music,R.drawable.sport,R.drawable.study,R.drawable.jiangzuo,R.drawable.xuanshang};
         List<TypeItem> typeItems = new ArrayList<>();
    //     MapService mapService = HttpRequest.create(MapService.class);
         mapService.getActivityType("Bearer" + GoFunApplication.token).enqueue(new Callback<List<Activity>>() {
@@ -41,7 +42,7 @@ public class NetRequset {
                 Log.d("Bottom1",list.toString());
                 Log.d("Botton4", String.valueOf(list.size()));
                 for(int i = 0; i < list.size(); i++){
-                    TypeItem typeItem = new TypeItem(R.drawable.head,list.get(i).getType1());
+                    TypeItem typeItem = new TypeItem(iconList[i],list.get(i).getType1());
                     Log.d("Bottom","type" + typeItem.getType());
                     typeItems.add(typeItem);
                 }

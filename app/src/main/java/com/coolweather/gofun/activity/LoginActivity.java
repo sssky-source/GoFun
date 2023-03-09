@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.coolweather.gofun.Animation.SgfSplash6Activity;
@@ -274,6 +275,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 t.printStackTrace();
             }
         });
+    }
+
+    public void Start(View view){
+        Toast.makeText(view.getContext(),"暂不支持此功能",Toast.LENGTH_SHORT).show();
     }
 
 }

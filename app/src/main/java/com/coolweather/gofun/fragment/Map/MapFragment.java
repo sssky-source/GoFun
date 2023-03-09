@@ -161,7 +161,8 @@ public class MapFragment extends Fragment implements
             switch (msg.what){
                 case 1:
                     titleList = (List<TypeItem>)msg.getData().getSerializable("typelist");
-                    titleList.add(0,new TypeItem(R.drawable.head,"全部"));
+                    Log.d("111",titleList.toString());
+                    titleList.add(0,new TypeItem(R.drawable.allactivity,"全部"));
                     showSheetDialog1();
                     bottomSheetDialog.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
                     bottomSheetDialog.show();

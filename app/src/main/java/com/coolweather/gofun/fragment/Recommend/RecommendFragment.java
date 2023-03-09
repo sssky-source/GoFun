@@ -77,7 +77,7 @@ public class RecommendFragment extends Fragment {
         tabLayout = view.findViewById(R.id.recommend_TabLayout);
         viewPager2 = view.findViewById(R.id.recommend_ViewPager2);
         title = view.findViewById(R.id.title);
-        title.setText("推荐活动");
+        title.setText("     推荐活动");
 
         RecommendService recommendService = HttpRequest.create(RecommendService.class);
         recommendService.getActivityType("Bearer " + token).enqueue(new Callback<List<Activity>>() {

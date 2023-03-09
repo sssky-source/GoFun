@@ -26,333 +26,426 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/ll_position"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/current_time_bg"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                tools:ignore="MissingConstraints">
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                app:cardCornerRadius="8dp"
+                android:elevation="5dp">>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="15dp"
-                    android:background="@null"
+                <LinearLayout
+                    android:id="@+id/ll_position"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@color/current_time_bg"
                     android:gravity="center_vertical"
-                    android:text="@string/activity_location"
-                    android:textColor="@color/current_time_text"
-                    android:textSize="15sp" />
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                    tools:ignore="MissingConstraints">
 
-                <Space
-                    android:layout_width="@dimen/dp_30"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:text="@string/activity_location"
+                        android:textColor="@color/current_time_text"
+                        android:textSize="15sp" />
 
-                <AutoCompleteTextView
-                    android:id="@+id/tv_selected_position"
-                    android:layout_width="280dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="15dp"
-                    android:background="@null"
+                    <Space
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/tv_selected_position"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:background="@null"
+                        android:gravity="right"
+                        android:textColor="@color/selected_time_text"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="8dp"
+                android:elevation="5dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@color/current_time_bg"
                     android:gravity="center_vertical"
-                    android:textColor="@color/selected_time_text"
-                    android:textSize="15sp" />
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                    tools:ignore="MissingConstraints">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:text="@string/current_date"
+                        android:textColor="@color/current_time_text"
+                        android:textSize="15sp" />
 
-            <LinearLayout
-                android:id="@+id/ll_date"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/current_time_bg"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                tools:ignore="MissingConstraints">
+                    <Space
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="15dp"
-                    android:background="@null"
+                    <TextView
+                        android:id="@+id/tv_selected_date"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/selected_time_text"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="8dp"
+                android:elevation="5dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/current_time_bg"
                     android:gravity="center_vertical"
-                    android:text="@string/current_date"
-                    android:textColor="@color/current_time_text"
-                    android:textSize="15sp" />
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/number">
 
-                <Space
-                    android:layout_width="@dimen/dp_30"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:text="@string/activity_type"
+                        android:textColor="@color/current_time_text"
+                        android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/tv_selected_date"
-                    android:layout_width="280dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="15dp"
-                    android:background="@null"
+                    <Space
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <Spinner
+                        android:id="@+id/ed_spinner"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:inputType="number"
+                        android:textColor="@color/selected_time_text"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="8dp"
+                android:elevation="5dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_theme"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/current_time_bg"
                     android:gravity="center_vertical"
-                    android:textColor="@color/selected_time_text"
-                    android:textSize="15sp" />
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:text="@string/theme"
+                        android:textColor="@color/current_time_text"
+                        android:textSize="15sp" />
 
-            <LinearLayout
-                android:id="@+id/ll_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/current_time_bg"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/number">
+                    <Space
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="15dp"
-                    android:background="@null"
+                    <EditText
+                        android:id="@+id/ed_theme"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:background="@null"
+                        android:gravity="right"
+                        android:textColor="@color/selected_time_text"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="8dp"
+                android:elevation="5dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_starttime"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/current_time_bg"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_date">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:text="@string/start_time"
+                        android:textColor="@color/current_time_text"
+                        android:textSize="15sp" />
+
+                    <Space
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tv_selected_time"
+                        android:layout_width="120dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/selected_time_text"
+                        android:textSize="15sp" />
+
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="8dp"
+                android:elevation="5dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_endtime"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/current_time_bg"
                     android:gravity="center_vertical"
-                    android:text="@string/activity_type"
-                    android:textColor="@color/current_time_text"
-                    android:textSize="15sp" />
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_starttime">
 
-                <Space
-                    android:layout_width="10dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:text="@string/end_time"
+                        android:textColor="@color/current_time_text"
+                        android:textSize="15sp" />
 
-                <Spinner
-                    android:id="@+id/ed_spinner"
-                    android:layout_width="280dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="15dp"
-                    android:background="@null"
+                    <Space
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tv_selected_endtime"
+                        android:layout_width="120dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/selected_time_text"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="8dp"
+                android:elevation="5dp">
+
+                <LinearLayout
+                    android:id="@+id/number"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/current_time_bg"
                     android:gravity="center_vertical"
-                    android:inputType="number"
-                    android:textColor="@color/selected_time_text"
-                    android:textSize="15sp" />
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_theme">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:text="@string/number"
+                        android:textColor="@color/current_time_text"
+                        android:textSize="15sp" />
 
-            <LinearLayout
-                android:id="@+id/ll_theme"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/current_time_bg"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                    <Space
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="15dp"
-                    android:background="@null"
+                    <EditText
+                        android:id="@+id/ed_number"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:background="@null"
+                        android:gravity="right"
+                        android:inputType="number"
+                        android:textColor="@color/selected_time_text"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="8dp"
+                android:elevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_200"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/current_time_bg"
                     android:gravity="center_vertical"
-                    android:text="@string/theme"
-                    android:textColor="@color/current_time_text"
-                    android:textSize="15sp" />
+                    android:orientation="horizontal">
 
-                <Space
-                    android:layout_width="10dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:text="@string/activity_introduce"
+                        android:textColor="@color/current_time_text"
+                        android:textSize="15sp" />
 
-                <EditText
-                    android:id="@+id/ed_theme"
-                    android:layout_width="280dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="15dp"
-                    android:background="@null"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/selected_time_text"
-                    android:textSize="15sp" />
+                    <Space
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
 
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/ed_introduce"
+                        android:layout_width="280dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:paddingRight="@dimen/dp_20"
+                        android:scrollbars="vertical"
+                        android:textColor="@color/selected_time_text"
+                        android:textSize="15sp" />
 
-            <LinearLayout
-                android:id="@+id/ll_starttime"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/current_time_bg"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/ll_date">
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="15dp"
-                    android:background="@null"
-                    android:gravity="center_vertical"
-                    android:text="@string/start_time"
-                    android:textColor="@color/current_time_text"
-                    android:textSize="15sp" />
+            </androidx.cardview.widget.CardView>
 
-                <Space
-                    android:layout_width="10dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/tv_selected_time"
-                    android:layout_width="280dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="15dp"
-                    android:background="@null"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/selected_time_text"
-                    android:textSize="15sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_endtime"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/current_time_bg"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/ll_starttime">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="15dp"
-                    android:background="@null"
-                    android:gravity="center_vertical"
-                    android:text="@string/end_time"
-                    android:textColor="@color/current_time_text"
-                    android:textSize="15sp" />
-
-                <Space
-                    android:layout_width="10dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/tv_selected_endtime"
-                    android:layout_width="280dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="15dp"
-                    android:background="@null"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/selected_time_text"
-                    android:textSize="15sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/number"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/current_time_bg"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/ll_theme">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="15dp"
-                    android:background="@null"
-                    android:gravity="center_vertical"
-                    android:text="@string/number"
-                    android:textColor="@color/current_time_text"
-                    android:textSize="15sp" />
-
-                <Space
-                    android:layout_width="10dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <EditText
-                    android:id="@+id/ed_number"
-                    android:layout_width="280dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="15dp"
-                    android:background="@null"
-                    android:gravity="center_vertical"
-                    android:inputType="number"
-                    android:textColor="@color/selected_time_text"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_200"
-                android:layout_marginTop="10dp"
-                android:background="@color/current_time_bg"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="15dp"
-                    android:background="@null"
-                    android:gravity="center_vertical"
-                    android:text="@string/activity_introduce"
-                    android:textColor="@color/current_time_text"
-                    android:textSize="15sp" />
-
-                <Space
-                    android:layout_width="@dimen/dp_30"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <EditText
-                    android:id="@+id/ed_introduce"
-                    android:layout_width="280dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="15dp"
-                    android:background="@null"
-                    android:gravity="center_vertical"
-                    android:paddingRight="@dimen/dp_20"
-                    android:scrollbars="vertical"
-                    android:textColor="@color/selected_time_text"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/current_time_bg"
-                android:gravity="center_vertical">
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="8dp"
+                android:elevation="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="15dp"
-                    android:background="@null"
-                    android:gravity="center_vertical"
-                    android:text="@string/money"
-                    android:textColor="@color/current_time_text"
-                    android:textSize="15sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@color/current_time_bg"
+                    android:gravity="center_vertical">
 
-                <Space
-                    android:layout_width="@dimen/dp_30"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="15dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:text="@string/money"
+                        android:textColor="@color/current_time_text"
+                        android:textSize="15sp" />
 
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/money"
-                    android:layout_width="50dp"
-                    android:layout_height="70dp"
-                    android:layout_marginEnd="15dp"
-                    android:text="" />
+                    <Space
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
 
-            </LinearLayout>
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/money"
+                        android:layout_width="50dp"
+                        android:layout_height="70dp"
+                        android:layout_marginEnd="15dp"
+                        android:text="" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:id="@+id/money_extend"

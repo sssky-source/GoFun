@@ -8,19 +8,45 @@
     tools:context=".fragment.Mine.introduce.Introduce"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:background="@color/pink"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="50dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="账号资料"
-            android:textSize="18sp"
-            android:textColor="@color/black"/>
-    </androidx.appcompat.widget.Toolbar>
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <!-- app:layout_scrollFlags="scroll|enterAlways|snap"
+        用这句可以 滑动时候一起隐藏-->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/Collect_Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white">
+            <TextView
+                android:id="@+id/Collect_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="个人资料"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:background=""-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:elevation="50dp">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="账号资料"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textColor="@color/black"/>-->
+<!--    </androidx.appcompat.widget.Toolbar>-->
 
     <!--头像-->
     <LinearLayout

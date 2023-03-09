@@ -253,7 +253,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
         checkCommend.setOnClickListener(this);
         apply.setOnClickListener(this);
         collect.setOnClickListener(this);
-
+        navigate.setOnClickListener(this);
     }
 
     @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
