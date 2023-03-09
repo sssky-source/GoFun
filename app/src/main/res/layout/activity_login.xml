@@ -14,12 +14,12 @@
         android:layout_marginTop="55dp">
         <TextView
             android:textStyle="bold"
-            android:textSize="30sp"
+            android:textSize="40sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="您好，"/>
         <TextView
-            android:textSize="20sp"
+            android:textSize="30sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="欢迎来到You&amp;I"/>
@@ -32,7 +32,7 @@
         android:layout_below="@id/welcome"
         android:layout_centerInParent="true"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="18dp"
         android:orientation="vertical"
@@ -119,13 +119,23 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp" />
+
         <Button
             android:id="@+id/i8_accountLogin_toLogin"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/login_btn_bg"
             android:paddingLeft="50dp"
@@ -134,35 +144,6 @@
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/login_btn_bg2"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="转跳"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/guidance"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/login_btn_bg"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="动画"
-            android:textColor="#ffffff"
-            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/register_account_btn"
@@ -177,7 +158,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/register_account_btn"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="70dp"
             android:orientation="vertical">
 
             <TextView

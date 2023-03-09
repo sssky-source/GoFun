@@ -45,7 +45,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private EditText accountLoginName;
     private EditText accountLoginPassword;
-    private Button loginBtn, viewpagerbutton,guidance;
+    private Button loginBtn;
     private TextView registerAccountBtn;
     private ProgressBar progressBar;
     private LinearLayout llLogin;
@@ -69,8 +69,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         accountLoginName = (EditText) findViewById(R.id.i8_accountLogin_name);
         accountLoginPassword = (EditText) findViewById(R.id.i8_accountLogin_password);
         loginBtn = (Button) findViewById(R.id.i8_accountLogin_toLogin);
-        viewpagerbutton = (Button) findViewById(R.id.viewpager);
-        guidance = findViewById(R.id.guidance);
         registerAccountBtn = (TextView) findViewById(R.id.register_account_btn);
         progressBar = (ProgressBar) findViewById(R.id.pb);
         llLogin = (LinearLayout) findViewById(R.id.ll_login);
@@ -93,20 +91,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void showProgressBar() {
         progressBar.setVisibility(View.VISIBLE);
         llLogin.setVisibility(View.GONE);
-        viewpagerbutton.setVisibility(View.GONE);
     }
 
     private void hiddenProgressBar() {
         progressBar.setVisibility(View.GONE);
         llLogin.setVisibility(View.VISIBLE);
-        viewpagerbutton.setVisibility(View.VISIBLE);
     }
 
     private void initListener() {
         loginBtn.setOnClickListener(this);
         registerAccountBtn.setOnClickListener(this);
-        viewpagerbutton.setOnClickListener(this);
-        guidance.setOnClickListener(this);
         QQ_Login.setOnClickListener(this);
         V_Login.setOnClickListener(this);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -138,14 +132,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 //startActivityForResult(intent,1);
                 startActivity(intent);
-                break;
-            case R.id.viewpager:
-                Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent1);
-                break;
-            case R.id.guidance:
-                Intent guidance = new Intent(LoginActivity.this, SgfSplash6Activity.class);
-                startActivity(guidance);
                 break;
             case R.id.QQ_Login:
             case R.id.V_Login:

@@ -1,5 +1,6 @@
 package com.coolweather.gofun.Animation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.coolweather.gofun.R;
+import com.coolweather.gofun.activity.LoginActivity;
 
 import java.util.ArrayList;
 
@@ -82,16 +84,16 @@ public class SgfSplash6Activity extends AppCompatActivity {
                                 //tv_course.setVisibility(View.VISIBLE);
                                 mHandler.postDelayed(new Runnable() {
                                     public void run() {
-                                        //startActivity(new Intent(SgfSplash6Activity.this,.class));
+                                        startActivity(new Intent(SgfSplash6Activity.this, LoginActivity.class));
                                         finish();
                                     }
-                                }, 2000);
+                                }, 500);
                             }
                         }, 500);
                     }
                 }, 500);
             }
-        }, 1500);
+        }, 500);
     }
 
     private void showAnimation(ArrayList<TextView> textViews) {
