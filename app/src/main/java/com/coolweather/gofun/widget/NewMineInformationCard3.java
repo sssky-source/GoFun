@@ -6,12 +6,14 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
 import com.coolweather.gofun.R;
+import com.coolweather.gofun.activity.LoginActivity;
 import com.coolweather.gofun.fragment.Mine.FeedBack.FeedBackActivity;
 import com.coolweather.gofun.fragment.Mine.about.AboutActivity;
 
@@ -46,7 +48,10 @@ public class NewMineInformationCard3 extends CardView implements View.OnClickLis
                 getContext().startActivity(about);
                 break;
             case R.id.mine_out:
-
+                Toast.makeText(getContext(),"退出成功",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                getContext().startActivity(intent);
+                break;
             case R.id.mine_set:
         }
     }

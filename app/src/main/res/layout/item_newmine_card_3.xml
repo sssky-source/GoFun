@@ -40,7 +40,7 @@
                     android:layout_centerInParent="true"
                     android:layout_marginStart="13dp"
                     android:layout_toRightOf="@id/image_join"
-                    android:text="客服帮助"
+                    android:text="问题反馈"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 

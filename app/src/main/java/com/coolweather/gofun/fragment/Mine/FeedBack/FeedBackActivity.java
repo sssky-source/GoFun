@@ -29,13 +29,9 @@ public class FeedBackActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String Context = help_feedback.getText().toString();
                 Toast.makeText(FeedBackActivity.this, "感谢您的反馈,我们会尽快处理您的意见。", Toast.LENGTH_SHORT).show();
-                jump();
+                finish();
             }
         });
     }
 
-    private void jump() {
-        Intent intent = new Intent(FeedBackActivity.this, MineFragment.class);
-
-    }
 }
