@@ -113,7 +113,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="https"
+                    android:text=">"
                     android:textSize="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
@@ -178,33 +178,39 @@
 
     </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="bottom"
-        android:layout_gravity="center_horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="服务协议"
-            android:gravity="bottom"
-            android:layout_marginRight="5dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="|"
+            android:textColor="@color/blue"
+            android:layout_toLeftOf="@+id/tv_2"
+            android:layout_alignParentBottom="true"
+            android:text="用户协议"
+            android:onClick="service"
+            />
+
+        <TextView
+            android:id="@+id/tv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text=" |"
             />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/blue"
+            android:layout_toRightOf="@+id/tv_2"
             android:text="隐私政策"
-            android:gravity="bottom"
-            android:layout_marginLeft="5dp"/>
+            android:layout_marginLeft="5dp"
+            android:onClick="secret"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

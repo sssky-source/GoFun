@@ -98,6 +98,8 @@ public class Introduce extends AppCompatActivity implements View.OnClickListener
     public static final int TAKE_PHOTO = 1;
     public static final int SELECT_PHOTO = 2;
 
+    private String img;
+
     //请求按钮
     private Button save;
 
@@ -138,6 +140,7 @@ public class Introduce extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onResponse(Call<Person> call, Response<Person> response) {
                 person = response.body();
+                img=person.getImage();
                 name.setText(person.getUsername());
                 name.setTextSize(18);
                 name.setTextColor(Color.rgb(0, 0, 0));
@@ -162,9 +165,12 @@ public class Introduce extends AppCompatActivity implements View.OnClickListener
             //保存个人信息
             case R.id.intro_save:
                 //上传头像
-                uploadHeadImg();
+                if(outputImagePath!=null){
+                    uploadHeadImg();
+                }
                 //修改个人信息
                 editInfo();
+                finish();
                 break;
 
             //头像
@@ -209,6 +215,7 @@ public class Introduce extends AppCompatActivity implements View.OnClickListener
         personService.editUserInfo("Bearer " + GoFunApplication.getToken(), personChange).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
                 Toast.makeText(Introduce.this, "修改完成", Toast.LENGTH_LONG).show();
             }
 

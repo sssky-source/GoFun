@@ -1,5 +1,6 @@
 package com.coolweather.gofun.fragment.Mine.join;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,8 +8,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.fragment.Mine.Adapter.JoinItemAdapter;
@@ -66,6 +71,17 @@ public class JoinActivity extends AppCompatActivity {
                 joinItemAdapter = new JoinItemAdapter(R.layout.activity_join_item,list);
                 recyclerView.setAdapter(joinItemAdapter);
                 swipeRefreshLayout.setRefreshing(false);
+
+                joinItemAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+                    @Override
+                    public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+                        switch(view.getId()){
+                            case R.id.join_register:
+                                Toast.makeText(JoinActivity.this,"未至签到范围",Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                });
             }
 
             @Override

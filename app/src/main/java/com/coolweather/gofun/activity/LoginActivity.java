@@ -135,7 +135,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.QQ_Login:
             case R.id.V_Login:
-              //  ToastUtils.show(this,"敬请期待");
+                Toast.makeText(LoginActivity.this,"暂不支持此功能",Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;

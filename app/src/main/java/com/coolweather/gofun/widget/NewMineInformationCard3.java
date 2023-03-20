@@ -14,7 +14,9 @@ import androidx.cardview.widget.CardView;
 
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.activity.LoginActivity;
+import com.coolweather.gofun.activity.MainActivity;
 import com.coolweather.gofun.fragment.Mine.FeedBack.FeedBackActivity;
+import com.coolweather.gofun.fragment.Mine.Setting.Setting;
 import com.coolweather.gofun.fragment.Mine.about.AboutActivity;
 
 public class NewMineInformationCard3 extends CardView implements View.OnClickListener{
@@ -49,10 +51,12 @@ public class NewMineInformationCard3 extends CardView implements View.OnClickLis
                 break;
             case R.id.mine_out:
                 Toast.makeText(getContext(),"退出成功",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), LoginActivity.class);
-                getContext().startActivity(intent);
+                Intent out = new Intent(getContext(), LoginActivity.class);
+                getContext().startActivity(out);
                 break;
             case R.id.mine_set:
+                Intent setting = new Intent(getContext(), Setting.class);
+                getContext().startActivity(setting);
         }
     }
 }

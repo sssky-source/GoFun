@@ -756,7 +756,7 @@ public class MapFragment extends Fragment implements
         InfoCard infoCard = new InfoCard(getContext(),getActivity(),activityItemList.get(Integer.parseInt(indntify)));
         // infoCard.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
         //此处设置位置窗体大小，
-        infoCard.getWindow().setLayout(800,1050);
+        infoCard.getWindow().setLayout(800,1150);
         infoCard.show();
     }
 

@@ -19,6 +19,8 @@ import java.util.List;
 public class JoinItemAdapter extends BaseQuickAdapter<PersonActivityItem, BaseViewHolder> {
     public JoinItemAdapter(int layoutResId, @Nullable List<PersonActivityItem> data) {
         super(layoutResId, data);
+
+        addChildClickViewIds(R.id.join_register);
     }
 
     @SuppressLint("ResourceAsColor")

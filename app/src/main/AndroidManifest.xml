@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustPan">
         <activity
-            android:name=".Setting"
+            android:name=".fragment.Mine.Setting.Setting"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -91,7 +91,7 @@
             android:name=".fragment.Mine.join.JoinActivity"
             android:exported="false" />
         <activity
-            android:name=".Guidance.GuidanceActivity"
+            android:name=".fragment.Recommend.Adapter.Guidance.GuidanceActivity"
             android:exported="false" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".Animation.SgfSplash6Activity" >

@@ -23,4 +23,8 @@ public interface ChartMessage {
     @POST("ChartMessage/addChartMessage")
     Call<ResponseBody> addChartMessage(@Header("Authorization") String token, @Body AddChartMessage addChartMessage);
 
+    //获取聊天内容
+    @GET("ChartMessage/GetUserCharList")
+    Call<ChartMessageBean> getLastMessage(@Header("Authorization") String token);
+
 }

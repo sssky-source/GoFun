@@ -21,4 +21,12 @@ public class AboutActivity extends AppCompatActivity {
         Intent intent = new Intent(AboutActivity.this,WebActivity.class);
         startActivity(intent);
     }
+
+    public void service(View view) {
+
+    }
+
+    public void secret(View view) {
+
+    }
 }

@@ -150,7 +150,7 @@ public class InfoCard extends Dialog implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(context, RecommendActivityDetail.class);
-        intent.putExtra("detail_item",activityItem);
+        intent.putExtra("activityId",activityItem.getId());
         context.startActivity(intent);
     }
 

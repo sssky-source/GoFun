@@ -31,16 +31,25 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/view"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="10dp"
                 android:text="名字"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/trust"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mine_username"
+                android:layout_centerHorizontal="true"
+                android:text="信用指数：100"/>
+
 
             <LinearLayout
                 android:id="@+id/mine_tagChange"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/mine_username"
+                android:layout_below="@id/trust"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical">

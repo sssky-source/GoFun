@@ -26,4 +26,5 @@
     <color name="chip">#fff7e6</color>
     <color name="chip_pressed">#fa8c16</color>
     <color name="grey">#808080</color>
+    <color name="introduce">#FDF6F6</color>
 </resources>

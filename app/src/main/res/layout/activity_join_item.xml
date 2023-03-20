@@ -89,5 +89,18 @@
             android:layout_marginRight="30dp"
             android:text="人数"
             android:textColor="#49cc90" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/join_register"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/join_number"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/message"
+            android:elevation="3dp"
+            />
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -365,8 +365,14 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
                     /**
                      * 悬赏和标签编写
                      */
-                    addActivityItem.setPayment(new Payment(Integer.parseInt(money_number.getText().toString().trim()),moneyTypeId));
-                    addActivityItem.setTags(new ArrayList<>());
+                    if(switchMaterial.isChecked()) {
+                        addActivityItem.setPayment(new Payment(Integer.parseInt(money_number.getText().toString().trim()),moneyTypeId));
+                        addActivityItem.setTags(new ArrayList<>());
+                    }else  {
+                        addActivityItem.setPayment(null);
+                        addActivityItem.setTags(new ArrayList<>());
+                    }
+
 
                     Log.d("item",addActivityItem.getEndtime());
                     Log.d("item",addActivityItem.getType().toString());

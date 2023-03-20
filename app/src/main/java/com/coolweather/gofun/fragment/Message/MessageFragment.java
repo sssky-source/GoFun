@@ -21,7 +21,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.R;
+import com.coolweather.gofun.fragment.Message.Adapter.ChartMessageAdapter;
 import com.coolweather.gofun.fragment.Message.Adapter.JoinActivityAdapter;
+import com.coolweather.gofun.fragment.Message.bean.ChartMessageBean;
 import com.coolweather.gofun.fragment.Mine.bean.PersonActivityItem;
 import com.coolweather.gofun.net.ChartMessage;
 import com.coolweather.gofun.net.HttpRequest;
@@ -50,6 +52,8 @@ public class MessageFragment extends Fragment {
     private RecyclerView recyclerView;
     private JoinActivityAdapter joinActivityAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private int activityID;
+    private ChartMessage chartMessage;
 
     //空布局
     private LinearLayout empty;
@@ -86,6 +90,7 @@ public class MessageFragment extends Fragment {
         });
         swipeRefreshLayout.setRefreshing(true);
         requestGoingActivity(personService);
+        requestChartMessage(chartMessage);
     }
 
     private void requestGoingActivity(PersonService personService) {
@@ -127,6 +132,21 @@ public class MessageFragment extends Fragment {
         });
     }
 
+    private void requestChartMessage(ChartMessage chartMessage) {
+        chartMessage.getLastMessage("Bearer " + GoFunApplication.token).enqueue(new Callback<ChartMessageBean>() {
+            @Override
+            public void onResponse(Call<ChartMessageBean> call, Response<ChartMessageBean> response) {
 
+
+                Log.d("333",GoFunApplication.token);
+                Log.d("333333","onResponse: " + response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ChartMessageBean> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
 
 }

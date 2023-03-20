@@ -1,4 +1,4 @@
-package com.coolweather.gofun.Guidance;
+package com.coolweather.gofun.fragment.Recommend.Adapter.Guidance;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
