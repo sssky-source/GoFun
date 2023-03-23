@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,8 @@ import com.coolweather.gofun.fragment.Recommend.bean.PersonAddComment;
 import com.coolweather.gofun.fragment.Recommend.bean.PersonComment;
 import com.coolweather.gofun.net.CommentService;
 import com.coolweather.gofun.net.HttpRequest;
+import com.coolweather.gofun.net.PersonService;
+import com.coolweather.gofun.net.RecommendService;
 import com.coolweather.gofun.util.ToastUtils;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -42,7 +45,9 @@ import retrofit2.Response;
 public class RecommendCommendActivity extends AppCompatActivity {
 
     private CommentService commentService;
+    private RecommendService recommendService;
     private List<PersonComment> list;
+    private int activityId;
     private RecyclerView recyclerView;
     private CommendAdapter commendAdapter;
     private TextView commendNumber;
@@ -50,6 +55,7 @@ public class RecommendCommendActivity extends AppCompatActivity {
     private PersonLitePal person_LitePal;
     //活动详情信息列表
     private ActivityItem item;
+    private TextView textView;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -59,19 +65,23 @@ public class RecommendCommendActivity extends AppCompatActivity {
 
         person_LitePal = LitePal.findFirst(PersonLitePal.class);
         commentService = HttpRequest.create(CommentService.class);
+        recommendService = HttpRequest.create(RecommendService.class);
         //接受评论list
         Intent intent = getIntent();
-        list = (List<PersonComment>) intent.getSerializableExtra("commendList");
-        item = (ActivityItem) intent.getSerializableExtra("ActivityItem");
+        //list = (List<PersonComment>) intent.getSerializableExtra("commendList");
+        activityId = intent.getIntExtra("activityId",0);
+        //item = (ActivityItem) intent.getSerializableExtra("ActivityItem");
+        requestCommand();
+        requestActivityById();
 
         recyclerView = findViewById(R.id.commend_history);
         commendNumber = findViewById(R.id.commend_number);
         floatingActionButton = findViewById(R.id.floating_addCommend);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(RecommendCommendActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        commendAdapter = new CommendAdapter(R.layout.activity_commend_item,list);
-        recyclerView.setAdapter(commendAdapter);
-        commendNumber.setText(getResources().getString(R.string.commend) + "(" + list.size() + ")");
+        //commendAdapter = new CommendAdapter(R.layout.activity_commend_item,list);
+//        recyclerView.setAdapter(commendAdapter);
+//        commendNumber.setText(getResources().getString(R.string.commend) + "(" + list.size() + ")");
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +94,7 @@ public class RecommendCommendActivity extends AppCompatActivity {
                 CircleImageView sheetUserImage = dialogView.findViewById(R.id.sheetUserImage);
                 Glide.with(RecommendCommendActivity.this).load(person_LitePal.getImage()).into(sheetUserImage);
                 //设置点击事件找到实例使用上面的View来寻找
-                TextView textView = dialogView.findViewById(R.id.sheetActivity);
+                textView = dialogView.findViewById(R.id.sheetActivity);
                 textView.setText("[" + item.getType() + "] " + item.getTitle());
 
                 EditText editText = dialogView.findViewById(R.id.sheetEditText);
@@ -116,5 +126,38 @@ public class RecommendCommendActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void requestActivityById() {
+        recommendService.getActivityItemById("Bearer " + GoFunApplication.token, activityId).enqueue(new Callback<ActivityItem>() {
+            @Override
+            public void onResponse(Call<ActivityItem> call, Response<ActivityItem> response) {
+                item = response.body();
+                Log.d("item","item:" + item.getType()+item.getTitle());
+                //textView.setText("[" + item.getType() + "] " + item.getTitle());
+            }
+
+            @Override
+            public void onFailure(Call<ActivityItem> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void requestCommand() {
+        commentService.getComment("Bearer " + GoFunApplication.token, activityId).enqueue(new Callback<List<PersonComment>>() {
+            @Override
+            public void onResponse(Call<List<PersonComment>> call, Response<List<PersonComment>> response) {
+                list = response.body();
+                commendAdapter = new CommendAdapter(R.layout.activity_commend_item,list);
+                recyclerView.setAdapter(commendAdapter);
+                commendNumber.setText(getResources().getString(R.string.commend) + "(" + list.size() + ")");
+            }
+
+            @Override
+            public void onFailure(Call<List<PersonComment>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }

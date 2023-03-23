@@ -273,11 +273,12 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
                 //评论
             case R.id.ActivityDetail_CheckCommend:
                 Intent intent = new Intent(RecommendActivityDetail.this, RecommendCommendActivity.class);
-                Bundle bundle = new Bundle();
+                //Bundle bundle = new Bundle();
                 //传递评论list
-                bundle.putSerializable("commendList", (Serializable) list);
-                bundle.putSerializable("ActivityItem",item);
-                intent.putExtras(bundle);
+                //bundle.putSerializable("commendList", (Serializable) list);
+                intent.putExtra("activityId",activityId);
+                //bundle.putSerializable("ActivityItem",item);
+                //intent.putExtras(bundle);
                 startActivity(intent);
                 break;
 
