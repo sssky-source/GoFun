@@ -97,6 +97,7 @@ public class NewMineInformationCard1 extends CardView implements View.OnClickLis
                         @Override
                         public void onClick(View view) {
                             Intent tagChange = new Intent(getContext(), MineTagActivity.class);
+                            tagChange.putExtra("userID",personLitePal.getUserID());
                             getContext().startActivity(tagChange);
                         }
                     });
