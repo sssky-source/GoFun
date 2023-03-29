@@ -22,6 +22,7 @@ import com.coolweather.gofun.util.ToastUtils;
 
 import org.litepal.LitePal;
 
+import androidx.annotation.Nullable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -81,6 +82,11 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

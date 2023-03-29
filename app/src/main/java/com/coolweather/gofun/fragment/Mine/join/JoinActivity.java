@@ -2,10 +2,12 @@ package com.coolweather.gofun.fragment.Mine.join;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,13 +16,19 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
+import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.fragment.Mine.Adapter.JoinItemAdapter;
 import com.coolweather.gofun.fragment.Mine.bean.PersonActivityItem;
+import com.coolweather.gofun.fragment.Recommend.Adapter.RecommendItemAdapter;
+import com.coolweather.gofun.fragment.Recommend.RecommendActivityDetail;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 import com.coolweather.gofun.net.HttpRequest;
 import com.coolweather.gofun.net.PersonService;
+import com.coolweather.gofun.net.RecommendService;
+import com.coolweather.gofun.util.DialogUtils;
+import com.coolweather.gofun.util.ToastUtils;
 
 import java.util.List;
 
@@ -60,6 +68,7 @@ public class JoinActivity extends AppCompatActivity {
         });
         swipeRefreshLayout.setRefreshing(true);
         request(personService);
+
     }
 
     private void request(PersonService personService) {
@@ -79,6 +88,13 @@ public class JoinActivity extends AppCompatActivity {
                             case R.id.join_register:
                                 Toast.makeText(JoinActivity.this,"未至签到范围",Toast.LENGTH_SHORT).show();
                                 break;
+//                            case R.id.card:
+//                                Intent detail = new Intent(JoinActivity.this, RecommendActivityDetail.class);
+//                                //传入活动ID
+//                                int activityId = list.get(position).getId();
+//                                detail.putExtra("activityId", activityId);
+//                                startActivity(detail);
+//                                break;
                         }
                     }
                 });

@@ -105,7 +105,7 @@
                 android:layout_width="250dp"
                 android:layout_height="match_parent"/>
 
-            <EditText
+            <TextView
                 android:background="@null"
                 android:id="@+id/intro_name"
                 android:layout_width="match_parent"

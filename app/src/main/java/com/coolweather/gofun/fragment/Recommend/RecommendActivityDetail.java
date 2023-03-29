@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,8 @@ import com.coolweather.gofun.LocalDb.LitPalUtil;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.LocalDb.PersonLitePal;
 import com.coolweather.gofun.activity.RouteActivity;
+import com.coolweather.gofun.fragment.Message.ActivityChartMessage;
+import com.coolweather.gofun.fragment.Mine.bean.PersonActivityItem;
 import com.coolweather.gofun.fragment.Recommend.Adapter.CommendAdapter;
 import com.coolweather.gofun.fragment.Recommend.bean.ActivityItem;
 import com.coolweather.gofun.fragment.Recommend.bean.PersonAddComment;
@@ -72,6 +75,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     private CommentService commentService;
     //活动详情信息列表
     private ActivityItem item;
+
     private int activityId;
     //活动信息详情
     private CircleImageView creatorImage, userImage;  //创建者头像
@@ -125,6 +129,11 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
 
         //获取收藏人数
         requestStarActivityNum();
+
+
+        //第一个时间：多长时间后会调用onFinish方法，第二个时间：多长时间会调用onTick方法
+        CountTime countTime = new CountTime(30000,3000);
+        countTime.start();
     }
 
     //根据传入的活动id获取活动详细信息
@@ -205,6 +214,7 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
             @Override
             public void onResponse(@NonNull Call<List<PersonComment>> call, @NonNull Response<List<PersonComment>> response) {
                 list = response.body();
+                temp.clear();
                 //倒转list
                 if (list != null) {
                     Collections.reverse(list);
@@ -454,5 +464,22 @@ public class RecommendActivityDetail extends AppCompatActivity implements View.O
     @Override
     public void deactivate() {
 
+    }
+
+    //用于聊天记录定时刷新的内部类
+    class CountTime extends CountDownTimer {
+
+        public CountTime(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long l) {
+            requestCommend();
+        }
+
+        @Override
+        public void onFinish() {
+        }
     }
 }

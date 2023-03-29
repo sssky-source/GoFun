@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
+    android:id="@+id/card"
     android:orientation="horizontal"
     app:cardCornerRadius="10dp"
     app:cardElevation="8dp">
@@ -98,7 +99,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
             android:layout_marginTop="40dp"
-            android:src="@drawable/message"
+            android:src="@drawable/register"
             android:elevation="3dp"
             />
 

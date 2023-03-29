@@ -40,6 +40,7 @@ import com.coolweather.gofun.util.BitmapUtils;
 import com.coolweather.gofun.util.CameraUtils;
 import com.coolweather.gofun.util.ToastUtils;
 import com.coolweather.gofun.widget.BottomDialog;
+import com.coolweather.gofun.widget.NewMineInformationCard1;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -60,6 +61,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Introduce extends AppCompatActivity implements View.OnClickListener {
+
+    private PersonLitePal personLitePal;
 
     //个人信息
     private Person person;
@@ -113,6 +116,7 @@ public class Introduce extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_introduce);
         personService = HttpRequest.create(PersonService.class);
+        personLitePal = LitePal.findFirst(PersonLitePal.class);
 
         //初始化
         initView();
@@ -170,7 +174,15 @@ public class Introduce extends AppCompatActivity implements View.OnClickListener
                 }
                 //修改个人信息
                 editInfo();
+                request();
+//
+//                int result = 1;
+//
+//                Intent data = new Intent();
+//                data.putExtra("result",1);
+//                setResult(result,data);
                 finish();
+
                 break;
 
             //头像
@@ -389,5 +401,23 @@ public class Introduce extends AppCompatActivity implements View.OnClickListener
         } else {
             ToastUtils.show(Introduce.this, "图片获取失败");
         }
+    }
+
+    private void request() {
+        personService.getUserInfo("Bearer " + GoFunApplication.getToken()).enqueue(new Callback<Person>() {
+            @Override
+            public void onResponse(Call<Person> call, Response<Person> response) {
+                Log.d("kkk",response.body().getImage());
+                Log.d("kkk",response.body().getUsername());
+                personLitePal.setImage(response.body().getImage());
+                personLitePal.setUsername(response.body().getUsername());
+                personLitePal.save();
+            }
+
+            @Override
+            public void onFailure(Call<Person> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }

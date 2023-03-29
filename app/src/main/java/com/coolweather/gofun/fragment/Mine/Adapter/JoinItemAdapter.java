@@ -21,6 +21,7 @@ public class JoinItemAdapter extends BaseQuickAdapter<PersonActivityItem, BaseVi
         super(layoutResId, data);
 
         addChildClickViewIds(R.id.join_register);
+        addChildClickViewIds(R.id.card);
     }
 
     @SuppressLint("ResourceAsColor")

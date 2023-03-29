@@ -37,14 +37,14 @@
             android:textColor="#000000"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/message_ActivityTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="20dp"
-            android:text="时间"
-            android:textColor="#49cc90" />
+<!--        <TextView-->
+<!--            android:id="@+id/message_ActivityTime"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginEnd="20dp"-->
+<!--            android:text="时间"-->
+<!--            android:textColor="#49cc90" />-->
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

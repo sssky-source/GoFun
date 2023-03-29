@@ -109,11 +109,11 @@
 
                     <TextView
                         android:id="@+id/tv_selected_date"
-                        android:layout_width="80dp"
+                        android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="15dp"
                         android:background="@null"
-                        android:gravity="center_vertical"
+                        android:gravity="right"
                         android:textColor="@color/selected_time_text"
                         android:textSize="15sp" />
 
@@ -203,7 +203,7 @@
 
                     <EditText
                         android:id="@+id/ed_theme"
-                        android:layout_width="120dp"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="15dp"
                         android:background="@null"
@@ -229,7 +229,7 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/current_time_bg"
-                    android:gravity="right"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
                     app:layout_constraintTop_toBottomOf="@+id/ll_date">
 
@@ -250,11 +250,11 @@
 
                     <TextView
                         android:id="@+id/tv_selected_time"
-                        android:layout_width="120dp"
+                        android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="15dp"
                         android:background="@null"
-                        android:gravity="center_vertical"
+                        android:gravity="right"
                         android:textColor="@color/selected_time_text"
                         android:textSize="15sp" />
 
@@ -299,11 +299,11 @@
 
                     <TextView
                         android:id="@+id/tv_selected_endtime"
-                        android:layout_width="120dp"
+                        android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="15dp"
                         android:background="@null"
-                        android:gravity="center_vertical"
+                        android:gravity="right"
                         android:textColor="@color/selected_time_text"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -386,7 +386,7 @@
                         android:textSize="15sp" />
 
                     <Space
-                        android:layout_width="@dimen/dp_30"
+                        android:layout_width="40dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1" />
 
@@ -503,7 +503,7 @@
                         android:textSize="13sp" />
 
                     <Space
-                        android:layout_width="10dp"
+                        android:layout_width="20dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1" />
 

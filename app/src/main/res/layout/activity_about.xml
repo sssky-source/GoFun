@@ -10,14 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <!-- app:layout_scrollFlags="scroll|enterAlways|snap"
         用这句可以 滑动时候一起隐藏-->
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/Collect_Toolbar"
+            android:id="@+id/about_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white">
+            android:background="@color/white"
+            app:navigationIcon="@drawable/back">
             <TextView
                 android:id="@+id/Collect_title"
                 android:layout_width="wrap_content"
@@ -151,12 +151,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:onClick="person">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="开发人员"
+                    android:text="关于我们"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
@@ -180,7 +181,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dp">
 
         <TextView
             android:layout_width="wrap_content"

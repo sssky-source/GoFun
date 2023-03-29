@@ -12,10 +12,11 @@
         <!-- app:layout_scrollFlags="scroll|enterAlways|snap"
         用这句可以 滑动时候一起隐藏-->
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/Collect_Toolbar"
+            android:id="@+id/feedback_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white">
+            android:background="@color/white"
+            app:navigationIcon="@drawable/back">
             <TextView
                 android:id="@+id/Collect_title"
                 android:layout_width="wrap_content"
@@ -81,6 +82,7 @@
             <RatingBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:progressTint="@color/yellow"
                 android:id="@+id/rb_star"
                 android:layout_gravity="center"/>
 
@@ -106,6 +108,9 @@
                     android:id="@+id/image_button"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:background="@color/white"
+                    android:src="@drawable/send"
+                    android:scaleType="fitCenter"
                     />
 
             </LinearLayout>

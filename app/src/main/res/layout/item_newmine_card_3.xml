@@ -32,7 +32,7 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/kefu"/>
+                    android:src="@drawable/feedback"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/guanyu" />
+                    android:src="@drawable/about" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/xiaxian" />
+                    android:src="@drawable/leave" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -114,7 +114,7 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/shezhi" />
+                    android:src="@drawable/setting" />
 
                 <TextView
                     android:layout_width="wrap_content"

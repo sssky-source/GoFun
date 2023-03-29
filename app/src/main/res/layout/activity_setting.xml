@@ -15,10 +15,11 @@
         <!-- app:layout_scrollFlags="scroll|enterAlways|snap"
         用这句可以 滑动时候一起隐藏-->
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/Collect_Toolbar"
+            android:id="@+id/setting_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white">
+            android:background="@color/white"
+            app:navigationIcon="@drawable/back">
             <TextView
                 android:id="@+id/Collect_title"
                 android:layout_width="wrap_content"
@@ -44,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            >
+            android:onClick="intentToIntroduce">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,35 +72,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:onClick="intentToMineTag">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="标签设置"
-                    android:textSize="20sp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text=">"
-                    android:textSize="20sp"
-                    android:gravity="right"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="账号安全"
                     android:textSize="20sp"/>
 
                 <TextView

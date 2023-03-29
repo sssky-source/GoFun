@@ -2,6 +2,8 @@ package com.coolweather.gofun.widget;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +18,8 @@ import com.bumptech.glide.Glide;
 import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.LocalDb.PersonLitePal;
 import com.coolweather.gofun.R;
+import com.coolweather.gofun.fragment.Message.ActivityChartMessage;
+import com.coolweather.gofun.fragment.Mine.bean.Person;
 import com.coolweather.gofun.fragment.Mine.bean.UserTag;
 import com.coolweather.gofun.fragment.Mine.introduce.Introduce;
 import com.coolweather.gofun.fragment.Mine.tag.MineTagActivity;
@@ -28,6 +32,7 @@ import com.google.android.material.imageview.ShapeableImageView;
 
 import org.litepal.LitePal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -41,6 +46,8 @@ public class NewMineInformationCard1 extends CardView implements View.OnClickLis
     //头像和性别
     private ShapeableImageView userImage,sex;
 
+    private int result = 0;
+
     //名字
     private TextView username;
 
@@ -48,16 +55,21 @@ public class NewMineInformationCard1 extends CardView implements View.OnClickLis
     private ChipGroup chipGroup;
     private LinearLayout layout;
 
+
     public NewMineInformationCard1(Context context, AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.item_newmine_card_1,this);
-        personLitePal  = LitePal.findFirst(PersonLitePal.class);
+        personLitePal = LitePal.findFirst(PersonLitePal.class);
         personService = HttpRequest.create(PersonService.class);
 
         initView();
 
         //请求标签
         requestTag();
+
+        //第一个时间：多长时间后会调用onFinish方法，第二个时间：多长时间会调用onTick方法
+        CountTime countTime = new CountTime(30000,3000);
+//        countTime.start();
     }
 
     private void initView() {
@@ -89,6 +101,7 @@ public class NewMineInformationCard1 extends CardView implements View.OnClickLis
             @Override
             public void onResponse(Call<List<UserTag>> call, Response<List<UserTag>> response) {
                 List<UserTag> list = response.body();
+
                 for (UserTag userTag : list){
                     Chip chip = new Chip(getContext());
                     chip.setText(userTag.getName());
@@ -103,7 +116,6 @@ public class NewMineInformationCard1 extends CardView implements View.OnClickLis
                     });
                     chipGroup.addView(chip);
                 }
-
             }
             @Override
             public void onFailure(Call<List<UserTag>> call, Throwable t) {
@@ -136,4 +148,21 @@ public class NewMineInformationCard1 extends CardView implements View.OnClickLis
         }
 
     }
+
+    class CountTime extends CountDownTimer {
+
+        public CountTime(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long l) {
+            requestTag();
+        }
+
+        @Override
+        public void onFinish() {
+        }
+    }
+
 }

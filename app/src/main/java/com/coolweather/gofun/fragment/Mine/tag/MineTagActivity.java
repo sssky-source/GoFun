@@ -9,8 +9,10 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.coolweather.gofun.GoFunApplication;
 import com.coolweather.gofun.R;
@@ -19,6 +21,7 @@ import com.coolweather.gofun.fragment.Mine.bean.TagChange;
 import com.coolweather.gofun.fragment.Mine.bean.UserTag;
 import com.coolweather.gofun.net.HttpRequest;
 import com.coolweather.gofun.net.PersonService;
+import com.coolweather.gofun.widget.NewMineInformationCard1;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -31,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MineTagActivity extends AppCompatActivity {
+public class MineTagActivity extends AppCompatActivity implements View.OnClickListener {
     private int userID;
     private VerticalTabLayout tabLayout;
     private YViewPager viewPager;
@@ -61,6 +64,8 @@ public class MineTagActivity extends AppCompatActivity {
         //获取全部标签
         getAllTagRequest(personService);
 
+        save.setOnClickListener(this);
+
         //获取用户标签
         //getUserTagRequest(personService, userID);
     }
@@ -87,4 +92,9 @@ public class MineTagActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onClick(View v) {
+        Toast.makeText(this, "修改完成", Toast.LENGTH_SHORT).show();
+        finish();
+    }
 }

@@ -1,17 +1,20 @@
 package com.coolweather.gofun.fragment.Mine;
 
 import android.Manifest;
+import android.app.Instrumentation;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,10 +27,15 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.coolweather.gofun.R;
 import com.coolweather.gofun.LocalDb.PersonLitePal;
+import com.coolweather.gofun.fragment.Mine.introduce.Introduce;
+import com.coolweather.gofun.fragment.Mine.tag.MineTagActivity;
+import com.coolweather.gofun.net.PersonService;
 import com.coolweather.gofun.util.BitmapUtils;
 import com.coolweather.gofun.util.CameraUtils;
 import com.coolweather.gofun.util.ToastUtils;
 import com.coolweather.gofun.widget.BottomDialog;
+import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.File;
@@ -64,6 +72,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     public static final int SELECT_PHOTO = 2;
     public static final int TAKE_PHOTO = 1;
 
+
     //Glide请求图片选项配置
     private RequestOptions requestOptions = RequestOptions.circleCropTransform()
             .diskCacheStrategy(DiskCacheStrategy.NONE)//不做磁盘缓存
@@ -74,10 +83,12 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.fragment_newmine, container, false);
         personLitePal  = LitePal.findFirst(PersonLitePal.class);
+
         //initView();
         //setListeners();
         return view;
     }
+
 
     public void initView(){
         imageViewhead = (ImageView)view.findViewById(R.id.head);
@@ -88,6 +99,8 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     public void setListeners(){
         imageViewhead.setOnClickListener(this);
     }
+
+
 
     @Override
     public void onClick(View view) {
@@ -145,7 +158,6 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         }
         startActivityForResult(CameraUtils.getSelectPhotoIntent(), SELECT_PHOTO);
     }
-
 
     private void checkVersion(){
         //android 6.0及以上版本

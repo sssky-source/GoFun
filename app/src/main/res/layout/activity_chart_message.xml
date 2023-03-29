@@ -28,16 +28,17 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!--底部-->
+
     <androidx.recyclerview.widget.RecyclerView
-        android:paddingTop="5dp"
         android:id="@+id/chart_RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="114dp"
         android:background="#F1F2F3"
+        android:paddingTop="5dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <!--底部-->
     <com.google.android.material.appbar.MaterialToolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
